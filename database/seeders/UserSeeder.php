@@ -19,22 +19,22 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Sondy Kumajas',
             'level' => 'admin',
-            'email' => 'admin@gmail',
+            'email' => 'admin@gmail.com',
             'password' => bcrypt('password'), //password
         ]);
 
         User::create([
             'name' => 'Rivay Samangka',
             'level' => 'pegawai',
-            'email' => 'pegawai@gmail',
+            'email' => 'pegawai@gmail.com',
             'fakultas' => 'Fakultas Teknik',
             'password' => bcrypt('password'), //password
         ]);
 
         User::create([
             'name' => 'Kristofel Santa',
-            'level' => 'pegawai',
-            'email' => 'dosen@gmail',
+            'level' => 'dosen',
+            'email' => 'dosen@gmail.com',
             'fakultas' => 'Fakultas Teknik',
             'jurusan_prodi' => 'Program Studi Teknik Informatika',
             'password' => bcrypt('password'), //password

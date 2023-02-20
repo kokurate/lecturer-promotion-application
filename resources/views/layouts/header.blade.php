@@ -108,6 +108,13 @@
           <span>Dashboard Dosen</span>
         </a>
       </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('dosen.storage') }}">
+          <i class="bi bi-grid"></i>
+          <span>Storage</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
       @endif
       
 

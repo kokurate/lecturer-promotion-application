@@ -56,6 +56,8 @@
   <!-- Template Main JS File -->
   <script src="/templates/assets/js/main.js"></script>
 
+  @stack('script')
+  
 </body>
 
 </html>

@@ -17,4 +17,15 @@ class DosenController extends Controller
             'title' => 'Unggah Berkas'
         ]);
     }
+
+    public function tambah_pangkat_reguler_store(){
+
+    }
+
+    public function storage(){
+        return view('dosen.storage',[
+            'title' => 'Dosen | Storage'
+        ]);
+    }
+
 }

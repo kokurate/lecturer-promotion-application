@@ -3,7 +3,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="/templates/assets/img/logo.png" alt="">
+        {{-- <img src="/templates/assets/img/logo.png" alt=""> --}}
         <span class="d-none d-lg-block my-1">Pengajuan Kenaikan Pangkat</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -21,14 +21,22 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">Account</span>
+            {{-- <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> --}}
+            <span class="d-none d-md-block dropdown-toggle ps-2">Setting</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Rivay Samangka</h6>
-              <span>Pegawai Fakultas Bahasa dan Seni Budaya testing 123</span>
+              <h6>{{ auth()->user()->name }}</h6>
+              @if(auth()->user()->level == 'pegawai' || auth()->user()->level == 'dosen')
+                  <span>{{ auth()->user()->fakultas }}</span>
+                @if(auth()->user()->level == 'dosen')
+                  <br>
+                  <span>{{ auth()->user()->jurusan_prodi }}</span>
+                @endif
+              @else
+              <span>Admin</span>
+              @endif
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -92,19 +100,37 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
+      <!-- ============ Dosen  ================= -->
+      @if(auth()->user()->level == 'dosen'  )
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="{{ route('dosen.index') }}">
           <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+          <span>Dashboard Dosen</span>
         </a>
       </li><!-- End Dashboard Nav -->
+      @endif
       
+
+      <!-- ============ Pegawai ================= -->
+      @if(auth()->user()->level == 'pegawai')
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="{{ route('pegawai.index') }}">
           <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+          <span>Dashboard Pegawai</span>
         </a>
       </li><!-- End Dashboard Nav -->
+      @endif
+
+
+      <!-- ============ Admin ================= -->
+      @if(auth()->user()->level == 'admin')
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('admin.index') }}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard Admin</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+      @endif
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
@@ -137,16 +163,16 @@
 
 
     
+      @if(auth()->user()->level == 'admin')
+        <li class="nav-heading">Admin Pages</li>
 
-      <li class="nav-heading">Pages</li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
-          <i class="bi bi-person"></i>
-          <span>Profile</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
-
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="users-profile.html">
+            <i class="bi bi-person"></i>
+            <span>Register New Accounts</span>
+          </a>
+        </li><!-- End Profile Page Nav -->
+      @endif
 
     </ul>
 

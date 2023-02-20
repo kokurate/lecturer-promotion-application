@@ -15,8 +15,17 @@
 
           <div class="card">
             <div class="card-body">
-              <h2 class="mt-5" style="color:#012970;">Selamat Datang, <strong>Sondy Kumajas</strong></h2>
-              <h3 style="color:#012970;">Dosen Jurusan Teknik Informatika, Program Studi Teknik Informatika, Fakultas <strong>Teknik</strong></h3>
+              <h2 class="mt-5" style="color:#012970;">Selamat Datang, <strong>{{ auth()->user()->name }}</strong></h2>
+              <?php
+                $valuefakultas = auth()->user()->fakultas;
+                $substringsfakultas = explode(' ', $valuefakultas);
+                $fakultas = $substringsfakultas[0]; 
+
+                $valueafterfakultas = auth()->user()->fakultas;
+                $substringsafterfakultas = explode(' ', $valueafterfakultas);
+                $afterfakultas = implode(' ', array_slice($substringsafterfakultas, 1))
+              ?>
+              <h3 style="color:#012970;">Dosen {{ auth()->user()->jurusan_prodi }}, {{ $fakultas }} <strong>{{ $afterfakultas }}</strong></h3>
               <p style="margin-top: 25px;"></p>
               <p><strong>Kenaikan Pangkat  : 
                 <span style="color:#00ff66">Tersedia</span>

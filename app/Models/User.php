@@ -17,11 +17,13 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'password',
+    // ];
+
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,4 +43,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function berkas_kenaikan_pangkat_reguler(){
+        return $this->hasOne(berkas_kenaikan_pangkat_reguler::class);
+    }
+
+    public function pangkat(){
+        return $this->hasOne(pangkat::class);
+    }
+
+    public function storage(){
+        return $this->hasMany(storage::class);
+    }
+
+    public function status(){
+        return $this->hasOne(status_kenaikan_pangkat::class);
+    }
+
 }

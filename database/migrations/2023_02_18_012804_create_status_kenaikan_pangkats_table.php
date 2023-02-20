@@ -15,6 +15,7 @@ class CreateStatusKenaikanPangkatsTable extends Migration
     {
         Schema::create('status_kenaikan_pangkats', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable();
             $table->string('status');
             $table->string('pangkat');
             $table->timestamps();

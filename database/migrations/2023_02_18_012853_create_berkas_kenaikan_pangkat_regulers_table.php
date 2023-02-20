@@ -15,6 +15,7 @@ class CreateBerkasKenaikanPangkatRegulersTable extends Migration
     {
         Schema::create('berkas_kenaikan_pangkat_regulers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable();
             $table->string('kartu_pegawai_nip_baru_bkn')->nullable();
             $table->string('sk_cpns')->nullable();
             $table->string('sk_pangkat_terakhir')->nullable();

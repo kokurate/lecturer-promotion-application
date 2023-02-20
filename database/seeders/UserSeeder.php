@@ -14,11 +14,29 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // there's 3 level admin, pegawai, dosen
         // Admin
         User::create([
-            'name' => 'Rivay',
+            'name' => 'Sondy Kumajas',
+            'level' => 'admin',
+            'email' => 'admin@gmail',
+            'password' => bcrypt('password'), //password
+        ]);
+
+        User::create([
+            'name' => 'Rivay Samangka',
             'level' => 'pegawai',
-            'email' => 'rivay@unima.ac.id',
+            'email' => 'pegawai@gmail',
+            'fakultas' => 'Fakultas Teknik',
+            'password' => bcrypt('password'), //password
+        ]);
+
+        User::create([
+            'name' => 'Kristofel Santa',
+            'level' => 'pegawai',
+            'email' => 'dosen@gmail',
+            'fakultas' => 'Fakultas Teknik',
+            'jurusan_prodi' => 'Program Studi Teknik Informatika',
             'password' => bcrypt('password'), //password
         ]);
     }

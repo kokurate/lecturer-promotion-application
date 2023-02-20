@@ -67,7 +67,14 @@
             <li>
               <a class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
+                <span>
+                  <form action="{{ route('logout') }}" method="post">
+                  @csrf
+                  {{-- <button type="submit" class="" style="text-decoration: none; border:none; border-radius:none;">Log Out</button> --}}
+                  <button type="submit" class="btn text-decoration-none border-0 p-0 m-0">Log Out</button>
+
+                </form> 
+              </span>
               </a>
             </li>
 

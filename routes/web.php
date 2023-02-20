@@ -21,11 +21,19 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/',[AuthController::class, ('login')])->name('login');
+Route::post('authenticate',[AuthController::class,'authenticate'])->name('authenticate');
+Route::post('logout',[AuthController::class,'logout'])->name('logout');
 
 // ============================= Dosen =========================== 
-Route::get('/dosen',[DosenController::class,('index')])->name('dosen.index');
-Route::get('/dosen/kenaikan-pangkat-reguler/tambah',[DosenController::class,('tambah_pangkat_reguler')])->name('dosen.tambah_pangkat_reguler');
+Route::group( ['middleware' => ['auth', ]],(function(){
+    Route::get('/dosen',[DosenController::class,('index')])->name('dosen.index');
+    Route::get('/dosen/kenaikan-pangkat-reguler/tambah',[DosenController::class,('tambah_pangkat_reguler')])->name('dosen.tambah_pangkat_reguler');
+
+}));
 
 
 // ============================= Pegawai =========================== 
-Route::get('/pegawai',[PegawaiController::class,('index')])->name('pegawai.index');
+Route::group( ['middleware' => ['auth', ]],(function(){
+    Route::get('/pegawai',[PegawaiController::class,('index')])->name('pegawai.index');
+
+}));

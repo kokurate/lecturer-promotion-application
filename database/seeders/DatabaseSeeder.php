@@ -17,4 +17,5 @@ class DatabaseSeeder extends Seeder
         $this->call(PangkatSeeder::class);
         $this->call(UserSeeder::class);
     }
+    
 }

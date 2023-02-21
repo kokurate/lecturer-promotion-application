@@ -50,6 +50,8 @@ Route::middleware('auth', 'level:admin,dosen')->group(function () {
 // ============================= Pegawai =========================== 
 Route::middleware('auth', 'level:admin,pegawai')->group(function () {
     Route::get('/pegawai',[PegawaiController::class,('index')])->name('pegawai.index');
+    Route::get('/pegawai/semua-dosen', [PegawaiController::class,('semua_dosen')])->name('pegawai.semua_dosen');
+    Route::post('/pegawai/semua-dosen', [PegawaiController::class,('semua_dosen_store')])->name('pegawai.semua_dosen_store');
 
 });
 

@@ -137,7 +137,7 @@ class DosenController extends Controller
 
         if ($validator->fails()) {
             Alert::error($validator->errors()->all()[0]);
-            return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Gagal mengunggah file. Pastikan file yang diunggah berformat PDF dan berukuran maksimal 1MB.');
+            return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Gagal Menambahkan Akun Dosen');
         }
 
         // Validasi

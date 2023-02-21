@@ -36,7 +36,7 @@
                           @endforeach
                         </select>
                         @error('kartu_pegawai_nip_baru_bkn')
-                          <p class="text-danger">Error</p>
+                          <p class="text-danger"><strong>{{ $message }}</strong></p>
                         @enderror
                     </div> 
                     <div class="col my-3">
@@ -52,7 +52,7 @@
                           @endforeach
                         </select>
                         @error('sk_cpns')
-                          <p class="text-danger">Error</p>
+                          <p class="text-danger"><strong>{{ $message }}</strong></p>
                         @enderror
                     </div> 
                     <div class="col my-3">
@@ -68,7 +68,7 @@
                           @endforeach
                         </select>
                         @error('sk_pangkat_terakhir')
-                          <p class="text-danger">Error</p>
+                          <p class="text-danger"><strong>{{ $message }}</strong></p>
                         @enderror
                     </div> 
                     <div class="col my-3">
@@ -84,7 +84,7 @@
                           @endforeach
                         </select>
                         @error('sk_jabfung_terakhir_dan_pak')
-                          <p class="text-danger">Error</p>
+                          <p class="text-danger"><strong>{{ $message }}</strong></p>
                         @enderror
                     </div> 
                     <div class="col my-3">
@@ -100,7 +100,7 @@
                           @endforeach
                         </select>
                         @error('ppk_dan_skp')
-                          <p class="text-danger">Error</p>
+                          <p class="text-danger"><strong>{{ $message }}</strong></p>
                         @enderror
                     </div> 
                 </div> <!-- End-col-lg6 -->
@@ -144,7 +144,7 @@
                           @endforeach
                         </select>
                         @error('ijazah_terakhir')
-                          <p class="text-danger">Error</p>
+                          <p class="text-danger"><strong>{{ $message }}</strong></p>
                         @enderror
                     </div> 
                     <div class="col my-3">
@@ -160,7 +160,7 @@
                           @endforeach
                         </select>
                         @error('sk_tugas_belajar_atau_surat_izin_studi')
-                          <p class="text-danger">Error</p>
+                          <p class="text-danger"><strong>{{ $message }}</strong></p>
                         @enderror
                     </div> 
                     <div class="col my-3">
@@ -176,7 +176,7 @@
                           @endforeach
                         </select>
                         @error('keterangan_membina_mata_kuliah_dari_jurusan')
-                          <p class="text-danger">Error</p>
+                          <p class="text-danger"><strong>{{ $message }}</strong></p>
                         @enderror
                     </div> 
                     <div class="col my-3">
@@ -192,7 +192,7 @@
                           @endforeach
                         </select>
                         @error('surat_pernyataan_setiap_bidang_tridharma')
-                          <p class="text-danger">Error</p>
+                          <p class="text-danger"><strong>{{ $message }}</strong></p>
                         @enderror
                     </div> 
                 </div>

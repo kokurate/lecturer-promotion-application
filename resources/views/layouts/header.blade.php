@@ -102,15 +102,15 @@
 
       <!-- ============ Dosen  ================= -->
       @if(auth()->user()->level == 'dosen'  )
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('dosen.index') }}">
+      <li class="nav-item  ">
+        <a class="nav-link collapsed {{ request()->routeIs('dosen.index') ? 'bg-secondary text-light' : '' }}" href="{{ route('dosen.index') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard Dosen</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('dosen.storage') }}">
+        <a class="nav-link collapsed {{ Request::is('dosen/storage*') ? 'bg-secondary text-light' : '' }}" href="{{ route('dosen.storage') }}">
           <i class="bi bi-grid"></i>
           <span>Storage</span>
         </a>
@@ -121,11 +121,28 @@
       <!-- ============ Pegawai ================= -->
       @if(auth()->user()->level == 'pegawai')
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('pegawai.index') }}">
+        <a class="nav-link collapsed {{ request()->routeIs('pegawai.index') ? 'bg-secondary text-light' : '' }}" href="{{ route('pegawai.index') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard Pegawai</span>
         </a>
       </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Category</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ route('pegawai.semua_dosen') }}">
+              <i class="bi bi-circle"></i><span>Semua Dosen</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="bi bi-circle"></i><span>Dalam Proses</span>
+            </a>
+          </li>
+          <li>
       @endif
 
 
@@ -139,33 +156,7 @@
       </li><!-- End Dashboard Nav -->
       @endif
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>Form Elements</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Form Layouts</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-editors.html">
-              <i class="bi bi-circle"></i><span>Form Editors</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-validation.html">
-              <i class="bi bi-circle"></i><span>Form Validation</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Forms Nav -->
+      
 
 
 

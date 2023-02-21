@@ -19,27 +19,89 @@
               
                 
             <!-- Vertical Form -->
-            <form class="row g-3 my-3">
+            <form class="row g-3 my-3" action="{{ route('dosen.tambah_pangkat_reguler_store', $user->email) }}" method="post" enctype="multipart/form-data">
+              @csrf
                 <div class="col-lg-5">
                     <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">1. Kartu Pegawai & NIP Baru BKN</label>
-                        <input class="form-control" type="file" id="formFile"  accept=".pdf">
+                        <label for="" class="form-label">1. Kartu Pegawai & NIP Baru BKN</label>
+                        {{-- <input class="form-control" type="file" id="formFile"  accept=".pdf"> --}}
+                        <select name="kartu_pegawai_nip_baru_bkn" class="form-select">
+                          <option selected>Pilih File Pada Storage Anda</option>
+                          @foreach($storage as $data)
+                            @if(old('kartu_pegawai_nip_baru_bkn') == $data->path)
+                              <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                            @else
+                              <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                            @endif
+                          @endforeach
+                        </select>
+                        @error('kartu_pegawai_nip_baru_bkn')
+                          <p class="text-danger">Error</p>
+                        @enderror
                     </div> 
                     <div class="col my-3">
                         <label for="inputNanme4" class="form-label">2. SK Pengangkatan Pertama (CPNS)</label>
-                        <input class="form-control" type="file" id="formFile"  accept=".pdf">
+                        <select name="sk_cpns" class="form-select">
+                          <option selected>Pilih File Pada Storage Anda</option>
+                          @foreach($storage as $data)
+                            @if(old('sk_cpns') == $data->path)
+                              <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                            @else
+                              <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                            @endif
+                          @endforeach
+                        </select>
+                        @error('sk_cpns')
+                          <p class="text-danger">Error</p>
+                        @enderror
                     </div> 
                     <div class="col my-3">
                         <label for="inputNanme4" class="form-label">3. SK Pangkat Terakhir</label>
-                        <input class="form-control" type="file" id="formFile"  accept=".pdf">
+                        <select name="sk_pangkat_terakhir" class="form-select">
+                          <option selected>Pilih File Pada Storage Anda</option>
+                          @foreach($storage as $data)
+                            @if(old('sk_pangkat_terakhir') == $data->path)
+                              <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                            @else
+                              <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                            @endif
+                          @endforeach
+                        </select>
+                        @error('sk_pangkat_terakhir')
+                          <p class="text-danger">Error</p>
+                        @enderror
                     </div> 
                     <div class="col my-3">
                         <label for="inputNanme4" class="form-label">4. SK Jabatan Fungsional Terakhir dan PAK</label>
-                        <input class="form-control" type="file" id="formFile"  accept=".pdf">
+                        <select name="sk_jabfung_terakhir_dan_pak" class="form-select">
+                          <option selected>Pilih File Pada Storage Anda</option>
+                          @foreach($storage as $data)
+                            @if(old('sk_jabfung_terakhir_dan_pak') == $data->path)
+                              <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                            @else
+                              <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                            @endif
+                          @endforeach
+                        </select>
+                        @error('sk_jabfung_terakhir_dan_pak')
+                          <p class="text-danger">Error</p>
+                        @enderror
                     </div> 
                     <div class="col my-3">
                         <label for="inputNanme4" class="form-label">5. PPK & SKP dua tahun terakhir</label>
-                        <input class="form-control" type="file" id="formFile"  accept=".pdf">
+                        <select name="ppk_dan_skp" class="form-select">
+                          <option selected>Pilih File Pada Storage Anda</option>
+                          @foreach($storage as $data)
+                            @if(old('ppk_dan_skp') == $data->path)
+                              <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                            @else
+                              <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                            @endif
+                          @endforeach
+                        </select>
+                        @error('ppk_dan_skp')
+                          <p class="text-danger">Error</p>
+                        @enderror
                     </div> 
                 </div> <!-- End-col-lg6 -->
 
@@ -71,19 +133,67 @@
                 <div class="col-lg-5">
                     <div class="col my-3">
                         <label for="inputNanme4" class="form-label">6. Ijazah Terakhir (jika gelar belum tercantum dalam SK Pangkat Terakhir) </label>
-                        <input class="form-control" type="file" id="formFile"  accept=".pdf">
+                        <select name="ijazah_terakhir" class="form-select">
+                          <option selected>Pilih File Pada Storage Anda</option>
+                          @foreach($storage as $data)
+                            @if(old('ijazah_terakhir') == $data->path)
+                              <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                            @else
+                              <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                            @endif
+                          @endforeach
+                        </select>
+                        @error('ijazah_terakhir')
+                          <p class="text-danger">Error</p>
+                        @enderror
                     </div> 
                     <div class="col my-3">
                         <label for="inputNanme4" class="form-label">7. SK Tugas Belajar atau Surat Izin Studi (sesuai no.5)</label>
-                        <input class="form-control" type="file" id="formFile"  accept=".pdf">
+                        <select name="sk_tugas_belajar_atau_surat_izin_studi" class="form-select">
+                          <option selected>Pilih File Pada Storage Anda</option>
+                          @foreach($storage as $data)
+                            @if(old('sk_tugas_belajar_atau_surat_izin_studi') == $data->path)
+                              <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                            @else
+                              <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                            @endif
+                          @endforeach
+                        </select>
+                        @error('sk_tugas_belajar_atau_surat_izin_studi')
+                          <p class="text-danger">Error</p>
+                        @enderror
                     </div> 
                     <div class="col my-3">
                         <label for="inputNanme4" class="form-label">Keterangan Membina Mata Kuliah dari Jurusan</label>
-                        <input class="form-control" type="file" id="formFile"  accept=".pdf">
+                        <select name="keterangan_membina_mata_kuliah_dari_jurusan" class="form-select">
+                          <option selected>Pilih File Pada Storage Anda</option>
+                          @foreach($storage as $data)
+                            @if(old('keterangan_membina_mata_kuliah_dari_jurusan') == $data->path)
+                              <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                            @else
+                              <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                            @endif
+                          @endforeach
+                        </select>
+                        @error('keterangan_membina_mata_kuliah_dari_jurusan')
+                          <p class="text-danger">Error</p>
+                        @enderror
                     </div> 
                     <div class="col my-3">
                         <label for="inputNanme4" class="form-label">Surat Pernyataan Setiap Bidang Tridharma (beserta bukti pendukung)</label>
-                        <input class="form-control" type="file" id="formFile"  accept=".pdf">
+                        <select name="surat_pernyataan_setiap_bidang_tridharma" class="form-select">
+                          <option selected>Pilih File Pada Storage Anda</option>
+                          @foreach($storage as $data)
+                            @if(old('surat_pernyataan_setiap_bidang_tridharma') == $data->path)
+                              <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                            @else
+                              <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                            @endif
+                          @endforeach
+                        </select>
+                        @error('surat_pernyataan_setiap_bidang_tridharma')
+                          <p class="text-danger">Error</p>
+                        @enderror
                     </div> 
                 </div>
 

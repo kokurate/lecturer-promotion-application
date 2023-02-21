@@ -34,7 +34,7 @@
               
         <div class="text-center my-5">
             <div class="text-align-center">
-                <a href="{{ route('dosen.tambah_pangkat_reguler') }}" class="btn btn-primary btn-lg rounded-pill" style="background-color:#012970; padding-left: 50px; padding-right: 50px;">Ajukan Kenaikan <br> Pangkat</a>
+                <a href="{{ route('dosen.tambah_pangkat_reguler', $user->email) }}" class="btn btn-primary btn-lg rounded-pill" style="background-color:#012970; padding-left: 50px; padding-right: 50px;">Ajukan Kenaikan <br> Pangkat</a>
 
                 <a href="#" class="btn btn-success btn-lg rounded-pill" style="background-color:#0fcc08; padding-left: 50px; padding-right: 50px;">Lihat Status <br> Kenaikan Pangkat</a>
             </div>

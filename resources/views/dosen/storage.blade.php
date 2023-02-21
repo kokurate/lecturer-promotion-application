@@ -22,7 +22,7 @@
                 <div class="col-lg-6">
                     <div class="col">
                         <label for="nama" class="mt-3 form-label"><strong>Nama File</strong></label>
-                        <input class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}" type="text" name="nama" required>
+                        <input class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}" type="text" name="nama" value="{{ old('nama') }}" required>
                         
                         <label for="inputNanme4" class="form-label"></label>
                         <input class="form-control{{ $errors->has('path') ? ' is-invalid' : '' }}" type="file" id="pdf_file" name="path" accept=".pdf">
@@ -55,7 +55,6 @@
       <!-- =========== New Row ========== -->
         <div class="row">
             <div class="col-lg">
-                <h2>testing</h2>
                     <div class="table-responsive">
                     <table class="table align-items-center mb-0">
                         <thead>

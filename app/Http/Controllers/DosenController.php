@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\my_storage;
+use App\Models\berkas_kenaikan_pangkat_reguler;
+use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,16 +19,90 @@ class DosenController extends Controller
     public function index(){
         return view('dosen.index',[
             'title' => 'Dosen Dashboard',
+            'user' => auth()->user(),
         ]);
     }
 
-    public function tambah_pangkat_reguler(){
+    public function tambah_pangkat_reguler(User $user){
         return view('dosen.tambah_pangkat_reguler',[
-            'title' => 'Unggah Berkas'
+            'title' => 'Unggah Berkas',
+            'storage' => my_storage::where('user_id', auth()->user()->id)->whereNotNull('path')->get(),
+            'user' => $user,
         ]);
     }
 
-    public function tambah_pangkat_reguler_store(){
+    public function tambah_pangkat_reguler_store(Request $request, User $user){
+        $validator = Validator::make($request->all(),[
+            'kartu_pegawai_nip_baru_bkn' => [ Rule::exists('my_storages', 'path')->where(function ($query) {
+                                                $query->where('user_id', auth()->user()->id);})],
+            'sk_cpns' =>                                    [Rule::exists('my_storages', 'path')->where(function ($query) {
+                                                            $query->where('user_id', auth()->user()->id);})],
+            'sk_pangkat_terakhir' =>                                [Rule::exists('my_storages', 'path')->where(function ($query) {
+                                                            $query->where('user_id', auth()->user()->id);})],
+            'sk_jabfung_terakhir_dan_pak' =>                                [Rule::exists('my_storages', 'path')->where(function ($query) {
+                                                            $query->where('user_id', auth()->user()->id);})],
+            'ppk_dan_skp' =>                                [Rule::exists('my_storages', 'path')->where(function ($query) {
+                                                            $query->where('user_id', auth()->user()->id);})],
+            'ijazah_terakhir' =>                                [Rule::exists('my_storages', 'path')->where(function ($query) {
+                                                            $query->where('user_id', auth()->user()->id);})],
+            'sk_tugas_belajar_atau_surat_izin_studi' => [ Rule::exists('my_storages', 'path')->where(function ($query) {
+                                                            $query->where('user_id', auth()->user()->id);})],
+            'keterangan_membina_mata_kuliah_dari_jurusan' => [ Rule::exists('my_storages', 'path')->where(function ($query) {
+                                                            $query->where('user_id', auth()->user()->id);})],
+            'surat_pernyataan_setiap_bidang_tridharma' => [ Rule::exists('my_storages', 'path')->where(function ($query) {
+                                                            $query->where('user_id', auth()->user()->id);})],
+
+        ],[
+            'kartu_pegawai_nip_baru_bkn.exists' => 'Belum Memilih File Kartu Pegawai & NIP Baru BKN',
+            'sk_cpns.exists' => 'Belum Memilih File SK CPNS',
+            'sk_pangkat_terakhir.exists' => 'Belum Memilih File SK Pangkat Terakhir',
+            'sk_jabfung_terakhir_dan_pak.exists' => 'Belum Memilih File SK Jabatan Fungsional Terakhir dan PAK',
+            'ppk_dan_skp.exists' => 'Belum Memilih File PPK dan SKP',
+            'ijazah_terakhir.exists' => 'Belum Memilih File Ijazah',
+            'sk_tugas_belajar_atau_surat_izin_studi.exists' => 'Belum Memilih File SK Tugas Belajar atau Surat Izin Studi',
+            'keterangan_membina_mata_kuliah_dari_jurusan.exists' => 'Belum Memilih File Keterangan Membina Mata Kuliah dari Jurusan',
+            'surat_pernyataan_setiap_bidang_tridharma.exists' => 'Belum Memilih File Surat Pernyataan Setiap Bidang Tridharma',
+            
+            // 'kartu_pegawai_nip_baru_bkn.in' => 'Pilih file anda',
+        ]);    
+        // Kalo error kase alert error
+        if ($validator->fails()) {
+            Alert::error($validator->errors()->all()[0]);
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Validasi
+        $validatedData = $validator->validated();
+        $validatedData['user_id'] = $user->id; 
+
+        // dd($validatedData);
+        if (berkas_kenaikan_pangkat_reguler::where('user_id', $user->id)->doesntExist()) {
+            // User doesn't have a record, so create a new one
+            berkas_kenaikan_pangkat_reguler::create($validatedData + ['user_id' => $user->id]);
+        } else {
+            // User already has a record, so update it
+            berkas_kenaikan_pangkat_reguler::where('user_id', $user->id)->update($validatedData);
+        }
+   
+        // Save the file path to the kartu_pegawai_nip_baru_bkn column of the berkas_kenaikan_pangkat_regulers table
+        // $berkas = new berkas_kenaikan_pangkat_reguler();
+        // $berkas->user_id = $user->id;
+        // $berkas->kartu_pegawai_nip_baru_bkn = $validatedData['kartu_pegawai_nip_baru_bkn'];
+        // $berkas->sk_cpns = $validatedData['sk_cpns'];
+        // $berkas->sk_pangkat_terakhir = $validatedData['sk_pangkat_terakhir'];
+        // $berkas->sk_jabfung_terakhir_dan_pak = $validatedData['sk_jabfung_terakhir_dan_pak'];
+        // $berkas->ppk_dan_skp = $validatedData['ppk_dan_skp'];
+        // $berkas->ijazah_terakhir = $validatedData['ijazah_terakhir'];
+        // $berkas->sk_tugas_belajar_atau_surat_izin_studi = $validatedData['sk_tugas_belajar_atau_surat_izin_studi'];
+        // $berkas->keterangan_membina_mata_kuliah_dari_jurusan = $validatedData['keterangan_membina_mata_kuliah_dari_jurusan'];
+        // $berkas->surat_pernyataan_setiap_bidang_tridharma = $validatedData['surat_pernyataan_setiap_bidang_tridharma'];
+        
+        // $berkas->save();
+
+
+        Alert::success('File Berhasil diupload');
+
+        return redirect()->route('dosen.index');
 
     }
 

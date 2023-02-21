@@ -33,13 +33,16 @@ Route::post('logout',[AuthController::class,'logout'])->name('logout');
 // ============================= Dosen =========================== 
 Route::middleware('auth', 'level:admin,dosen')->group(function () {
     Route::get('/dosen',[DosenController::class,('index')])->name('dosen.index');
-    Route::get('/dosen/kenaikan-pangkat-reguler/tambah',[DosenController::class,('tambah_pangkat_reguler')])->name('dosen.tambah_pangkat_reguler');
-    Route::post('/dosen/kenaikan-pangkat-reguler/tambah',[DosenController::class,('tambah_pangkat_reguler_store')])->name('dosen.tambah_pangkat_reguler_store');
     
     // Storage
     Route::get('/dosen/storage',[DosenController::class,('storage')])->name('dosen.storage');
     Route::post('/dosen/storage',[DosenController::class,('storage_store')])->name('dosen.storage_store');
     Route::delete('/dosen/storage/{my_storage:filename}',[DosenController::class,('storage_destroy')])->name('dosen.storage_destroy');
+
+    // tambah berkas kenaikan pangkat reguler
+    Route::get('/dosen/kenaikan-pangkat-reguler/tambah/{user:email}',[DosenController::class,('tambah_pangkat_reguler')])->name('dosen.tambah_pangkat_reguler');
+    Route::post('/dosen/kenaikan-pangkat-reguler/tambah/{user:email}',[DosenController::class,('tambah_pangkat_reguler_store')])->name('dosen.tambah_pangkat_reguler_store');
+    
 });
 
 

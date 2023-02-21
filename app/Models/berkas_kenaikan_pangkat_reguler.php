@@ -9,6 +9,8 @@ class berkas_kenaikan_pangkat_reguler extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

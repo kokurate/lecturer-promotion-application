@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\PdfFileController;
 use App\Http\Controllers\PegawaiController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,7 @@ Route::middleware('auth', 'level:admin,dosen')->group(function () {
     // Storage
     Route::get('/dosen/storage',[DosenController::class,('storage')])->name('dosen.storage');
     Route::post('/dosen/storage',[DosenController::class,('storage_store')])->name('dosen.storage_store');
+    Route::delete('/dosen/storage/{my_storage:filename}',[DosenController::class,('storage_destroy')])->name('dosen.storage_destroy');
 });
 
 

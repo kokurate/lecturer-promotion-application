@@ -21,13 +21,11 @@ class CreateUsersTable extends Migration
             $table->integer('nip')->unique()->nullable();
             $table->integer('nidn')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('level')->nullable();
             $table->string('status')->nullable();
             $table->string('fakultas')->nullable();
             $table->string('jurusan_prodi')->nullable();
-            $table->boolean('checklist_jurusan')->default(0);
-            $table->boolean('checklist_prodi')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

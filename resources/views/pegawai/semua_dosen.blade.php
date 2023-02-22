@@ -8,6 +8,7 @@
 
 
     <section class="section">
+      <div class="row">
           <!-- ================ Display None ================= -->
           <div id="myDiv" style="display:none;">
             <form action="{{ route('pegawai.semua_dosen_store') }}" method="post" class="">
@@ -239,9 +240,9 @@
                         <table id="semua_dosen">
                             <thead>
                               <tr>
-                                <th>Nama</th>
-                                <th>Program Studi</th>
-                                <th>Action</th>
+                                <th class="text-center">Nama</th>
+                                <th class="text-center">Program Studi</th>
+                                <th class="text-center">Action</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -250,9 +251,13 @@
                                     <td><p>{{ $data->name }}</p></td>
                                     <td><p>{{ $data->jurusan_prodi }}</p></td>
                                     <td>
-                                        <a href="#" >
-                                            {{ $data->email }}
-                                        </a>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{ route('pegawai.ubah_status_kenaikan_pangkat', $data->email) }}" class="text-center badge bg-outline-primary" >
+                                                <span class="badge bg-primary">
+                                                    Ubah Status Kenaikan Pangkat
+                                                </span>
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\jurusan_prodi;
 use App\Models\pangkat;
+use App\Models\status_kenaikan_pangkat;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -82,5 +83,48 @@ class PegawaiController extends Controller
         
         Alert::success('Data Berhasil Ditambahkan');
         return back();
+    }
+
+    public function ubah_status_kenaikan_pangkat(User $user){
+
+        return view('pegawai.ubah_status_kenaikan_pangkat',[
+            'title' => 'Pegawai | Ubah Status',
+            'user' => $user->load('pangkat'),
+            'status_kenaikan_pangkat' => status_kenaikan_pangkat::where('user_id', $user->id)->first(),
+            'golongan' => pangkat::all(),
+        ]);
+    }
+
+    public function ubah_status_kenaikan_pangkat_store(Request $request , User $user){
+        $validator = Validator::make($request->all(),[ 
+            'golongan' => 'required|exists:pangkats,golongan',
+        ],[
+            'golongan.exists' => 'Golongan Belum dipilih'
+        ]);
+
+        if ($validator->fails()) {
+           Alert::error($validator->errors()->all()[0]);
+           return redirect()->back()->withErrors($validator)->withInput();
+       }
+        // Validasi
+        $validatedData = $validator->validated();
+        $validatedData['status'] = 'Tersedia'; 
+        $validatedData['user_id'] = $user->id; 
+
+        // status_kenaikan_pangkat::create($validatedData);
+        
+        // dd($validatedData);
+
+        if (status_kenaikan_pangkat::where('user_id', $user->id)->doesntExist()) {
+            // User doesn't have a record, so create a new one
+            status_kenaikan_pangkat::create($validatedData + ['user_id' => $user->id]);
+        } else {
+            // User already has a record, so update it
+            status_kenaikan_pangkat::where('user_id', $user->id)->update($validatedData);
+        }
+
+        Alert::success('Status Kenaikan Pangkat Berhasil Diubah');
+        return back();
+
     }
 }

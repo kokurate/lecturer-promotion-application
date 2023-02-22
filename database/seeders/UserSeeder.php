@@ -33,6 +33,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name' => 'Kristofel Santa',
+            'pangkat_id' => 2,
             'level' => 'dosen',
             'email' => 'dosen@gmail.com',
             'fakultas' => 'Fakultas Teknik',

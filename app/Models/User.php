@@ -49,14 +49,14 @@ class User extends Authenticatable
     }
 
     public function pangkat(){
-        return $this->hasOne(pangkat::class);
+        return $this->belongsTo(pangkat::class);
     }
 
     public function my_storage(){
         return $this->hasMany(my_storage::class);
     }
 
-    public function status(){
+    public function status_kenaikan_pangkat(){
         return $this->hasOne(status_kenaikan_pangkat::class);
     }
 

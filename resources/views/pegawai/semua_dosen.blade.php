@@ -46,12 +46,58 @@
                             @endif
                             " disabled>
                         </div>
-                        <div class="col">
-                            <label for="jurusan_prodi" class="mt-3 form-label"><strong>Jurusan/Program Studi</strong></label>
-                            {{-- <select name="pangkat_id" class="form-select">
-                                <option selected></option>
-                            </select> --}}
-                        </div>
+
+                        @if(auth()->user()->fakultas == 'Fakultas Ilmu Pendidikan')
+                        <!-- ========================== Fakultas Ilmu Pendidikan ==============  -->
+                            <div class="col">
+                                <label for="jurusan_prodi" class="mt-3 form-label"><strong>Program Studi</strong></label>
+                                <select name="jurusan_prodi" class="form-select">
+                                    <option selected>Pilih Program Studi</option>
+                                    @foreach($fip as $data)
+                                    @if(old('jurusan_prodi') == $data->nama)
+                                        <option value="{{ $data->nama }}" selected>{{ $data->nama }}</option>
+                                    @else
+                                        <option value="{{ $data->nama }}">{{ $data->nama }}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                @error('jurusan_prodi')
+                                        <p class="text-danger my-2"><strong>{{ $message }}</strong></p>    
+                                @enderror
+                            </div>
+                        
+                        @elseif(auth()->user()->fakultas == 'Fakultas Matematika Dan Ilmu Pengetahuan Alam')
+                        <!-- ========================== Fakultas Matematika Dan Ilmu Pengetahuan Alam==============  -->
+                        @elseif(auth()->user()->fakultas == 'Fakultas Ilmu Keolahragaan')
+                        <!-- ========================== Fakultas Ilmu Keolahragaan ==============  -->
+                        @elseif(auth()->user()->fakultas == 'Fakultas Teknik')
+                        <!-- ========================== Fakultas Teknik ==============  -->
+                        @elseif(auth()->user()->fakultas == 'Fakultas Ekonomi')
+                        <!-- ========================== Fakultas Ekonomi ==============  -->
+                        @elseif(auth()->user()->fakultas == 'Fakultas Ilmu Sosial')
+                        <!-- ========================== Fakultas Ilmu Sosial ==============  -->
+                        @elseif(auth()->user()->fakultas == 'Fakultas Bahasa Dan Seni')
+                        <!-- ========================== Fakultas Bahasa Dan Seni ==============  -->
+                            <div class="col">
+                                <label for="jurusan_prodi" class="mt-3 form-label"><strong>Program Studi</strong></label>
+                                <select name="jurusan_prodi" class="form-select">
+                                    <option selected>Pilih Program Studi</option>
+                                    @foreach($fbs as $data)
+                                    @if(old('jurusan_prodi') == $data->nama)
+                                        <option value="{{ $data->nama }}" selected>{{ $data->nama }}</option>
+                                    @else
+                                        <option value="{{ $data->nama }}">{{ $data->nama }}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                @error('jurusan_prodi')
+                                        <p class="text-danger my-2"><strong>{{ $message }}</strong></p>    
+                                @enderror
+                            </div>
+                        
+                        @endif
+
+
 
                         <!--  ============================== End  ================ -->
                         
@@ -69,10 +115,8 @@
                                 @endforeach
                               </select>
                               @error('pangkat_id')
-                                
-                                    <p class="text-danger my-2"><strong>{{ $message }}</strong></p>
-                                
-                                    @enderror
+                                    <p class="text-danger my-2"><strong>{{ $message }}</strong></p>    
+                            @enderror
                         </div>
                     </div>
                 </div> <!-- End Row-->

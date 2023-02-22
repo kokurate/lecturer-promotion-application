@@ -66,16 +66,102 @@
                                 @enderror
                             </div>
                         
+                        
                         @elseif(auth()->user()->fakultas == 'Fakultas Matematika Dan Ilmu Pengetahuan Alam')
                         <!-- ========================== Fakultas Matematika Dan Ilmu Pengetahuan Alam==============  -->
+                            <div class="col">
+                                <label for="jurusan_prodi" class="mt-3 form-label"><strong>Program Studi</strong></label>
+                                <select name="jurusan_prodi" class="form-select">
+                                    <option selected>Pilih Program Studi</option>
+                                    @foreach($fmipa as $data)
+                                    @if(old('jurusan_prodi') == $data->nama)
+                                        <option value="{{ $data->nama }}" selected>{{ $data->nama }}</option>
+                                    @else
+                                        <option value="{{ $data->nama }}">{{ $data->nama }}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                @error('jurusan_prodi')
+                                        <p class="text-danger my-2"><strong>{{ $message }}</strong></p>    
+                                @enderror
+                            </div>
+
                         @elseif(auth()->user()->fakultas == 'Fakultas Ilmu Keolahragaan')
                         <!-- ========================== Fakultas Ilmu Keolahragaan ==============  -->
+                            <div class="col">
+                                <label for="jurusan_prodi" class="mt-3 form-label"><strong>Program Studi</strong></label>
+                                <select name="jurusan_prodi" class="form-select">
+                                    <option selected>Pilih Program Studi</option>
+                                    @foreach($fik as $data)
+                                    @if(old('jurusan_prodi') == $data->nama)
+                                        <option value="{{ $data->nama }}" selected>{{ $data->nama }}</option>
+                                    @else
+                                        <option value="{{ $data->nama }}">{{ $data->nama }}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                @error('jurusan_prodi')
+                                        <p class="text-danger my-2"><strong>{{ $message }}</strong></p>    
+                                @enderror
+                            </div>
+
                         @elseif(auth()->user()->fakultas == 'Fakultas Teknik')
                         <!-- ========================== Fakultas Teknik ==============  -->
+                            <div class="col">
+                                <label for="jurusan_prodi" class="mt-3 form-label"><strong>Program Studi</strong></label>
+                                <select name="jurusan_prodi" class="form-select">
+                                    <option selected>Pilih Program Studi</option>
+                                    @foreach($fatek as $data)
+                                    @if(old('jurusan_prodi') == $data->nama)
+                                        <option value="{{ $data->nama }}" selected>{{ $data->nama }}</option>
+                                    @else
+                                        <option value="{{ $data->nama }}">{{ $data->nama }}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                @error('jurusan_prodi')
+                                        <p class="text-danger my-2"><strong>{{ $message }}</strong></p>    
+                                @enderror
+                            </div>
+
                         @elseif(auth()->user()->fakultas == 'Fakultas Ekonomi')
                         <!-- ========================== Fakultas Ekonomi ==============  -->
+                            <div class="col">
+                                <label for="jurusan_prodi" class="mt-3 form-label"><strong>Program Studi</strong></label>
+                                <select name="jurusan_prodi" class="form-select">
+                                    <option selected>Pilih Program Studi</option>
+                                    @foreach($fekon as $data)
+                                    @if(old('jurusan_prodi') == $data->nama)
+                                        <option value="{{ $data->nama }}" selected>{{ $data->nama }}</option>
+                                    @else
+                                        <option value="{{ $data->nama }}">{{ $data->nama }}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                @error('jurusan_prodi')
+                                        <p class="text-danger my-2"><strong>{{ $message }}</strong></p>    
+                                @enderror
+                            </div>
+
                         @elseif(auth()->user()->fakultas == 'Fakultas Ilmu Sosial')
                         <!-- ========================== Fakultas Ilmu Sosial ==============  -->
+                            <div class="col">
+                                <label for="jurusan_prodi" class="mt-3 form-label"><strong>Program Studi</strong></label>
+                                <select name="jurusan_prodi" class="form-select">
+                                    <option selected>Pilih Program Studi</option>
+                                    @foreach($fis as $data)
+                                    @if(old('jurusan_prodi') == $data->nama)
+                                        <option value="{{ $data->nama }}" selected>{{ $data->nama }}</option>
+                                    @else
+                                        <option value="{{ $data->nama }}">{{ $data->nama }}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                @error('jurusan_prodi')
+                                        <p class="text-danger my-2"><strong>{{ $message }}</strong></p>    
+                                @enderror
+                            </div>
+
                         @elseif(auth()->user()->fakultas == 'Fakultas Bahasa Dan Seni')
                         <!-- ========================== Fakultas Bahasa Dan Seni ==============  -->
                             <div class="col">

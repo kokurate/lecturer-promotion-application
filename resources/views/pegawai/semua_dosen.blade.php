@@ -235,7 +235,29 @@
                   <!-- ========== Data Table ========-->
                   <div class="row" >
                     <div class="col-lg my-3">
-                        <h2>Data Table</h2>
+                        <h2></h2>
+                        <table id="semua_dosen">
+                            <thead>
+                              <tr>
+                                <th>Nama</th>
+                                <th>Program Studi</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($all_dosen as $data)
+                                <tr>
+                                    <td><p>{{ $data->name }}</p></td>
+                                    <td><p>{{ $data->jurusan_prodi }}</p></td>
+                                    <td>
+                                        <a href="#" >
+                                            {{ $data->email }}
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                          </table>
                     </div>
                   </div>
             </div>
@@ -247,7 +269,36 @@
 
 @endsection
 
+@push('css')
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+
+
+@endpush
+
 @push('script')
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        // $(document).ready(function() {
+        // $('#semua_dosen').DataTable();
+        // });
+
+        $(document).ready(function() {
+        $('#semua_dosen').DataTable({
+            "paging":   true,
+            "ordering": true,
+            "info":     true
+        });
+        });
+    </script>
+
+
     <script>
         var showDivButton = document.getElementById('showDiv');
         var myDiv = document.getElementById('myDiv');

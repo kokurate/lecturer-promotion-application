@@ -29,6 +29,16 @@ class PegawaiController extends Controller
 
         // $data = jurusan_prodi::whereIn('id',[7,8,9,10,11,12,13,14])->get();
         // dd($data);
+        // $login = auth()->user()->fakultas
+        if(auth()->user()->fakultas == 'Fakultas Ilmu Pendidikan'){$namafakultas = 'Fakultas Ilmu Pendidikan';}
+        elseif(auth()->user()->fakultas == 'Fakultas Matematika Dan Ilmu Pengetahuan Alam'){$namafakultas = 'Fakultas Matematika Dan Ilmu Pengetahuan Alam';}
+        elseif(auth()->user()->fakultas == 'Fakultas Ilmu Keolahragaan'){$namafakultas = 'Fakultas Ilmu Keolahragaan';}
+        elseif(auth()->user()->fakultas == 'Fakultas Teknik'){$namafakultas = 'Fakultas Teknik';}
+        elseif(auth()->user()->fakultas == 'Fakultas Ekonomi'){$namafakultas = 'Fakultas Ekonomi';}
+        elseif(auth()->user()->fakultas == 'Fakultas Ilmu Sosial'){$namafakultas = 'Fakultas Ilmu Sosial';}
+        elseif(auth()->user()->fakultas == 'Fakultas Bahasa Dan Seni'){$namafakultas = 'Fakultas Bahasa Dan Seni';}
+        
+
         return view('pegawai.semua_dosen',[
            'title' => 'Semua Dosen Fakultas',
            'pangkat' => pangkat::all(), 
@@ -39,6 +49,7 @@ class PegawaiController extends Controller
            'fekon' => jurusan_prodi::whereIn('id',[30,31,32,33,34])->get(),
            'fis' => jurusan_prodi::whereIn('id',[35,36,37,38,39,40,41,42])->get(),
            'fbs' => jurusan_prodi::whereIn('id',[43,44,45,46,47,48,49,50])->get(),
+           'all_dosen' => User::where('fakultas', $namafakultas )->where('level', 'dosen')->get(),
         ]);
     }
 

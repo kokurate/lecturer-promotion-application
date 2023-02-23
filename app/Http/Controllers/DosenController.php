@@ -201,7 +201,7 @@ class DosenController extends Controller
         $user = auth()->user()->id;
         User::where('id', $user)->update($validatedData);
 
-        Alert::success('File Berhasil diupload');
+        Alert::success('Berhasil','NIP dan NIDN berhasil disimpan');
         return redirect()->route('dosen.index');
         // dd($validatedData);
     }

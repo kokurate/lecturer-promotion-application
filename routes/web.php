@@ -30,6 +30,12 @@ Route::get('/',[AuthController::class, ('login')])->name('login');
 Route::post('authenticate',[AuthController::class,'authenticate'])->name('authenticate');
 Route::post('logout',[AuthController::class,'logout'])->name('logout');
 
+// Reset Password Alternative
+Route::get('/forgot-password',[AuthController::class, ('show_forgot_password')])->name('show_forgot_password');
+Route::post('/forgot-password',[AuthController::class, ('store_forgot_password')])->name('store_forgot_password');
+Route::get('/reset-password/{user:my_token}',[AuthController::class, ('show_reset_password')])->name('show_reset_password');
+Route::post('/reset-password/{user:my_token}',[AuthController::class, ('store_reset_password')])->name('store_reset_password');
+
 // ============================= Dosen =========================== 
 Route::middleware('auth', 'level:admin,dosen',)->group(function () {
     Route::get('/dosen',[DosenController::class,('index')])->name('dosen.index');

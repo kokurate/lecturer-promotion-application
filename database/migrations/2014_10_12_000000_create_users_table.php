@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('status')->nullable();
             $table->string('fakultas')->nullable();
             $table->string('jurusan_prodi')->nullable();
+            $table->string('my_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

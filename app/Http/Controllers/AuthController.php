@@ -141,7 +141,7 @@ class AuthController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         // dd($validatedData);
-        User::where('email', $user->email)->update(['password' => $validatedData['password'], 'my_token' => '']);
+        User::where('email', $user->email)->update(['password' => $validatedData['password'], 'my_token' => null]);
         
         Alert::success('Reset Password Berhasil','Silahkan login menggunakan password baru anda');
         return redirect()->route('login');

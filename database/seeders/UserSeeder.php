@@ -39,6 +39,18 @@ class UserSeeder extends Seeder
             'fakultas' => 'Fakultas Teknik',
             'jurusan_prodi' => 'Program Studi Teknik Informatika',
             'password' => bcrypt('password'), //password
+            'my_token' => 'asdasdasd'
+        ]);
+
+        User::create([
+            'name' => 'Ferdinand Sangkop',
+            'pangkat_id' => 4,
+            'level' => 'dosen',
+            'email' => 'dosen1@gmail.com',
+            'fakultas' => 'Fakultas Teknik',
+            'jurusan_prodi' => 'Program Studi Teknik Informatika',
+            'password' => bcrypt('password'), //password
+            'my_token' => 'asdasdasd'
         ]);
     }
 }

@@ -40,6 +40,8 @@ class Kernel extends HttpKernel
 
             // ======= ======   NEW   = ==========
             \App\Http\Middleware\VerifyNipAndNidn::class,
+            \App\Http\Middleware\ExpiredUsersMyToken::class,
+
         ],
 
         'api' => [

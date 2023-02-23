@@ -35,6 +35,9 @@
                         
                         <!-- ======================= Trigger =========== -->
                         @if(optional($status_kenaikan_pangkat)->status == null)
+                            <div class="d-flex justify-content-center">
+                                <a href="#" id="showDiv" class="text-center my-3" style="color: #012970; font-weight: bold; text-decoration: none;" onmouseover="this.style.color='red'" onmouseout="this.style.color='#012970'" data-bs-toggle="modal" data-bs-target="#disablebackdrop">+ Ubah Status Kenaikan Pangkat</a>
+                            </div>
                         @elseif($status_kenaikan_pangkat->status == 'Belum Tersedia')
                             <div class="d-flex justify-content-center">
                                 <a href="#" id="showDiv" class="text-center my-3" style="color: #012970; font-weight: bold; text-decoration: none;" onmouseover="this.style.color='red'" onmouseout="this.style.color='#012970'" data-bs-toggle="modal" data-bs-target="#disablebackdrop">+ Ubah Status Kenaikan Pangkat</a>

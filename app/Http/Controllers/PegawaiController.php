@@ -74,7 +74,7 @@ class PegawaiController extends Controller
 
         // Validasi
         $validatedData = $validator->validated();
-        $validatedData['password'] = bcrypt(Str::random('5')); 
+        // $validatedData['password'] = bcrypt(Str::random('5')); 
         $validatedData['level'] = 'dosen'; 
         $validatedData['fakultas'] = auth()->user()->fakultas; 
 
@@ -116,7 +116,16 @@ class PegawaiController extends Controller
         // dd($validatedData);
 
         if (status_kenaikan_pangkat::where('user_id', $user->id)->doesntExist()) {
-            // User doesn't have a record, so create a new one
+            // User doesn't have a record, so create a new one with passwords users
+            $plain = Str::random(5); 
+            $password = bcrypt($plain);
+
+            User::where('id', $user->id)->update(['password' => $password]);
+
+            // // preparing for sending email
+            //     $email_to = $user->email;
+            //     $data = 
+
             status_kenaikan_pangkat::create($validatedData + ['user_id' => $user->id]);
         } else {
             // User already has a record, so update it

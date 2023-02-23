@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
+use App\Mail\UbahStatusKenaikanPangkat;
+use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
+use Illuminate\Mail\Markdown;
 
 class PegawaiController extends Controller
 {
@@ -116,18 +119,44 @@ class PegawaiController extends Controller
         // dd($validatedData);
 
         if (status_kenaikan_pangkat::where('user_id', $user->id)->doesntExist()) {
-            // User doesn't have a record, so create a new one with passwords users
+            
             $plain = Str::random(5); 
             $password = bcrypt($plain);
 
             User::where('id', $user->id)->update(['password' => $password]);
 
-            // // preparing for sending email
-            //     $email_to = $user->email;
-            //     $data = 
+            // preparing for sending email
+                $email_to = $user->email;
+                $data = [
+                            'title' => 'DIHARAPKAN UNTUK SEGERA MENGUBAH PASSWORD ANDA !!!',
+                            'p1' => 'Status Kenaikan Pangkat Anda Diperbarui Menjadi '. $validatedData['status'] , 
+                            'p2' =>  'Anda Sudah Bisa Mengajukan Kenaikan Pangkat Dengan Menggunakan Akun berikut Ini',
+                            'credentials' =>  'Email = '.$user->email.' 
+                                                Password = '.$plain.' 
+                                                ',
+                            'url' => route('login'),
+                        ];
+                
+                // Send to Email
+                Mail::to($email_to)->send(new UbahStatusKenaikanPangkat($data));
 
+            // User doesn't have a record, so create a new one with passwords users
             status_kenaikan_pangkat::create($validatedData + ['user_id' => $user->id]);
         } else {
+
+            // preparing for sending email
+            $email_to = $user->email;
+            $data = [
+                        'title' => 'Selamat Datang',
+                        'p1' => 'Status Kenaikan Pangkat Anda Diperbarui Menjadi '. $validatedData['status'] .' Untuk Naik Ke Golongan '. $validatedData['golongan'], 
+                        'p2' =>  'Anda Sudah Bisa Mengajukan Kenaikan Pangkat Dengan Menggunakan Akun Anda',
+                        'credentials' =>  'Email = '.$user->email,
+                        'url' => route('login'),
+                    ];
+            
+            // Send to Email
+            Mail::to($email_to)->send(new UbahStatusKenaikanPangkat($data));
+
             // User already has a record, so update it
             status_kenaikan_pangkat::where('user_id', $user->id)->update($validatedData);
         }

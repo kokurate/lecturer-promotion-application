@@ -10,6 +10,11 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
+                        <h2>
+                            <a href="{{ route('pegawai.semua_dosen') }}" class="mt-5 btn btn-light" style="color: #012970; font-weight: bold; text-decoration: none;" onmouseover="this.style.color='red'" onmouseout="this.style.color='#012970'">
+                                <i class="bi bi-arrow-return-left"></i>  Kembali 
+                            </a>
+                        </h2>
                         <h2 class="mt-5" style="color:#012970;"><strong>Detail</strong></h2>
                         <h1 style="color:#012970;">_______</h1>
                         <h3 style="color:#cc0808;">{{ $user->pangkat->jabatan_fungsional }} , {{ $user->pangkat->golongan }} , {{ $user->pangkat->pangkat }}</h2>

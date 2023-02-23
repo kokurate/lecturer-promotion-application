@@ -237,17 +237,19 @@
                   <div class="row" >
                     <div class="col-lg my-3">
                         <h2></h2>
-                        <table id="semua_dosen">
+                        <table id="semua_dosen" class="table table-hover">
                             <thead>
                               <tr>
-                                <th class="text-center">Nama</th>
-                                <th class="text-center">Program Studi</th>
-                                <th class="text-center">Action</th>
+                                <th scope="col" class="text-center">#</th>
+                                <th scope="col" class="text-center">Nama</th>
+                                <th scope="col" class="text-center">Program Studi</th>
+                                <th scope="col" class="text-center">Action</th>
                               </tr>
                             </thead>
                             <tbody>
                             @foreach($all_dosen as $data)
                                 <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
                                     <td><p>{{ $data->name }}</p></td>
                                     <td><p>{{ $data->jurusan_prodi }}</p></td>
                                     <td>

@@ -115,8 +115,6 @@ class DosenController extends Controller
 
     public function storage_store(Request $request,){
         
-        
-
         $validator = Validator::make($request->all(),[
             'path' => 'required|max:1024|mimes:pdf',
             'nama' => 'required|max:255'
@@ -170,6 +168,42 @@ class DosenController extends Controller
         Alert::success('File Berhasil dihapus');
         return back();
 
+    }
+
+    public function verify_nip_and_nidn(){
+        return view('dosen.verifikasi_nip_dan_nidn',[
+            'title' => 'Verifikasi'
+        ]);
+    }
+
+    public function verify_nip_and_nidn_store(Request $request){
+        
+        $validator = Validator::make($request->all(),[
+            'nip' => 'required|numeric|',
+            'nidn' => 'required|numeric|'
+        ],[
+            'nip.required' => 'NIP harus diisi',
+            'nip.max' => 'Maksimal NIP 19 angka',
+            'nip.numeric' => 'NIP Hanya berupa angka',
+            'nidn.numeric' => 'NIDN Hanya berupa angka',
+            'nidn.required' => 'NIDN harus diisi',
+            'nidn.max' => 'Maksimal NIDN 25 angka',
+        ]);
+        
+
+        if ($validator->fails()) {
+            Alert::error($validator->errors()->all()[0]);
+            return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Gagal Menambahkan Akun Dosen');
+        }
+
+        // Validasi
+        $validatedData = $validator->validated();
+        $user = auth()->user()->id;
+        User::where('id', $user)->update($validatedData);
+
+        Alert::success('File Berhasil diupload');
+        return redirect()->route('dosen.index');
+        // dd($validatedData);
     }
 
 }

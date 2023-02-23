@@ -37,6 +37,9 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+
+            // ======= ======   NEW   = ==========
+            \App\Http\Middleware\VerifyNipAndNidn::class,
         ],
 
         'api' => [
@@ -63,6 +66,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        // ======= ======   NEW   = ==========
         'level' => \App\Http\Middleware\check_level::class,
+        // 'verify_nip_and_nidn' => \App\Http\Middleware\VerifyNipAndNidn::class,
     ];
 }

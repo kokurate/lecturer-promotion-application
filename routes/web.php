@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PdfFileController;
 use App\Http\Controllers\PegawaiController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,10 @@ Route::get('/',[AuthController::class, ('login')])->name('login');
 Route::post('authenticate',[AuthController::class,'authenticate'])->name('authenticate');
 Route::post('logout',[AuthController::class,'logout'])->name('logout');
 
+// PDF
+Route::get('/pdf/{path}', [PdfController::class,('show')] )->name('pdf.show');
+
+
 // Reset Password Alternative
 Route::get('/forgot-password',[AuthController::class, ('show_forgot_password')])->name('show_forgot_password');
 Route::post('/forgot-password',[AuthController::class, ('store_forgot_password')])->name('store_forgot_password');
@@ -53,6 +58,9 @@ Route::middleware('auth', 'level:admin,dosen',)->group(function () {
     Route::get('/dosen/verifikasi-nip-dan-nidn', [DosenController::class,('verify_nip_and_nidn')])->name('dosen.verify_nip_and_nidn');
     Route::post('/dosen/verifikasi-nip-dan-nidn', [DosenController::class,('verify_nip_and_nidn_store')])->name('dosen.verify_nip_and_nidn_store');
 
+
+    
+
 });
 
 
@@ -67,6 +75,13 @@ Route::middleware('auth', 'level:admin,pegawai')->group(function () {
     Route::get('/pegawai/ubah-status-kenaikan-pangkat/{user:email}', [PegawaiController::class,('ubah_status_kenaikan_pangkat')])->name('pegawai.ubah_status_kenaikan_pangkat');
     Route::post('/pegawai/ubah-status-kenaikan-pangkat/{user:email}', [PegawaiController::class,('ubah_status_kenaikan_pangkat_store')])->name('pegawai.ubah_status_kenaikan_pangkat_store');
 
+    // Pengajuan Masuk / Sanggah
+    Route::get('/pegawai/semua-pengajuan-masuk', [PegawaiController::class, ('pengajuan_masuk')])->name('pegawai.pengajuan_masuk');
+    Route::get('/pegawai/pengajuan-masuk/{user:email}', [PegawaiController::class, ('pengajuan_masuk_user')])->name('pegawai.pengajuan_masuk_user');
+    Route::get('/pegawai/pengajuan-masuk/detail/{user:email}', [PegawaiController::class, ('pengajuan_masuk_detail')])->name('pegawai.pengajuan_masuk_detail');
+    
+    // tolak
+    Route::post('/pegawai/pengajuan-masuk/detail/{user:email}', [PegawaiController::class, ('pengajuan_masuk_detail_tolak_store')])->name('pegawai.pengajuan_masuk_detail_tolak_store');
 
 });
 

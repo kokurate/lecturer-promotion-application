@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('fakultas')->nullable();
             $table->string('jurusan_prodi')->nullable();
             $table->string('my_token')->nullable();
+            $table->string('tanggapan')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

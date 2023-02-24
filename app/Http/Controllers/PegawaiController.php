@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DosenNotifications;
 use App\Models\jurusan_prodi;
 use App\Models\pangkat;
 use App\Models\status_kenaikan_pangkat;
@@ -11,6 +12,7 @@ use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
 use App\Mail\UbahStatusKenaikanPangkat;
+use App\Models\berkas_kenaikan_pangkat_reguler;
 use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
@@ -164,5 +166,62 @@ class PegawaiController extends Controller
         Alert::success('Status Kenaikan Pangkat Berhasil Diubah');
         return back();
 
+    }
+
+    public function pengajuan_masuk(){
+        return view('pegawai.pengajuan_masuk',[
+            'title' => 'Pegawai | Pengajuan Masuk',
+            // yang duluan pengajuan di atas
+            'masuk' => User::where('status', 'Sedang Diperiksa')->OrWhere('status','Disanggah')->orderBy('updated_at', 'ASC')->get(),
+        ]);
+    }
+
+    public function pengajuan_masuk_user(User $user){
+        return view('pegawai.pengajuan_masuk_user',[
+            'title' => 'Pengajuan '.$user->name ,
+            'user' => $user
+        ]);
+    }
+
+    public function pengajuan_masuk_detail(User $user){
+        // dd('Controller method called!', $email);
+        // $user = User::where('email', $email)->firstOrFail();
+        $berkas = berkas_kenaikan_pangkat_reguler::where('user_id', $user->id)->firstOrFail()->load('user');
+
+    return view('pegawai.pengajuan_masuk_detail',[
+        'title' => 'Detail Pengajuan',
+        'berkas' => $berkas,
+    ]);
+    }
+
+    public function pengajuan_masuk_detail_tolak_store(User $user, Request $request){
+        $validator = Validator::make($request->all(),[ 
+            'tanggapan' => 'required|',
+        ],[
+            'tanggapan.required' => 'Tanggapan harus diisi'
+        ]);
+
+        if ($validator->fails()) {
+           Alert::error($validator->errors()->all()[0]);
+           return redirect()->back()->withErrors($validator)->withInput();
+       }
+        // Validasi
+        $validatedData = $validator->validated();
+        $validatedData['status'] = 'Ditolak';
+        
+        User::where('id',$user->id)->update($validatedData);
+
+        $data = [
+            'title' => 'Notifikasi Dosen',
+            'open' => 'Status Kenaikan Pangkat Anda Diperbarui Menjadi '. $validatedData['status'], 
+            'close' =>  'Silahkan cek website untuk informasi lebih lanjut',
+            'url' => route('login'),
+        ];
+
+        // Send to Email
+        Mail::to($user->email)->send(new DosenNotifications($data));
+
+        Alert::success('Berhasil','Pengajuan berhasil diupdate');
+        return redirect()->route('pegawai.index');
     }
 }

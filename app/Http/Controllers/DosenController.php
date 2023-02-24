@@ -73,7 +73,8 @@ class DosenController extends Controller
 
         // Validasi
         $validatedData = $validator->validated();
-        $validatedData['user_id'] = $user->id; 
+        $validatedData['user_id'] = $user->id;
+        
 
         // dd($validatedData);
         if (berkas_kenaikan_pangkat_reguler::where('user_id', $user->id)->doesntExist()) {
@@ -83,6 +84,8 @@ class DosenController extends Controller
             // User already has a record, so update it
             berkas_kenaikan_pangkat_reguler::where('user_id', $user->id)->update($validatedData);
         }
+
+        User::where('id', $user->id)->update(['status' => 'Sedang Diperiksa']);
    
         // Save the file path to the kartu_pegawai_nip_baru_bkn column of the berkas_kenaikan_pangkat_regulers table
         // $berkas = new berkas_kenaikan_pangkat_reguler();
@@ -100,7 +103,7 @@ class DosenController extends Controller
         // $berkas->save();
 
 
-        Alert::success('File Berhasil diupload');
+        Alert::success('Berhasil','Pengajuan Kenaikan Pangkat Berhasil Dibuat');
 
         return redirect()->route('dosen.index');
 

@@ -138,8 +138,19 @@
             </a>
           </li>
           <li>
+            <a href="{{ route('pegawai.pengajuan_masuk') }}">
+              <i class="bi bi-circle"></i><span>Masuk</span>
+            </a>
+          </li>
+          <li>
             <a href="#">
               <i class="bi bi-circle"></i><span>Dalam Proses</span>
+            </a>
+          </li>
+          <li>
+          <li>
+            <a href="#">
+              <i class="bi bi-circle"></i><span>Selesai</span>
             </a>
           </li>
           <li>

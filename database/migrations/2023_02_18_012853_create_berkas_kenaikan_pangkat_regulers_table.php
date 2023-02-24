@@ -25,6 +25,7 @@ class CreateBerkasKenaikanPangkatRegulersTable extends Migration
             $table->string('sk_tugas_belajar_atau_surat_izin_studi')->nullable();
             $table->string('keterangan_membina_mata_kuliah_dari_jurusan')->nullable();
             $table->string('surat_pernyataan_setiap_bidang_tridharma')->nullable();
+            $table->string('merge')->nullable();
             $table->timestamps();
         });
     }

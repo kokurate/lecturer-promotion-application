@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,5 +17,9 @@ class PdfController extends Controller
         }
     
         return response()->file($fullPath);
+    }
+
+    public function merge(Request $request, User $user){
+        dd($request);
     }
 }

@@ -29,12 +29,12 @@
                                 <input type="hidden" name="kartu_pegawai_nip_baru_bkn" value="{{ asset('storage/'. $berkas->kartu_pegawai_nip_baru_bkn) }}">
                                 <input type="hidden" name="sk_cpns" value="{{ asset('storage/'. $berkas->sk_cpns) }}">
                                 <input type="hidden" name="sk_pangkat_terakhir" value="{{ asset('storage/'. $berkas->sk_pangkat_terakhir) }}">
-                                <input type="hidden" name="sk_jabfung_terakhir_dan_pak" value="{{ asset('storage/'. $berkas->sk_jabfung_terakhir_dan_pak) }}">
+                                {{-- <input type="hidden" name="sk_jabfung_terakhir_dan_pak" value="{{ asset('storage/'. $berkas->sk_jabfung_terakhir_dan_pak) }}">
                                 <input type="hidden" name="ppk_dan_skp" value="{{ asset('storage/'. $berkas->ppk_dan_skp) }}">
                                 <input type="hidden" name="ijazah_terakhir" value="{{ asset('storage/'. $berkas->ijazah_terakhir) }}">
                                 <input type="hidden" name="sk_tugas_belajar_atau_surat_izin_studi" value="{{ asset('storage/'. $berkas->sk_tugas_belajar_atau_surat_izin_studi) }}">
                                 <input type="hidden" name="keterangan_membina_mata_kuliah_dari_jurusan" value="{{ asset('storage/'. $berkas->keterangan_membina_mata_kuliah_dari_jurusan) }}">
-                                <input type="hidden" name="surat_pernyataan_setiap_bidang_tridharma" value="{{ asset('storage/'. $berkas->surat_pernyataan_setiap_bidang_tridharma) }}">
+                                <input type="hidden" name="surat_pernyataan_setiap_bidang_tridharma" value="{{ asset('storage/'. $berkas->surat_pernyataan_setiap_bidang_tridharma) }}"> --}}
 
                                 <div class="row">
                                     <div class="col-6">

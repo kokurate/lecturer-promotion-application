@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class PdfController extends Controller
 {
@@ -37,10 +39,21 @@ class PdfController extends Controller
     $oMerger->addPDF(storage_path('app/public/' . substr($validatedData['kartu_pegawai_nip_baru_bkn'], strlen(asset('storage/')))),'all');
     $oMerger->addPDF(storage_path('app/public/' . substr($validatedData['sk_cpns'], strlen(asset('storage/')))),'all');
     $oMerger->addPDF(storage_path('app/public/' . substr($validatedData['sk_pangkat_terakhir'], strlen(asset('storage/')))),'all');
-    
+    // $oMerger->addPDF(storage_path('app/public/' . $validatedData['kartu_pegawai_nip_baru_bkn']), 'all');
+    // $oMerger->addPDF(storage_path('app/public/' . $validatedData['sk_cpns']), 'all');
+    // $oMerger->addPDF(storage_path('app/public/' . $validatedData['sk_pangkat_terakhir']), 'all');
+
+
+    $namadosen = $user->name;
+    $slug = Str::slug($namadosen);
+
+
+   
+    $fileName = '/storage/dosen/'.$slug.'/'. time().'-merge'.'.pdf';
+    // $fileName = 'merge/'. time().'-merge'.'.pdf';
 
     $oMerger->merge();
-    $oMerger->save(public_path('merged_result.pdf'));
+    $oMerger->save(public_path($fileName));
 
     // return response()->download(public_path('merged_result.pdf'));
 

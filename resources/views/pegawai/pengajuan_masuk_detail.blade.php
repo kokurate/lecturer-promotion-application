@@ -131,6 +131,14 @@
                           
 
                             <div class="text-center my-5">
+                                <h4 class="text-center mb-3" style="color:red;">Jika pengajuan diterima jangan lupa untuk mendownload file pdf !!!</h4>
+                                
+                                @if(session('success'))
+                                    <div class="alert alert-success" role="alert">
+                                        <a href="{{ asset('storage/' . $berkas->merge) }}" style="color:rgb(255, 0, 0);" target="__blank">Lihat & Download File PDF </a>
+                                    </div>
+                                @endif
+
                                 <div class="d-flex justify-content-center">
                                    
                                         <a href="{{ route('pegawai.pengajuan_masuk_user', $berkas->user->email) }}" class="d-block btn btn-primary btn-lg rounded-pill mx-2" style="color:#012970; background-color:#eeff00; padding-left: 50px; padding-right: 50px;border:none;"><strong>Kembali</strong></a>
@@ -178,3 +186,8 @@
     </section>
 </main>
 @endsection
+
+@push('script')
+    
+
+@endpush

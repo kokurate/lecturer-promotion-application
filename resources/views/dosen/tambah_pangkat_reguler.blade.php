@@ -16,6 +16,7 @@
           <div class="card">
             <div class="card-body">
               <h2 class="mt-5 text-center" style="color:#012970;"><strong>Unggah Berkas Persyaratan</strong></h2>
+              <h4 class="text-center">Simbol <span style="color:rgb(255, 0, 0)">***</span> Wajib Diisi</h4>
               
                 
             <!-- Vertical Form -->
@@ -23,7 +24,7 @@
               @csrf
                 <div class="col-lg-5">
                     <div class="col my-3">
-                        <label for="" class="form-label">1. Kartu Pegawai & NIP Baru BKN</label>
+                        <label for="" class="form-label">1. Kartu Pegawai & NIP Baru BKN <span style="color:rgb(255, 0, 0)">***</span></label>
                         {{-- <input class="form-control" type="file" id="formFile"  accept=".pdf"> --}}
                         <select name="kartu_pegawai_nip_baru_bkn" class="form-select">
                           <option selected>Pilih File Pada Storage Anda</option>
@@ -40,7 +41,7 @@
                         @enderror
                     </div> 
                     <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">2. SK Pengangkatan Pertama (CPNS)</label>
+                        <label for="inputNanme4" class="form-label">2. SK Pengangkatan Pertama (CPNS) <span style="color:rgb(255, 0, 0)">***</span></label>
                         <select name="sk_cpns" class="form-select">
                           <option selected>Pilih File Pada Storage Anda</option>
                           @foreach($storage as $data)
@@ -56,7 +57,7 @@
                         @enderror
                     </div> 
                     <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">3. SK Pangkat Terakhir</label>
+                        <label for="inputNanme4" class="form-label">3. SK Pangkat Terakhir <span style="color:rgb(255, 0, 0)">***</span></label>
                         <select name="sk_pangkat_terakhir" class="form-select">
                           <option selected>Pilih File Pada Storage Anda</option>
                           @foreach($storage as $data)
@@ -72,7 +73,7 @@
                         @enderror
                     </div> 
                     <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">4. SK Jabatan Fungsional Terakhir dan PAK</label>
+                        <label for="inputNanme4" class="form-label">4. SK Jabatan Fungsional Terakhir dan PAK <span style="color:rgb(255, 0, 0)">***</span></label>
                         <select name="sk_jabfung_terakhir_dan_pak" class="form-select">
                           <option selected>Pilih File Pada Storage Anda</option>
                           @foreach($storage as $data)
@@ -88,7 +89,7 @@
                         @enderror
                     </div> 
                     <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">5. PPK & SKP dua tahun terakhir</label>
+                        <label for="inputNanme4" class="form-label">5. PPK & SKP dua tahun terakhir <span style="color:rgb(255, 0, 0)">***</span></label>
                         <select name="ppk_dan_skp" class="form-select">
                           <option selected>Pilih File Pada Storage Anda</option>
                           @foreach($storage as $data)
@@ -132,9 +133,9 @@
 
                 <div class="col-lg-5">
                     <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">6. Ijazah Terakhir (jika gelar belum tercantum dalam SK Pangkat Terakhir) </label>
+                        <label for="inputNanme4" class="form-label">6. Ijazah Terakhir (jika gelar belum tercantum dalam SK Pangkat Terakhir</label>
                         <select name="ijazah_terakhir" class="form-select">
-                          <option selected>Pilih File Pada Storage Anda</option>
+                          <option value="null" selected>Pilih File Pada Storage Anda</option>
                           @foreach($storage as $data)
                             @if(old('ijazah_terakhir') == $data->path)
                               <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
@@ -148,7 +149,7 @@
                         @enderror
                     </div> 
                     <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">7. SK Tugas Belajar atau Surat Izin Studi (sesuai no.5)</label>
+                        <label for="inputNanme4" class="form-label">7. SK Tugas Belajar atau Surat Izin Studi (sesuai no.5) <span style="color:rgb(255, 0, 0)">***</span></label>
                         <select name="sk_tugas_belajar_atau_surat_izin_studi" class="form-select">
                           <option selected>Pilih File Pada Storage Anda</option>
                           @foreach($storage as $data)
@@ -164,7 +165,7 @@
                         @enderror
                     </div> 
                     <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">Keterangan Membina Mata Kuliah dari Jurusan</label>
+                        <label for="inputNanme4" class="form-label">Keterangan Membina Mata Kuliah dari Jurusan <span style="color:rgb(255, 0, 0)">***</span></label>
                         <select name="keterangan_membina_mata_kuliah_dari_jurusan" class="form-select">
                           <option selected>Pilih File Pada Storage Anda</option>
                           @foreach($storage as $data)
@@ -180,7 +181,7 @@
                         @enderror
                     </div> 
                     <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">Surat Pernyataan Setiap Bidang Tridharma (beserta bukti pendukung)</label>
+                        <label for="inputNanme4" class="form-label">Surat Pernyataan Setiap Bidang Tridharma (beserta bukti pendukung) <span style="color:rgb(255, 0, 0)">***</span></label>
                         <select name="surat_pernyataan_setiap_bidang_tridharma" class="form-select">
                           <option selected>Pilih File Pada Storage Anda</option>
                           @foreach($storage as $data)

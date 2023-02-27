@@ -43,8 +43,7 @@ class DosenController extends Controller
                                                             $query->where('user_id', auth()->user()->id);})],
             'ppk_dan_skp' =>                                [Rule::exists('my_storages', 'path')->where(function ($query) {
                                                             $query->where('user_id', auth()->user()->id);})],
-            'ijazah_terakhir' =>                                [Rule::exists('my_storages', 'path')->where(function ($query) {
-                                                            $query->where('user_id', auth()->user()->id);})],
+            'ijazah_terakhir' => 'nullable',
             'sk_tugas_belajar_atau_surat_izin_studi' => [ Rule::exists('my_storages', 'path')->where(function ($query) {
                                                             $query->where('user_id', auth()->user()->id);})],
             'keterangan_membina_mata_kuliah_dari_jurusan' => [ Rule::exists('my_storages', 'path')->where(function ($query) {
@@ -74,7 +73,12 @@ class DosenController extends Controller
         // Validasi
         $validatedData = $validator->validated();
         $validatedData['user_id'] = $user->id;
-        
+
+        if($validatedData['ijazah_terakhir'] == 'null'){
+            $validatedData['ijazah_terakhir'] =  'tidak-upload.pdf';
+            // berkas_kenaikan_pangkat_reguler::where('user_id', $user->id)->update(['ijazah_terakhir', $validatedData['ijazah_terakhir']]);
+        }
+
 
         // dd($validatedData);
         if (berkas_kenaikan_pangkat_reguler::where('user_id', $user->id)->doesntExist()) {

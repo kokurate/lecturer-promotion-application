@@ -169,10 +169,16 @@ class PegawaiController extends Controller
     }
 
     public function pengajuan_masuk(){
+
         return view('pegawai.pengajuan_masuk',[
             'title' => 'Pegawai | Pengajuan Masuk',
             // yang duluan pengajuan di atas
-            'masuk' => User::where('status', 'Sedang Diperiksa')->OrWhere('status','Disanggah')->orderBy('updated_at', 'ASC')->get(),
+            'masuk' => User::where(function ($query) {
+                    $query->where('status', 'Sedang Diperiksa')
+                        ->where('fakultas', auth()->user()->fakultas);})
+                    ->orWhere('status', 'Disanggah')
+                    ->orderBy('updated_at', 'ASC')
+                    ->get(),
         ]);
     }
 
@@ -223,5 +229,19 @@ class PegawaiController extends Controller
 
         Alert::success('Berhasil','Pengajuan berhasil diupdate');
         return redirect()->route('pegawai.index');
+    }
+
+    public function pengajuan_dalam_proses(){
+        return view('pegawai.dalam_proses',[
+            'title' => 'Pegawai | Dalam Proses',
+            // yang duluan di bawah
+            'dalam_proses' => User::where(function ($query) {
+                            $query->where('status', 'Disetujui')
+                                ->where('fakultas', auth()->user()->fakultas);})
+                            ->orWhere('status', 'Disanggah')
+                            ->orderBy('updated_at', 'DESC')
+                            ->get()->load('berkas_kenaikan_pangkat_reguler'),
+
+        ]);
     }
 }

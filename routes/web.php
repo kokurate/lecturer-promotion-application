@@ -80,6 +80,10 @@ Route::middleware('auth', 'level:admin,pegawai')->group(function () {
     Route::get('/pegawai/pengajuan-masuk/{user:email}', [PegawaiController::class, ('pengajuan_masuk_user')])->name('pegawai.pengajuan_masuk_user');
     Route::get('/pegawai/pengajuan-masuk/detail/{user:email}', [PegawaiController::class, ('pengajuan_masuk_detail')])->name('pegawai.pengajuan_masuk_detail');
     
+    // Dalam Proses
+    Route::get('/pegawai/pengajuan-dalam-proses', [PegawaiController::class, ('pengajuan_dalam_proses')])->name('pegawai.pengajuan_dalam_proses');
+
+
     // tolak
     Route::post('/pegawai/pengajuan-masuk/detail/{user:email}/tolak', [PegawaiController::class, ('pengajuan_masuk_detail_tolak_store')])->name('pegawai.pengajuan_masuk_detail_tolak_store');
     // terima

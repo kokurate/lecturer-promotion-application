@@ -38,7 +38,7 @@
               <span>Admin</span>
               @endif
             </li>
-            <li>
+            {{-- <li>
               <hr class="dropdown-divider">
             </li>
 
@@ -67,7 +67,8 @@
                 <i class="bi bi-question-circle"></i>
                 <span>Need Help?</span>
               </a>
-            </li>
+            </li> --}}
+
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -143,17 +144,17 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="{{ route('pegawai.pengajuan_dalam_proses') }}">
               <i class="bi bi-circle"></i><span>Dalam Proses</span>
             </a>
           </li>
           <li>
           <li>
-            <a href="#">
+            {{-- <a href="#">
               <i class="bi bi-circle"></i><span>Selesai</span>
             </a>
           </li>
-          <li>
+          <li> --}}
       @endif
 
 

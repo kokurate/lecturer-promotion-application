@@ -40,7 +40,7 @@
                                     <div class="col-6">
                                         <div class="col">
                                             <p style="color:#012970;" style="margin-top: -50px;"><strong>1. Kartu Pegawai & NIP Baru</strong></strong></p>
-                                            @if($berkas->kartu_pegawai_nip_baru_bkn == null) <p style="color:red">Tidak Mengupload file</p>
+                                            @if($berkas->kartu_pegawai_nip_baru_bkn == 'tidak-upload.pdf') <p style="color:red">Tidak Mengupload file</p>
                                             @else
                                                 <a href="{{ asset('storage/' . $berkas->kartu_pegawai_nip_baru_bkn) }}" class="badge bg-secondary mb-3" target="_blank">
                                                 Open PDF 
@@ -49,7 +49,7 @@
                                         </div>
                                         <div class="col">
                                             <p style="color:#012970;"><strong>2. SK Pengangkatan Pertama (CPNS)</strong></p>
-                                            @if($berkas->sk_cpns == null) <p style="color:red">Tidak Mengupload file</p>
+                                            @if($berkas->sk_cpns == 'tidak-upload.pdf') <p style="color:red">Tidak Mengupload file</p>
                                             @else
                                                 <a href="{{ asset('storage/' . $berkas->sk_cpns) }}" class="badge bg-secondary mb-3" target="_blank">
                                                 Open PDF 
@@ -58,7 +58,7 @@
                                         </div>
                                         <div class="col">
                                             <p style="color:#012970;"><strong>3. SK Pangkat Terakhir</strong></p>
-                                            @if($berkas->sk_pangkat_terakhir == null) <p style="color:red">Tidak Mengupload file</p>
+                                            @if($berkas->sk_pangkat_terakhir == 'tidak-upload.pdf') <p style="color:red">Tidak Mengupload file</p>
                                             @else
                                                 <a href="{{ asset('storage/' . $berkas->sk_pangkat_terakhir) }}" class="badge bg-secondary mb-3" target="_blank">
                                                 Open PDF 
@@ -67,7 +67,7 @@
                                         </div>
                                         <div class="col">
                                             <p style="color:#012970;"><strong>4. SK Jabatan Fungsional Terakhir dan PAK</strong></p>
-                                            @if($berkas->sk_jabfung_terakhir_dan_pak == null) <p style="color:red">Tidak Mengupload file</p>
+                                            @if($berkas->sk_jabfung_terakhir_dan_pak == 'tidak-upload.pdf') <p style="color:red">Tidak Mengupload file</p>
                                             @else
                                                 <a href="{{ asset('storage/' . $berkas->sk_jabfung_terakhir_dan_pak) }}" class="badge bg-secondary mb-3" target="_blank">
                                                 Open PDF 
@@ -76,7 +76,7 @@
                                         </div>
                                         <div class="col">
                                             <p style="color:#012970;"><strong>5. PPK & SKP dua tahun terakhir</strong></p>
-                                            @if($berkas->ppk_dan_skp == null) <p style="color:red">Tidak Mengupload file</p>
+                                            @if($berkas->ppk_dan_skp == 'tidak-upload.pdf') <p style="color:red">Tidak Mengupload file</p>
                                             @else
                                                 <a href="{{ asset('storage/' . $berkas->ppk_dan_skp) }}" class="badge bg-secondary mb-3" target="_blank">
                                                 Open PDF 
@@ -90,7 +90,7 @@
                                     <div class="col-6">
                                         <div class="col">
                                             <p style="color:#012970;"><strong>6. Ijazah Terakhir (Jika gelar belum tercantum dalam SK Pangkat Terakhir)</strong></p>
-                                            @if($berkas->ijazah_terakhir == null) <p style="color:red">Tidak Mengupload file</p>
+                                            @if($berkas->ijazah_terakhir == 'tidak-upload.pdf') <p style="color:red">Tidak Mengupload file</p>
                                             @else
                                                 <a href="{{ asset('storage/' . $berkas->ijazah_terakhir) }}" class="badge bg-secondary mb-3" target="_blank">
                                                 Open PDF 
@@ -99,7 +99,7 @@
                                         </div>
                                         <div class="col">
                                             <p style="color:#012970;"><strong>7. SK Tugas Belajar atau Surat Izin Studi (Sesuai no. 5)</strong></p>
-                                            @if($berkas->sk_tugas_belajar_atau_surat_izin_studi == null) <p style="color:red">Tidak Mengupload file</p>
+                                            @if($berkas->sk_tugas_belajar_atau_surat_izin_studi == 'tidak-upload.pdf') <p style="color:red">Tidak Mengupload file</p>
                                             @else
                                                 <a href="{{ asset('storage/' . $berkas->sk_tugas_belajar_atau_surat_izin_studi) }}" class="badge bg-secondary mb-3" target="_blank">
                                                 Open PDF 
@@ -109,7 +109,7 @@
 
                                         <div class="col">
                                             <p style="color:#012970;"><strong>Keterangan Membina Mata Kuliah dari Jurusan</strong></p>
-                                            @if($berkas->keterangan_membina_mata_kuliah_dari_jurusan == null) <p style="color:red">Tidak Mengupload file</p>
+                                            @if($berkas->keterangan_membina_mata_kuliah_dari_jurusan == 'tidak-upload.pdf') <p style="color:red">Tidak Mengupload file</p>
                                             @else
                                                 <a href="{{ asset('storage/' . $berkas->keterangan_membina_mata_kuliah_dari_jurusan) }}" class="badge bg-secondary mb-3" target="_blank">
                                                 Open PDF 
@@ -118,7 +118,7 @@
                                         </div>
                                         <div class="col">
                                             <p style="color:#012970;"><strong>Surat Pernyataan Setiap Bidang Tridharma (beserta bukti pendukung)</strong></p>
-                                            @if($berkas->surat_pernyataan_setiap_bidang_tridharma == null) <p style="color:red">Tidak Mengupload file</p>
+                                            @if($berkas->surat_pernyataan_setiap_bidang_tridharma == 'tidak-upload.pdf') <p style="color:red">Tidak Mengupload file</p>
                                             @else
                                                 <a href="{{ asset('storage/' . $berkas->surat_pernyataan_setiap_bidang_tridharma) }}" class="badge bg-secondary mb-3" target="_blank">
                                                 Open PDF 

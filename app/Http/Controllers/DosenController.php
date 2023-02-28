@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\my_storage;
 use App\Models\berkas_kenaikan_pangkat_reguler;
+use App\Models\status_kenaikan_pangkat;
 use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
@@ -79,6 +80,8 @@ class DosenController extends Controller
             // berkas_kenaikan_pangkat_reguler::where('user_id', $user->id)->update(['ijazah_terakhir', $validatedData['ijazah_terakhir']]);
         }
 
+        // ubah status
+        status_kenaikan_pangkat::where('user_id', $user->id)->update(['status' => 'Belum Tersedia']);
 
         // dd($validatedData);
         if (berkas_kenaikan_pangkat_reguler::where('user_id', $user->id)->doesntExist()) {
@@ -212,5 +215,22 @@ class DosenController extends Controller
         return redirect()->route('dosen.index');
         // dd($validatedData);
     }
+
+    public function status_kenaikan_pangkat(){
+        return view('dosen.status_kenaikan_pangkat',[
+            'title' => 'Dosen | Status Kenaikan Pangkat',
+        ]);
+    }
+
+    public function sanggah(){
+        return view('dosen.sanggah',[
+            'title' => 'Dosen | Sanggah',
+            'storage' => my_storage::where('user_id', auth()->user()->id)->whereNotNull('path')->get(),
+        ]);
+    }
+
+    // public function sanggah_store(Request $request){
+
+    // }
 
 }

@@ -18,7 +18,9 @@
               <h2 class="mt-5" style="color:#012970;">Selamat Datang, <strong>Staf Kepegawaian</strong></h2>
               <h3 style="color:#012970;">Fakultas <strong>Teknik</strong></h3>
               <p style="margin-top: 25px;"></p>
-              <p><strong>Kenaikan Pangkat Dalam Proses : <span style="color:#00ff66">10</span></strong></p>
+              <p><strong>Kenaikan Pangkat Dalam Proses : <span style="color:#00ff66">
+                {{ $dalam_proses }}
+              </span></strong></p>
               <p style="margin-bottom: 100px;">-----</p>
             </div>
           </div>

@@ -22,8 +22,8 @@ class PegawaiController extends Controller
 {
     public function index(){
         return view('pegawai.index',[
-            'title' => 'Pegawai Dashboard'
-
+            'title' => 'Pegawai Dashboard',
+            'dalam_proses' => User::where('status', 'Disetujui')->count(),
         ]);
     }
 

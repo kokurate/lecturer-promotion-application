@@ -64,8 +64,6 @@
 @push('css')
 <!-- DataTables CSS -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-
-
 @endpush
 
 @push('script')

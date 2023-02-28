@@ -53,7 +53,15 @@ Route::middleware('auth', 'level:admin,dosen',)->group(function () {
     // tambah berkas kenaikan pangkat reguler
     Route::get('/dosen/kenaikan-pangkat-reguler/tambah/{user:email}',[DosenController::class,('tambah_pangkat_reguler')])->name('dosen.tambah_pangkat_reguler');
     Route::post('/dosen/kenaikan-pangkat-reguler/tambah/{user:email}',[DosenController::class,('tambah_pangkat_reguler_store')])->name('dosen.tambah_pangkat_reguler_store');
+  
+    // sanggah 
+    Route::get('/dosen/kenaikan-pangkat-reguler/sanggah',[DosenController::class,('sanggah')])->name('dosen.sanggah');
+    // Route::post('/dosen/kenaikan-pangkat-reguler/sanggah',[DosenController::class,('sanggah')])->name('dosen.sanggah_store');
+   
     
+    // status kenaikan pangkat
+    Route::get('/dosen/status-kenaikan-pangkat', [DosenController::class,('status_kenaikan_pangkat')])->name('dosen.status_kenaikan_pangkat');
+
     // Verifikasi NIP dan NIDN
     Route::get('/dosen/verifikasi-nip-dan-nidn', [DosenController::class,('verify_nip_and_nidn')])->name('dosen.verify_nip_and_nidn');
     Route::post('/dosen/verifikasi-nip-dan-nidn', [DosenController::class,('verify_nip_and_nidn_store')])->name('dosen.verify_nip_and_nidn_store');

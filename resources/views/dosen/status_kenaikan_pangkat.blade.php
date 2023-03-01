@@ -135,11 +135,12 @@
                                 
 
                     <div class="d-flex justify-content-center">
-
                         <a href="{{ route('dosen.index') }}" class="d-block btn btn-primary btn-lg rounded-pill mx-2" style="color:#012970; background-color:#eeff00;  border:none;"><strong>Kembali</strong></a>
-                        <a href="#" class="d-block btn btn-primary btn-lg rounded-pill mx-2" style="background-color:#ff0000;  border:none;" data-bs-toggle="modal" data-bs-target="#verticalycentered"><strong>Keterangan</strong></a>
-                        <a href="{{ route('dosen.sanggah') }}" class="d-block btn btn-primary btn-lg rounded-pill mx-2" style="color:#012970; background-color:#51ff00;  border:none;"><strong>Sanggah</strong></a>
-                    </div>
+                    @if(auth()->user()->status == 'Sedang Diperiksa' || auth()->user()->status == 'Ditolak')
+                            <a href="#" class="d-block btn btn-primary btn-lg rounded-pill mx-2" style="background-color:#ff0000;  border:none;" data-bs-toggle="modal" data-bs-target="#verticalycentered"><strong>Keterangan</strong></a>
+                            <a href="{{ route('dosen.sanggah') }}" class="d-block btn btn-primary btn-lg rounded-pill mx-2" style="color:#012970; background-color:#51ff00;  border:none;"><strong>Sanggah</strong></a>
+                    @endif
+                        </div>
                 </div>
                 <!-- Start The Modal -->
                 <div class="modal fade" id="verticalycentered" tabindex="-1">

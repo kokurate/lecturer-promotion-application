@@ -92,19 +92,24 @@ class PegawaiController extends Controller
 
     public function ubah_status_kenaikan_pangkat(User $user){
 
+        $naik_ke_pangkat = $user->pangkat_id + 1;
+        // $user->pangkat_id == 1;
+
         return view('pegawai.ubah_status_kenaikan_pangkat',[
             'title' => 'Pegawai | Ubah Status',
             'user' => $user->load('pangkat'),
             'status_kenaikan_pangkat' => status_kenaikan_pangkat::where('user_id', $user->id)->first(),
+            // 'naik_ke' => status_kenaikan_pangkat,
             'golongan' => pangkat::all(),
+            'naik_ke_pangkat' => pangkat::where('id', $naik_ke_pangkat)->first(),
         ]);
     }
 
     public function ubah_status_kenaikan_pangkat_store(Request $request , User $user){
         $validator = Validator::make($request->all(),[ 
-            'golongan' => 'required|exists:pangkats,golongan',
+            'golongan' => 'nullable',
         ],[
-            'golongan.exists' => 'Golongan Belum dipilih'
+            // 'golongan.exists' => 'Golongan Belum dipilih'
         ]);
 
         if ($validator->fails()) {

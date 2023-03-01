@@ -68,16 +68,12 @@
                                                     </div>
                                                 <div class="col">
                                                     <label for="golongan" class="mt-3 form-label"><strong>Naik Ke Golongan</strong></label>
+                                                    
+                                                    <label for="golongan" class="mt-3 form-label"><strong>{{ $naik_ke_pangkat->golongan }}</strong></label>
+
                                                     <select name="golongan" class="form-select">
-                                                        <option selected>Pilih</option>
-                                                        @foreach($golongan as $data)
-                                                          @if(old('golongan') == $data->golongan)
-                                                            <option value="{{ $data->golongan }}" selected>{{ $data->golongan }}</option>
-                                                          @else
-                                                            <option value="{{ $data->golongan }}">{{ $data->golongan }}</option>
-                                                          @endif
-                                                        @endforeach
-                                                      </select>
+                                                        <option value="{{ $naik_ke_pangkat->golongan }}" selected>{{ $naik_ke_pangkat->golongan }}</option>
+                                                    </select>
                                                       @error('golongan')
                                                             <p class="text-danger my-2"><strong>{{ $message }}</strong></p>    
                                                     @enderror
@@ -85,7 +81,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                                <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                         </form>
                                     </div>

@@ -16,7 +16,7 @@
           <div class="card">
             <div class="card-body">
               <h2 class="mt-5" style="color:#012970;">Selamat Datang, <strong>Staf Kepegawaian</strong></h2>
-              <h3 style="color:#012970;">Fakultas <strong>Teknik</strong></h3>
+              <h3 style="color:#012970;">{{ auth()->user()->fakultas }}</h3>
               <p style="margin-top: 25px;"></p>
               <p><strong>Kenaikan Pangkat Dalam Proses : <span style="color:#00ff66">
                 {{ $dalam_proses }}

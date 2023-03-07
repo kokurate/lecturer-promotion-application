@@ -265,4 +265,43 @@ class PegawaiController extends Controller
 
         ]);
     }
+
+    public function pengajuan_selesai_store(User $user, Request $request){
+        // dd($request);
+        $validator = Validator::make($request->all(),[ 
+            'status' => 'nullable',
+         ]);
+
+         if ($validator->fails()) {
+            Alert::error($validator->errors()->all()[0]);
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Validasi
+        $validatedData = $validator->validated();
+
+        $validatedData['pangkat_id'] = $user->pangkat_id + 1;
+        $validatedData['tanggapan'] = null;
+        $validatedData['status'] = null;
+
+        User::where('id', $user->id)->update($validatedData);
+        // dd($validatedData);
+
+
+        status_kenaikan_pangkat::where('user_id', $user->id)->update(['status' => null]);
+
+        $terbaru = pangkat::where('id', $validatedData['pangkat_id'])->first();
+        $data = [
+            'title' => 'Selamat Anda Sudah Naik Pangkat',
+            'open' => 'Pangkat Sekarang Yaitu '. $terbaru->jabatan_fungsional.', '.$terbaru->pangkat.', '. $terbaru->golongan, 
+            'close' =>  'Silahkan cek website untuk informasi lebih lanjut',
+            'url' => route('login'),
+        ];
+
+        // Send to Email
+        Mail::to($user->email)->send(new DosenNotifications($data));
+
+        Alert::success('Pengajuan Berhasil Diselesaikan');
+        return back();
+    }
 }

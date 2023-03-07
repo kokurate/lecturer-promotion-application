@@ -90,6 +90,9 @@ Route::middleware('auth', 'level:admin,pegawai')->group(function () {
     
     // Dalam Proses
     Route::get('/pegawai/pengajuan-dalam-proses', [PegawaiController::class, ('pengajuan_dalam_proses')])->name('pegawai.pengajuan_dalam_proses');
+    
+    // selesai
+    Route::post('/pegawai/pengajuan-selesai/{user:email}', [PegawaiController::class, ('pengajuan_selesai_store')])->name('pegawai.selesai_store');
 
 
     // tolak

@@ -24,6 +24,7 @@
                                         <th scope="col" class="text-center">Nama</th>
                                         <th scope="col" class="text-center">Program Studi</th>
                                         <th scope="col" class="text-center">File</th>
+                                        <th scope="col" class="text-center">Selesaikan Pengajuan</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -39,7 +40,41 @@
                                                     </a>
                                                 </div>    
                                             </td>
+                                            <td class="text-center ">
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="d-block btn btn-primary" style="background-color:#00ff62;  border:none;" data-bs-toggle="modal" data-bs-target="#verticalycentered{{ $data->id }}"><strong>Selesaikan</strong></a>
+                                                </div>
+                                            </td>
                                         </tr>
+                                        
+                                        <!-- Start The Modal -->
+                                            <div class="modal fade" id="verticalycentered{{ $data->id }}" tabindex="-1">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <form action="{{ route('pegawai.selesai_store', $data->email) }}" method="POST">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                <div class="form-floating mb-3">
+                                                                    <div class="d-flex justify-content-center">
+                                                                        <h3 class="modal-title text-center mt-2" style="color:#012970;"><strong>Selesaikan</strong></h3>
+                                                                    </div>
+                                                                    <input type="hidden" name="status" value="Selesai">
+                                                                    <p style="color:#012970;"><strong>Nama : {{ $data->name }}</strong></p>
+                                                                    <p>{{ $data->fakultas }}, {{ $data->jurusan_prodi }}</p>
+                                                                    
+                                                                    <p style="color:#012970;">Golongan Sekarang : {{ $data->pangkat->jabatan_fungsional }}, {{ $data->pangkat->pangkat }}, {{ $data->pangkat->golongan }}</p>
+                                                                    <p style="color:#012970;">Naik Ke Golongan : {{ $data->status_kenaikan_pangkat->golongan }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Selesaikan</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Vertically centered Modal-->
                                         @empty
                                             <tr>
                                                 <td colspan="12" class="text-center">Tidak Ada Pengajuan Dalam Proses</td>
@@ -54,7 +89,8 @@
             </div>
         </div>
 
-        
+
+            
 
     </section>
 </main>
@@ -67,6 +103,21 @@
 @endpush
 
 @push('script')
+
+    <!-- Modal-->
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal = document.querySelector('#verticalycentered');
+            modal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget;
+                var user = JSON.parse(button.getAttribute('data-user'));
+                var modalBody = modal.querySelector('.modal-body p');
+                modalBody.textContent = 'Name: ' + user.name + ', Jurusan Prodi: ' + user.jurusan_prodi;
+            });
+        });
+    </script> --}}
+
+
 
     <!-- jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -177,9 +177,9 @@
         <li class="nav-heading">Admin Pages</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="users-profile.html">
+          <a class="nav-link collapsed" href="{{ route('admin.register_pegawai') }}">
             <i class="bi bi-person"></i>
-            <span>Register New Accounts</span>
+            <span>Register Pegawai</span>
           </a>
         </li><!-- End Profile Page Nav -->
       @endif

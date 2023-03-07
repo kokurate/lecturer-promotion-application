@@ -105,4 +105,10 @@ Route::middleware('auth', 'level:admin,pegawai')->group(function () {
 
 Route::middleware('auth', 'level:admin')->group(function () {
     Route::get('/admin',[AdminController::class,('index')])->name('admin.index');
+    
+    // register
+    Route::get('/admin/register-pegawai',[AdminController::class,('register_pegawai')])->name('admin.register_pegawai');
+    Route::post('/admin/register-pegawai',[AdminController::class,('register_pegawai_store')])->name('admin.register_pegawai_store');
+
+
 });

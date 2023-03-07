@@ -56,7 +56,7 @@ Route::middleware('auth', 'level:admin,dosen',)->group(function () {
   
     // sanggah 
     Route::get('/dosen/kenaikan-pangkat-reguler/sanggah',[DosenController::class,('sanggah')])->name('dosen.sanggah');
-    // Route::post('/dosen/kenaikan-pangkat-reguler/sanggah',[DosenController::class,('sanggah')])->name('dosen.sanggah_store');
+    Route::post('/dosen/kenaikan-pangkat-reguler/sanggah/{user:email}',[DosenController::class,('sanggah_store')])->name('dosen.sanggah_store');
    
     
     // status kenaikan pangkat

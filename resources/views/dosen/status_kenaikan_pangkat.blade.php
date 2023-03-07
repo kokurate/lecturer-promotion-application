@@ -136,7 +136,7 @@
 
                     <div class="d-flex justify-content-center">
                         <a href="{{ route('dosen.index') }}" class="d-block btn btn-primary btn-lg rounded-pill mx-2" style="color:#012970; background-color:#eeff00;  border:none;"><strong>Kembali</strong></a>
-                    @if(auth()->user()->status == 'Sedang Diperiksa' || auth()->user()->status == 'Ditolak')
+                    @if(auth()->user()->status == 'Ditolak')
                             <a href="#" class="d-block btn btn-primary btn-lg rounded-pill mx-2" style="background-color:#ff0000;  border:none;" data-bs-toggle="modal" data-bs-target="#verticalycentered"><strong>Keterangan</strong></a>
                             <a href="{{ route('dosen.sanggah') }}" class="d-block btn btn-primary btn-lg rounded-pill mx-2" style="color:#012970; background-color:#51ff00;  border:none;"><strong>Sanggah</strong></a>
                     @endif
@@ -146,14 +146,80 @@
                 <div class="modal fade" id="verticalycentered" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <div class="d-flex justify-content-center">
-                            <h3 class="modal-title text-center mt-2" style="color:#012970;"><strong>Alasan Penolakan</strong></h3>
-                        </div>
                         
+                        <div class="modal-body">
+                            <div class="justify-content-start">
+                                <div class="row">
+                                    <div class="col my-2">
+                                        <p style="color:#ff0000;"><strong>Berkas Yang Ditolak :</strong></p>
 
+                                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_kartu_pegawai_nip_baru_bkn == 1)
+                                                <div class="form-check text-start ">
+                                                    <label class="form-check-label" for="customCheck1">1. Kartu Pegawai & NIP Baru</label>
+                                                </div>
+                                                
+                                            @endif
+
+                                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_sk_cpns == 1)
+                                                <div class="form-check text-start">
+                                                    <label class="form-check-label" for="customCheck2">2. SK Pengangkatan Pertama (CPNS)</label>
+                                                </div>
+                                            @endif    
+
+                                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_sk_pangkat_terakhir == 1)
+                                                <div class="form-check text-start">
+                                                    <label class="form-check-label" for="customCheck3">3. SK Pangkat Terakhir</label>        
+                                                </div>
+                                            @endif    
+                                            
+                                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_sk_jabfung_terakhir_dan_pak == 1)
+                                                <div class="form-check text-start">
+                                                    <label class="form-check-label" for="customCheck4">4. SK Jabatan Fungsional Terakhir dan PAK</label>
+                                                </div>
+                                            @endif    
+                                            
+                                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_ppk_dan_skp == 1)
+                                                <div class="form-check text-start">
+                                                    <label class="form-check-label" for="customCheck5">5. PPK & SKP dua tahun terakhir</label>
+                                                </div>
+                                            @endif    
+                                            
+                                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_ijazah_terakhir == 1)
+                                                <div class="form-check text-start">
+                                                    <label class="form-check-label" for="customCheck6">6. Ijazah Terakhir (Jika gelar belum tercantum dalam SK Pangkat Terakhir)</label>
+                                                </div>
+                                            @endif    
+                                            
+                                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_sk_tugas_belajar_atau_surat_izin_studi == 1)
+                                                <div class="form-check text-start">
+                                                    <label class="form-check-label" for="customCheck7">7. SK Tugas Belajar atau Surat Izin Studi (Sesuai no. 5)</label>
+                                                </div>
+                                            @endif    
+                                            
+                                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_keterangan_membina_mata_kuliah_dari_jurusan == 1)
+                                                <div class="form-check text-start">
+                                                    <label class="form-check-label" for="customCheck8">Keterangan Membina Mata Kuliah dari Jurusan</label>
+                                                </div>
+                                            @endif    
+                                            
+                                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_surat_pernyataan_setiap_bidang_tridharma == 1)
+                                                <div class="form-check text-start">
+                                                    <label class="form-check-label" for="customCheck9">Surat Pernyataan Setiap Bidang Tridharma (beserta bukti pendukung)</label>
+                                                </div>
+                                            @endif    
+                                        
+                                           
+                
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         
                             <div class="modal-body">
                                 <div class="form-floating mb-3">
+                                    <div class="d-flex justify-content-center">
+                                        <h3 class="modal-title text-center mt-2" style="color:#012970;"><strong>Alasan Penolakan</strong></h3>
+                                    </div>
                                     <p>
                                         {!! auth()->user()->tanggapan !!}
                                     </p>

@@ -152,16 +152,121 @@
                                         <div class="modal fade" id="verticalycentered" tabindex="-1">
                                             <div class="modal-dialog modal-dialog-centered">
                                               <div class="modal-content">
-                                                <div class="d-flex justify-content-center">
-                                                    <h3 class="modal-title text-center mt-2" style="color:#012970;"><strong>Alasan Penolakan</strong></h3>
-                                                </div>
-                                                
-
                                                 <form action="{{ route('pegawai.pengajuan_masuk_detail_tolak_store', $berkas->user->email) }}" method="post">
                                                     @csrf
+                                                    {{-- <div class="modal-header">
+                                                        <div class="d-flex justify-content-start">
+                                                            <p><strong>Berkas Yang Ditolak :</strong></p>
+                                                        </div>
+                                                    </div> --}}
+
                                                     <div class="modal-body">
+                                                        <div class="justify-content-start">
+                                                            <div class="row">
+                                                                <div class="col my-2">
+                                                                    <p style="color:#ff0000;"><strong>Berkas Yang Ditolak :</strong></p>
+                                                                        <div class="form-check text-start text-start">
+                                                                            @if(old('check_kartu_pegawai_nip_baru_bkn'))
+                                                                                <input class="form-check-input" type="checkbox" name="check_kartu_pegawai_nip_baru_bkn" id="customCheck1" value="1" checked>
+                                                                            @else
+                                                                                <input class="form-check-input" type="checkbox" name="check_kartu_pegawai_nip_baru_bkn" id="customCheck1" value="1">
+                                                                            @endif
+                                                                                <label class="form-check-label" for="customCheck1">1. Kartu Pegawai & NIP Baru</label>
+                                                                        </div>
+                                                                        
+                                                                        <div class="form-check text-start">
+                                                                            @if(old('check_sk_cpns'))
+                                                                                <input class="form-check-input" type="checkbox" name="check_sk_cpns" value="1" id="customCheck2" checked>
+                                                                            @else
+                                                                                <input class="form-check-input" type="checkbox" name="check_sk_cpns" value="1" id="customCheck2">
+                                                                            @endif    
+                                                                                <label class="form-check-label" for="customCheck2">2. SK Pengangkatan Pertama (CPNS)</label>
+                                                                        </div>
+                                                                        
+                                                                        <div class="form-check text-start">
+                                                                            @if(old('check_sk_pangkat_terakhir'))
+                                                                                <input class="form-check-input" type="checkbox" name="check_sk_pangkat_terakhir" value="1" id="customCheck3" checked>
+                                                                            @else    
+                                                                                <input class="form-check-input" type="checkbox" name="check_sk_pangkat_terakhir" value="1" id="customCheck3">
+                                                                            @endif    
+                                                                                <label class="form-check-label" for="customCheck3">3. SK Pangkat Terakhir</label>
+                                                                        
+                                                                        </div>
+                                                                        
+                                                                        <div class="form-check text-start">
+                                                                            @if(old('check_sk_jabfung_terakhir_dan_pak'))
+                                                                                <input class="form-check-input" type="checkbox" name="check_sk_jabfung_terakhir_dan_pak" value="1" id="customCheck4" checked>
+                                                                            @else    
+                                                                                <input class="form-check-input" type="checkbox" name="check_sk_jabfung_terakhir_dan_pak" value="1" id="customCheck4">
+                                                                            @endif    
+                                                                                <label class="form-check-label" for="customCheck4">4. SK Jabatan Fungsional Terakhir dan PAK</label>
+                                                                        
+                                                                        </div>
+                                                                        
+                                                                        <div class="form-check text-start">
+                                                                            @if(old('check_ppk_dan_skp'))
+                                                                                <input class="form-check-input" type="checkbox" name="check_ppk_dan_skp" value="1" id="customCheck5" checked>
+                                                                            @else    
+                                                                                <input class="form-check-input" type="checkbox" name="check_ppk_dan_skp" value="1" id="customCheck5">
+                                                                            @endif    
+                                                                                <label class="form-check-label" for="customCheck5">5. PPK & SKP dua tahun terakhir</label>
+                                                                        
+                                                                        </div>
+                                                                        
+                                                                        <div class="form-check text-start">
+                                                                            @if(old('check_ijazah_terakhir'))
+                                                                                <input class="form-check-input" type="checkbox" name="check_ijazah_terakhir" value="1" id="customCheck6" checked>
+                                                                            @else    
+                                                                                <input class="form-check-input" type="checkbox" name="check_ijazah_terakhir" value="1" id="customCheck6">
+                                                                            @endif    
+                                                                                <label class="form-check-label" for="customCheck6">6. Ijazah Terakhir (Jika gelar belum tercantum dalam SK Pangkat Terakhir)</label>
+                                                                        
+                                                                        </div>
+                                                                        
+                                                                        <div class="form-check text-start">
+                                                                            @if(old('check_sk_tugas_belajar_atau_surat_izin_studi'))
+                                                                                <input class="form-check-input" type="checkbox" name="check_sk_tugas_belajar_atau_surat_izin_studi" value="1" id="customCheck7" checked>
+                                                                            @else    
+                                                                                <input class="form-check-input" type="checkbox" name="check_sk_tugas_belajar_atau_surat_izin_studi" value="1" id="customCheck7">
+                                                                            @endif    
+                                                                                <label class="form-check-label" for="customCheck7">7. SK Tugas Belajar atau Surat Izin Studi (Sesuai no. 5)</label>
+                                                                        
+                                                                        </div>
+                                                                        
+                                                                        <div class="form-check text-start">
+                                                                            @if(old('check_keterangan_membina_mata_kuliah_dari_jurusan'))
+                                                                                <input class="form-check-input" type="checkbox" name="check_keterangan_membina_mata_kuliah_dari_jurusan" value="1" id="customCheck8" checked>
+                                                                            @else    
+                                                                                <input class="form-check-input" type="checkbox" name="check_keterangan_membina_mata_kuliah_dari_jurusan" value="1" id="customCheck8">
+                                                                            @endif    
+                                                                                <label class="form-check-label" for="customCheck8">Keterangan Membina Mata Kuliah dari Jurusan</label>
+                                                                        
+                                                                        </div>
+                                                                        
+                                                                        <div class="form-check text-start">
+                                                                            @if(old('check_surat_pernyataan_setiap_bidang_tridharma'))
+                                                                                <input class="form-check-input" type="checkbox" name="check_surat_pernyataan_setiap_bidang_tridharma" value="1" id="customCheck9" checked>
+                                                                            @else    
+                                                                                <input class="form-check-input" type="checkbox" name="check_surat_pernyataan_setiap_bidang_tridharma" value="1" id="customCheck9">
+                                                                            @endif    
+                                                                                <label class="form-check-label" for="customCheck9">Surat Pernyataan Setiap Bidang Tridharma (beserta bukti pendukung)</label>
+                                                                        
+                                                                        </div>
+                                                                    
+                                                                       
+                                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <div class="d-flex justify-content-center">
+                                                            <h3 class="modal-title text-center mt-2" style="color:#012970;"><strong>Alasan Penolakan</strong></h3>
+                                                        </div>
+
                                                         <div class="form-floating mb-3">
-                                                            <textarea class="form-control" name="tanggapan" style="height: 150px;"></textarea>
+                                                            <textarea class="form-control" name="tanggapan" style="height: 150px;" placeholder="Alasan Penolakan"></textarea>
                                                         </div>
                                                         @error('tanggapan')
                                                                 <p class="text-danger my-2"><strong>{{ $message }}</strong></p>    

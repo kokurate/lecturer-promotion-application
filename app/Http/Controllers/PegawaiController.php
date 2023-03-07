@@ -199,18 +199,33 @@ class PegawaiController extends Controller
         // $user = User::where('email', $email)->firstOrFail();
         $berkas = berkas_kenaikan_pangkat_reguler::where('user_id', $user->id)->firstOrFail()->load('user');
 
-    return view('pegawai.pengajuan_masuk_detail',[
-        'title' => 'Detail Pengajuan',
-        'berkas' => $berkas,
-    ]);
+        return view('pegawai.pengajuan_masuk_detail',[
+            'title' => 'Detail Pengajuan',
+            'berkas' => $berkas,
+        ]);
     }
 
     public function pengajuan_masuk_detail_tolak_store(User $user, Request $request){
+        // dd($request);
         $validator = Validator::make($request->all(),[ 
             'tanggapan' => 'required|',
         ],[
             'tanggapan.required' => 'Tanggapan harus diisi'
         ]);
+
+        // validasi check 
+        $check_berkas_ditolak = $request->validate([
+            'check_kartu_pegawai_nip_baru_bkn' => 'nullable',
+            'check_sk_cpns' => 'nullable',
+            'check_sk_pangkat_terakhir' => 'nullable',
+            'check_sk_jabfung_terakhir_dan_pak' => 'nullable',
+            'check_ppk_dan_skp' => 'nullable',
+            'check_ijazah_terakhir' => 'nullable',
+            'check_sk_tugas_belajar_atau_surat_izin_studi' => 'nullable',
+            'check_keterangan_membina_mata_kuliah_dari_jurusan' => 'nullable',
+            'check_surat_pernyataan_setiap_bidang_tridharma' => 'nullable',
+        ]);
+        
 
         if ($validator->fails()) {
            Alert::error($validator->errors()->all()[0]);
@@ -221,6 +236,7 @@ class PegawaiController extends Controller
         $validatedData['status'] = 'Ditolak';
         
         User::where('id',$user->id)->update($validatedData);
+        berkas_kenaikan_pangkat_reguler::where('user_id', $user->id)->update($check_berkas_ditolak);
 
         $data = [
             'title' => 'Notifikasi Dosen',

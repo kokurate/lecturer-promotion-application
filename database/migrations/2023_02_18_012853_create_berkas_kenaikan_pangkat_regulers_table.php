@@ -26,6 +26,15 @@ class CreateBerkasKenaikanPangkatRegulersTable extends Migration
             $table->string('keterangan_membina_mata_kuliah_dari_jurusan')->nullable();
             $table->string('surat_pernyataan_setiap_bidang_tridharma')->nullable();
             $table->string('merge')->nullable();
+            $table->boolean('check_kartu_pegawai_nip_baru_bkn')->default(0);
+            $table->boolean('check_sk_cpns')->default(0);
+            $table->boolean('check_sk_pangkat_terakhir')->default(0);
+            $table->boolean('check_sk_jabfung_terakhir_dan_pak')->default(0);
+            $table->boolean('check_ppk_dan_skp')->default(0);
+            $table->boolean('check_ijazah_terakhir')->default(0);
+            $table->boolean('check_sk_tugas_belajar_atau_surat_izin_studi')->default(0);
+            $table->boolean('check_keterangan_membina_mata_kuliah_dari_jurusan')->default(0);
+            $table->boolean('check_surat_pernyataan_setiap_bidang_tridharma')->default(0);
             $table->timestamps();
         });
     }

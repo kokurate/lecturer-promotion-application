@@ -20,206 +20,321 @@
               
                 
             <!-- Vertical Form -->
-            <form class="row g-3 my-3" action="{{ route('dosen.tambah_pangkat_reguler_store', auth()->user()->email) }}" method="post" enctype="multipart/form-data">
+            <form class="row g-3 my-3" action="{{ route('dosen.sanggah_store', auth()->user()->email) }}" method="post" enctype="multipart/form-data">
               @csrf
-                <div class="col-lg-5">
-                    <div class="col my-3">
-                        <label for="" class="form-label">1. Kartu Pegawai & NIP Baru BKN <span style="color:rgb(255, 0, 0)">***</span></label>
-                        {{-- <input class="form-control" type="file" id="formFile"  accept=".pdf"> --}}
-                        <select name="kartu_pegawai_nip_baru_bkn" class="form-select">
-                          <option selected> Pilih File Pada Storage Anda</option>
+              <div class="col-lg-6">
+                <div class="card">
+                  <div class="card-body">
+                      <div class="col my-3">
+                          <label for="" class="form-label">1. Kartu Pegawai & NIP Baru BKN <span style="color:rgb(255, 0, 0)">***</span></label>
+                          {{-- <input class="form-control" type="file" id="formFile"  accept=".pdf"> --}}
                           
-                            @foreach($storage as $data)
-                                @if(old('kartu_pegawai_nip_baru_bkn', auth()->user()->berkas_kenaikan_pangkat_reguler->kartu_pegawai_nip_baru_bkn) == $data->path)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->kartu_pegawai_nip_baru_bkn !== 'tidak-upload.pdf' && $data->path === $data->filename)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @else
-                                    <option value="{{ $data->path }}">{{ $data->nama }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('kartu_pegawai_nip_baru_bkn')
-                          <p class="text-danger"><strong>{{ $message }}</strong></p>
-                        @enderror
-                    </div> 
-                    <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">2. SK Pengangkatan Pertama (CPNS) <span style="color:rgb(255, 0, 0)">***</span></label>
-                        <select name="sk_cpns" class="form-select">
-                          <option selected>Pilih File Pada Storage Anda</option>
-                            @foreach($storage as $data)
-                                @if(old('sk_cpns', auth()->user()->berkas_kenaikan_pangkat_reguler->sk_cpns) == $data->path)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->sk_cpns !== 'tidak-upload.pdf' && $data->path === $data->filename)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @else
-                                    <option value="{{ $data->path }}">{{ $data->nama }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('sk_cpns')
-                          <p class="text-danger"><strong>{{ $message }}</strong></p>
-                        @enderror
-                    </div> 
-                    <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">3. SK Pangkat Terakhir <span style="color:rgb(255, 0, 0)">***</span></label>
-                        <select name="sk_pangkat_terakhir" class="form-select">
-                          <option selected>Pilih File Pada Storage Anda</option>
-                            @foreach($storage as $data)
-                                @if(old('sk_pangkat_terakhir', auth()->user()->berkas_kenaikan_pangkat_reguler->sk_pangkat_terakhir) == $data->path)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->sk_pangkat_terakhir !== 'tidak-upload.pdf' && $data->path === $data->filename)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @else
-                                    <option value="{{ $data->path }}">{{ $data->nama }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('sk_pangkat_terakhir')
-                          <p class="text-danger"><strong>{{ $message }}</strong></p>
-                        @enderror
-                    </div> 
-                    <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">4. SK Jabatan Fungsional Terakhir dan PAK <span style="color:rgb(255, 0, 0)">***</span></label>
-                        <select name="sk_jabfung_terakhir_dan_pak" class="form-select">
-                          <option selected>Pilih File Pada Storage Anda</option>
-                            @foreach($storage as $data)
-                                @if(old('sk_jabfung_terakhir_dan_pak', auth()->user()->berkas_kenaikan_pangkat_reguler->sk_jabfung_terakhir_dan_pak) == $data->path)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->sk_jabfung_terakhir_dan_pak !== 'tidak-upload.pdf' && $data->path === $data->filename)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @else
-                                    <option value="{{ $data->path }}">{{ $data->nama }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('sk_jabfung_terakhir_dan_pak')
-                          <p class="text-danger"><strong>{{ $message }}</strong></p>
-                        @enderror
-                    </div> 
-                    <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">5. PPK & SKP dua tahun terakhir <span style="color:rgb(255, 0, 0)">***</span></label>
-                        <select name="ppk_dan_skp" class="form-select">
-                          <option selected>Pilih File Pada Storage Anda</option>
-                            @foreach($storage as $data)
-                                @if(old('ppk_dan_skp', auth()->user()->berkas_kenaikan_pangkat_reguler->ppk_dan_skp) == $data->path)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->ppk_dan_skp !== 'tidak-upload.pdf' && $data->path === $data->filename)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @else
-                                    <option value="{{ $data->path }}">{{ $data->nama }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('ppk_dan_skp')
-                          <p class="text-danger"><strong>{{ $message }}</strong></p>
-                        @enderror
-                    </div> 
-                </div> <!-- End-col-lg6 -->
+
+                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_kartu_pegawai_nip_baru_bkn == 1)
+                                <select name="kartu_pegawai_nip_baru_bkn" class="form-select">
+                                  <option selected> Pilih File Pada Storage Anda</option>
+                                  @foreach($storage as $data)
+                                      @if(old('kartu_pegawai_nip_baru_bkn', auth()->user()->berkas_kenaikan_pangkat_reguler->kartu_pegawai_nip_baru_bkn) == $data->path)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->kartu_pegawai_nip_baru_bkn !== 'tidak-upload.pdf' && $data->path === $data->filename)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @else
+                                          <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                                      @endif
+                                  @endforeach
+                                </select>
+                                @error('kartu_pegawai_nip_baru_bkn')
+                                  <p class="text-danger"><strong>{{ $message }}</strong></p>
+                                @enderror
+                            @else
+                                  <input type="hidden"  class="form-control" name="kartu_pegawai_nip_baru_bkn" value="{{ auth()->user()->berkas_kenaikan_pangkat_reguler->kartu_pegawai_nip_baru_bkn }}" disabled>
+                                  
+                            
+                                  <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text">
+                                        <i class="bi bi-lock"></i>
+                                      </span>
+                                    </div>
+                                    <input type="text" class="form-control" value="Dikunci" disabled>
+                                  </div>
+                            @endif
+                      </div> 
+
+                      <div class="col my-3">
+                          <label for="inputNanme4" class="form-label">2. SK Pengangkatan Pertama (CPNS) <span style="color:rgb(255, 0, 0)">***</span></label>
+                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_sk_cpns == 1)
+                                <select name="sk_cpns" class="form-select">
+                                  <option selected>Pilih File Pada Storage Anda</option>
+                                    @foreach($storage as $data)
+                                        @if(old('sk_cpns', auth()->user()->berkas_kenaikan_pangkat_reguler->sk_cpns) == $data->path)
+                                            <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                        @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->sk_cpns !== 'tidak-upload.pdf' && $data->path === $data->filename)
+                                            <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                        @else
+                                            <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @error('sk_cpns')
+                                  <p class="text-danger"><strong>{{ $message }}</strong></p>
+                                @enderror
+                            @else
+                                <input type="hidden"  class="form-control" name="sk_cpns" value="{{ auth()->user()->berkas_kenaikan_pangkat_reguler->sk_cpns }}" disabled>
+                                
+                          
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="bi bi-lock"></i>
+                                    </span>
+                                  </div>
+                                  <input type="text" class="form-control" value="Dikunci" disabled>
+                                </div>
+                            @endif
+                      </div> 
+
+                      <div class="col my-3">
+                          <label for="inputNanme4" class="form-label">3. SK Pangkat Terakhir <span style="color:rgb(255, 0, 0)">***</span></label>
+                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_sk_pangkat_terakhir == 1)  
+                              <select name="sk_pangkat_terakhir" class="form-select">
+                                <option selected>Pilih File Pada Storage Anda</option>
+                                  @foreach($storage as $data)
+                                      @if(old('sk_pangkat_terakhir', auth()->user()->berkas_kenaikan_pangkat_reguler->sk_pangkat_terakhir) == $data->path)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->sk_pangkat_terakhir !== 'tidak-upload.pdf' && $data->path === $data->filename)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @else
+                                          <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                                      @endif
+                                  @endforeach
+                              </select>
+                              @error('sk_pangkat_terakhir')
+                                <p class="text-danger"><strong>{{ $message }}</strong></p>
+                              @enderror
+                            @else
+                                <input type="hidden"  class="form-control" name="sk_pangkat_terakhir" value="{{ auth()->user()->berkas_kenaikan_pangkat_reguler->sk_pangkat_terakhir }}" disabled>
+                                
+                          
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="bi bi-lock"></i>
+                                    </span>
+                                  </div>
+                                  <input type="text" class="form-control" value="Dikunci" disabled>
+                                </div>
+                            @endif
+                      </div> 
+
+                      <div class="col my-3">
+                          <label for="inputNanme4" class="form-label">4. SK Jabatan Fungsional Terakhir dan PAK <span style="color:rgb(255, 0, 0)">***</span></label>
+                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_sk_jabfung_terakhir_dan_pak == 1)  
+                              <select name="sk_jabfung_terakhir_dan_pak" class="form-select">
+                                <option selected>Pilih File Pada Storage Anda</option>
+                                  @foreach($storage as $data)
+                                      @if(old('sk_jabfung_terakhir_dan_pak', auth()->user()->berkas_kenaikan_pangkat_reguler->sk_jabfung_terakhir_dan_pak) == $data->path)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->sk_jabfung_terakhir_dan_pak !== 'tidak-upload.pdf' && $data->path === $data->filename)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @else
+                                          <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                                      @endif
+                                  @endforeach
+                              </select>
+                              @error('sk_jabfung_terakhir_dan_pak')
+                                <p class="text-danger"><strong>{{ $message }}</strong></p>
+                              @enderror
+                            @else
+                                <input type="hidden"  class="form-control" name="sk_jabfung_terakhir_dan_pak" value="{{ auth()->user()->berkas_kenaikan_pangkat_reguler->sk_jabfung_terakhir_dan_pak }}" disabled>
+                                
+                          
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="bi bi-lock"></i>
+                                    </span>
+                                  </div>
+                                  <input type="text" class="form-control" value="Dikunci" disabled>
+                                </div>
+                            @endif
+                      </div> 
+                      
+                      <div class="col my-3">
+                          <label for="inputNanme4" class="form-label">5. PPK & SKP dua tahun terakhir <span style="color:rgb(255, 0, 0)">***</span></label>
+                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_ppk_dan_skp == 1)  
+                              <select name="ppk_dan_skp" class="form-select">
+                                <option selected>Pilih File Pada Storage Anda</option>
+                                  @foreach($storage as $data)
+                                      @if(old('ppk_dan_skp', auth()->user()->berkas_kenaikan_pangkat_reguler->ppk_dan_skp) == $data->path)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->ppk_dan_skp !== 'tidak-upload.pdf' && $data->path === $data->filename)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @else
+                                          <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                                      @endif
+                                  @endforeach
+                              </select>
+                              @error('ppk_dan_skp')
+                                <p class="text-danger"><strong>{{ $message }}</strong></p>
+                              @enderror
+                            @else
+                                <input type="hidden"  class="form-control" name="ppk_dan_skp" value="{{ auth()->user()->berkas_kenaikan_pangkat_reguler->ppk_dan_skp }}" disabled>
+                                
+                          
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="bi bi-lock"></i>
+                                    </span>
+                                  </div>
+                                  <input type="text" class="form-control" value="Dikunci" disabled>
+                                </div>
+                            @endif
+                      </div> 
+                  </div> <!-- End-col-lg6 -->
+                </div>
+              </div>
 
 
-                <div class="col-lg-2">
-                    <p class="text-center">
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                      |<br>
-                    </p>
-                  </div> <!-- Middle -->
+                <div class="col-lg-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="col my-3">
+                          <label for="inputNanme4" class="form-label">6. Ijazah Terakhir (jika gelar belum tercantum dalam SK Pangkat Terakhir</label>
+                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_ijazah_terakhir == 1)  
+                              <select name="ijazah_terakhir" class="form-select">
+                                <option value="null" selected>Pilih File Pada Storage Anda</option>
+                                  @foreach($storage as $data)
+                                      @if(old('ijazah_terakhir', auth()->user()->berkas_kenaikan_pangkat_reguler->ijazah_terakhir) == $data->path)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->ijazah_terakhir !== 'tidak-upload.pdf' && $data->path === $data->filename)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @else
+                                          <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                                      @endif
+                                  @endforeach
+                              </select>
+                              @error('ijazah_terakhir')
+                                <p class="text-danger"><strong>{{ $message }}</strong></p>
+                              @enderror
+                            @else
+                                <input type="hidden"  class="form-control" name="ijazah_terakhir" value="{{ auth()->user()->berkas_kenaikan_pangkat_reguler->ijazah_terakhir }}" disabled>
+                                
+                          
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="bi bi-lock"></i>
+                                    </span>
+                                  </div>
+                                  <input type="text" class="form-control" value="Dikunci" disabled>
+                                </div>
+                            @endif
+                      </div> 
 
-                <div class="col-lg-5">
-                    <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">6. Ijazah Terakhir (jika gelar belum tercantum dalam SK Pangkat Terakhir</label>
-                        <select name="ijazah_terakhir" class="form-select">
-                          <option value="null" selected>Pilih File Pada Storage Anda</option>
-                            @foreach($storage as $data)
-                                @if(old('ijazah_terakhir', auth()->user()->berkas_kenaikan_pangkat_reguler->ijazah_terakhir) == $data->path)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->ijazah_terakhir !== 'tidak-upload.pdf' && $data->path === $data->filename)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @else
-                                    <option value="{{ $data->path }}">{{ $data->nama }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('ijazah_terakhir')
-                          <p class="text-danger"><strong>{{ $message }}</strong></p>
-                        @enderror
-                    </div> 
-                    <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">7. SK Tugas Belajar atau Surat Izin Studi (sesuai no.5) <span style="color:rgb(255, 0, 0)">***</span></label>
-                        <select name="sk_tugas_belajar_atau_surat_izin_studi" class="form-select">
-                          <option selected>Pilih File Pada Storage Anda</option>
-                            @foreach($storage as $data)
-                                @if(old('sk_tugas_belajar_atau_surat_izin_studi', auth()->user()->berkas_kenaikan_pangkat_reguler->sk_tugas_belajar_atau_surat_izin_studi) == $data->path)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->sk_tugas_belajar_atau_surat_izin_studi !== 'tidak-upload.pdf' && $data->path === $data->filename)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @else
-                                    <option value="{{ $data->path }}">{{ $data->nama }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('sk_tugas_belajar_atau_surat_izin_studi')
-                          <p class="text-danger"><strong>{{ $message }}</strong></p>
-                        @enderror
-                    </div> 
-                    <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">Keterangan Membina Mata Kuliah dari Jurusan <span style="color:rgb(255, 0, 0)">***</span></label>
-                        <select name="keterangan_membina_mata_kuliah_dari_jurusan" class="form-select">
-                          <option selected>Pilih File Pada Storage Anda</option>
-                            @foreach($storage as $data)
-                                @if(old('keterangan_membina_mata_kuliah_dari_jurusan', auth()->user()->berkas_kenaikan_pangkat_reguler->keterangan_membina_mata_kuliah_dari_jurusan) == $data->path)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->keterangan_membina_mata_kuliah_dari_jurusan !== 'tidak-upload.pdf' && $data->path === $data->filename)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @else
-                                    <option value="{{ $data->path }}">{{ $data->nama }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('keterangan_membina_mata_kuliah_dari_jurusan')
-                          <p class="text-danger"><strong>{{ $message }}</strong></p>
-                        @enderror
-                    </div> 
-                    <div class="col my-3">
-                        <label for="inputNanme4" class="form-label">Surat Pernyataan Setiap Bidang Tridharma (beserta bukti pendukung) <span style="color:rgb(255, 0, 0)">***</span></label>
-                        <select name="surat_pernyataan_setiap_bidang_tridharma" class="form-select">
-                          <option selected>Pilih File Pada Storage Anda</option>
-                            @foreach($storage as $data)
-                                @if(old('surat_pernyataan_setiap_bidang_tridharma', auth()->user()->berkas_kenaikan_pangkat_reguler->surat_pernyataan_setiap_bidang_tridharma) == $data->path)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->surat_pernyataan_setiap_bidang_tridharma !== 'tidak-upload.pdf' && $data->path === $data->filename)
-                                    <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
-                                @else
-                                    <option value="{{ $data->path }}">{{ $data->nama }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('surat_pernyataan_setiap_bidang_tridharma')
-                          <p class="text-danger"><strong>{{ $message }}</strong></p>
-                        @enderror
-                    </div> 
+                      <div class="col my-3">
+                          <label for="inputNanme4" class="form-label">7. SK Tugas Belajar atau Surat Izin Studi (sesuai no.5) <span style="color:rgb(255, 0, 0)">***</span></label>
+                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_sk_tugas_belajar_atau_surat_izin_studi == 1)  
+                              <select name="sk_tugas_belajar_atau_surat_izin_studi" class="form-select">
+                                <option selected>Pilih File Pada Storage Anda</option>
+                                  @foreach($storage as $data)
+                                      @if(old('sk_tugas_belajar_atau_surat_izin_studi', auth()->user()->berkas_kenaikan_pangkat_reguler->sk_tugas_belajar_atau_surat_izin_studi) == $data->path)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->sk_tugas_belajar_atau_surat_izin_studi !== 'tidak-upload.pdf' && $data->path === $data->filename)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @else
+                                          <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                                      @endif
+                                  @endforeach
+                              </select>
+                              @error('sk_tugas_belajar_atau_surat_izin_studi')
+                                <p class="text-danger"><strong>{{ $message }}</strong></p>
+                              @enderror
+                            @else
+                                <input type="hidden"  class="form-control" name="sk_tugas_belajar_atau_surat_izin_studi" value="{{ auth()->user()->berkas_kenaikan_pangkat_reguler->sk_tugas_belajar_atau_surat_izin_studi }}" disabled>
+                                
+                          
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="bi bi-lock"></i>
+                                    </span>
+                                  </div>
+                                  <input type="text" class="form-control" value="Dikunci" disabled>
+                                </div>
+                            @endif
+                      </div> 
+
+                      <div class="col my-3">
+                          <label for="inputNanme4" class="form-label">Keterangan Membina Mata Kuliah dari Jurusan <span style="color:rgb(255, 0, 0)">***</span></label>
+                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_keterangan_membina_mata_kuliah_dari_jurusan == 1)  
+                              <select name="keterangan_membina_mata_kuliah_dari_jurusan" class="form-select">
+                                <option selected>Pilih File Pada Storage Anda</option>
+                                  @foreach($storage as $data)
+                                      @if(old('keterangan_membina_mata_kuliah_dari_jurusan', auth()->user()->berkas_kenaikan_pangkat_reguler->keterangan_membina_mata_kuliah_dari_jurusan) == $data->path)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->keterangan_membina_mata_kuliah_dari_jurusan !== 'tidak-upload.pdf' && $data->path === $data->filename)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @else
+                                          <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                                      @endif
+                                  @endforeach
+                              </select>
+                              @error('keterangan_membina_mata_kuliah_dari_jurusan')
+                                <p class="text-danger"><strong>{{ $message }}</strong></p>
+                              @enderror
+                            @else
+                                <input type="hidden"  class="form-control" name="keterangan_membina_mata_kuliah_dari_jurusan" value="{{ auth()->user()->berkas_kenaikan_pangkat_reguler->keterangan_membina_mata_kuliah_dari_jurusan }}" >
+                       
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="bi bi-lock"></i>
+                                    </span>
+                                  </div>
+                                  <input type="text" class="form-control" value="Dikunci" disabled>
+                                </div>
+                            @endif
+                      </div> 
+
+                      <div class="col my-3">
+                          <label for="inputNanme4" class="form-label">Surat Pernyataan Setiap Bidang Tridharma (beserta bukti pendukung) <span style="color:rgb(255, 0, 0)">***</span></label>
+                            @if(auth()->user()->berkas_kenaikan_pangkat_reguler->check_surat_pernyataan_setiap_bidang_tridharma == 1)  
+                              <select name="surat_pernyataan_setiap_bidang_tridharma" class="form-select">
+                                <option selected>Pilih File Pada Storage Anda</option>
+                                  @foreach($storage as $data)
+                                      @if(old('surat_pernyataan_setiap_bidang_tridharma', auth()->user()->berkas_kenaikan_pangkat_reguler->surat_pernyataan_setiap_bidang_tridharma) == $data->path)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @elseif(auth()->user()->berkas_kenaikan_pangkat_reguler->surat_pernyataan_setiap_bidang_tridharma !== 'tidak-upload.pdf' && $data->path === $data->filename)
+                                          <option value="{{ $data->path }}" selected>{{ $data->nama }}</option>
+                                      @else
+                                          <option value="{{ $data->path }}">{{ $data->nama }}</option>
+                                      @endif
+                                  @endforeach
+                              </select>
+                              @error('surat_pernyataan_setiap_bidang_tridharma')
+                                <p class="text-danger"><strong>{{ $message }}</strong></p>
+                              @enderror
+                            @else
+                                <input type="hidden"  class="form-control" name="surat_pernyataan_setiap_bidang_tridharma" value="{{ auth()->user()->berkas_kenaikan_pangkat_reguler->surat_pernyataan_setiap_bidang_tridharma }}" disabled>
+                                
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="bi bi-lock"></i>
+                                    </span>
+                                  </div>
+                                  <input type="text" class="form-control" value="Dikunci" disabled>
+                                </div>
+                            @endif
+                      </div> 
+                    </div>
+                  </div>
                 </div>
 
                 <div class="col-lg text-center">
-                    <a href="#" class="btn btn-lg btn-warning rounded-pill" style="color:#012970;padding-left: 50px; padding-right: 50px;">Batal</a>
+                    <a href="{{ route('dosen.status_kenaikan_pangkat') }}" class="btn btn-lg btn-warning rounded-pill" style="color:#012970;padding-left: 50px; padding-right: 50px;">Batal</a>
                     <button type="submit" class="btn btn-primary btn-lg rounded-pill" style="background-color:#012970; color:#ffffff;padding-left: 50px; padding-right: 50px;">Ajukan</button>
                 </div>
             </form><!-- Vertical Form -->

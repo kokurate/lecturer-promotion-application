@@ -15,6 +15,7 @@ use App\Mail\UbahStatusKenaikanPangkat;
 use App\Models\berkas_kenaikan_pangkat_reguler;
 use App\Models\history;
 use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use Illuminate\Mail\Markdown;
@@ -22,9 +23,31 @@ use Illuminate\Mail\Markdown;
 class PegawaiController extends Controller
 {
     public function index(){
+
+        $all_masuk = history::where('status','Sedang Diperiksa')->where('fakultas', auth()->user()->fakultas)->count();
+        $all_diproses = history::where('status','Disetujui')->where('fakultas', auth()->user()->fakultas)->count();
+        $all_selesai = history::where('status','Selesai')->where('fakultas', auth()->user()->fakultas)->count();
+        $all_ditolak = history::where('status','Ditolak')->where('fakultas', auth()->user()->fakultas)->count();
+
+        $this_month_masuk = history::where('status', 'Sedang Diperiksa')->where('fakultas', auth()->user()->fakultas)->whereYear('updated_at', Carbon::now()->year)->whereMonth('updated_at', Carbon::now()->month)->count();
+        $this_month_diproses = history::where('status', 'Disetujui')->where('fakultas', auth()->user()->fakultas)->whereYear('updated_at', Carbon::now()->year)->whereMonth('updated_at', Carbon::now()->month)->count();
+        $this_month_selesai = history::where('status', 'Selesai')->where('fakultas', auth()->user()->fakultas)->whereYear('updated_at', Carbon::now()->year)->whereMonth('updated_at', Carbon::now()->month)->count();
+        $this_month_ditolak = history::where('status', 'Ditolak')->where('fakultas', auth()->user()->fakultas)->whereYear('updated_at', Carbon::now()->year)->whereMonth('updated_at', Carbon::now()->month)->count();
+
+
         return view('pegawai.index',[
             'title' => 'Pegawai Dashboard',
-            'dalam_proses' => User::where('status', 'Disetujui')->count(),
+            'dalam_proses' => User::where('status', 'Disetujui')->where('fakultas', auth()->user()->fakultas)->count(),
+            'all_masuk' => $all_masuk,
+            'all_diproses' => $all_diproses,
+            'all_selesai' => $all_selesai,
+            'all_ditolak' => $all_ditolak,
+            'this_month_masuk' => $this_month_masuk,
+            'this_month_diproses' => $this_month_diproses,
+            'this_month_selesai' => $this_month_selesai,
+            'this_month_ditolak' => $this_month_ditolak,
+            
+
         ]);
     }
 

@@ -21,13 +21,104 @@
               <p><strong>Kenaikan Pangkat Dalam Proses : <span style="color:#00ff66">
                 {{ $dalam_proses }}
               </span></strong></p>
-              <p style="margin-bottom: 100px;">-----</p>
             </div>
-          </div>
+          </div> <!-- End Card -->
 
         </div>
 
-      </div>
+      </div> <!-- End Row--> 
+
+      <!-- New Chart with new Row ===================================== -->
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Semua Pengajuan</h5>
+
+                <!-- Pie Chart -->
+                <canvas id="pieChart" style="max-height: 400px;"></canvas>
+                <script>
+                  document.addEventListener("DOMContentLoaded", () => {
+                    new Chart(document.querySelector('#pieChart'), {
+                      type: 'pie',
+                      data: {
+                        labels: [
+                          'Masuk',
+                          'Ditolak',
+                          'Selesai',
+                          'Diproses',
+                        ],
+                        
+                        datasets: [{
+                          // label: 'My First Dataset',
+                          data: [{{ $all_masuk }}, {{ $all_ditolak }}, {{ $all_selesai }}, {{ $all_diproses }}],
+                          backgroundColor: [
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 99, 132)',
+                            'rgb(0, 255, 60)',
+                            'rgb(255, 238, 0)',
+                          ],
+                          
+                          hoverOffset: 4
+                        }]
+                      }
+                    });
+                  });
+                </script>
+                <!-- End Pie CHart -->
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Pengajuan Bulan Ini</h5>
+  
+                <!-- Bar Chart -->
+                <canvas id="barChart" style="max-height: 400px;"></canvas>
+                <script>
+                  document.addEventListener("DOMContentLoaded", () => {
+                    new Chart(document.querySelector('#barChart'), {
+                      type: 'bar',
+                      data: {
+                        labels: [ 'Masuk','Ditolak','Selesai','Diproses',],
+                        datasets: [{
+                          label:  '{{ auth()->user()->fakultas }}',
+                          data: [{{ $this_month_masuk }}, {{ $this_month_ditolak }}, {{ $this_month_selesai }}, {{ $this_month_diproses }}],
+                          backgroundColor: [
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 99, 132)',
+                            'rgb(0, 255, 60)',
+                            'rgb(255, 238, 0)',
+                          ],
+                          borderColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 159, 64)',
+                            'rgb(255, 205, 86)',
+                            'rgb(75, 192, 192)',
+                          ],
+                          borderWidth: 1
+                        }]
+                      },
+                      options: {
+                        scales: {
+                          y: {
+                            beginAtZero: true
+                          }
+                        }
+                      }
+                    });
+                  });
+                </script>
+                <!-- End Bar CHart -->
+  
+              </div>
+            </div>
+          </div>
+  
+        </div> <!-- End New Row-->
     </section>
 
   </main><!-- End #main -->

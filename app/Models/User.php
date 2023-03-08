@@ -56,6 +56,10 @@ class User extends Authenticatable
         return $this->hasMany(my_storage::class);
     }
 
+    public function history(){
+        return $this->hasMany(history::class);
+    }
+
     public function status_kenaikan_pangkat(){
         return $this->hasOne(status_kenaikan_pangkat::class);
     }

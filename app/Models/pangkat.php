@@ -14,6 +14,11 @@ class pangkat extends Model
         return $this->hasMany(User::class);
     }
 
+    public function history()
+    {
+        return $this->hasMany(history::class);
+    }
+
     // public function user(){
     //     return $this->belongsTo(User::class);
     // }

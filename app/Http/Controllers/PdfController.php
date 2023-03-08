@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\DosenNotifications;
 use App\Models\berkas_kenaikan_pangkat_reguler;
+use App\Models\history;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -46,6 +47,17 @@ class PdfController extends Controller
     
     User::where('id', $user->id)->update(['status' => 'Disetujui']);
 
+    //preparing history
+    $data_history = [
+        'status' => 'Disetujui',
+        // 'user_id' => null,
+    ];
+
+    // Buat history
+    history::where('user_id', $user->id)->update($data_history);
+
+
+
     $oMerger->addPDF(storage_path('app/public/' . substr($request->kartu_pegawai_nip_baru_bkn, strlen(asset('storage/')))),'all');
     $oMerger->addPDF(storage_path('app/public/' . substr($request->sk_cpns, strlen(asset('storage/')))),'all');
     $oMerger->addPDF(storage_path('app/public/' . substr($request->sk_pangkat_terakhir, strlen(asset('storage/')))),'all');
@@ -78,8 +90,10 @@ class PdfController extends Controller
     }
 
 
+
     $mergelokasi = 'dosen/'. $generate;
     berkas_kenaikan_pangkat_reguler::where('user_id', $user->id)->update(['merge' => $mergelokasi]);
+
     $data = [
         'title' => 'Notifikasi Dosen',
         'open' => 'Status Kenaikan Pangkat Anda Diperbarui Menjadi Disetujui', 

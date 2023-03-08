@@ -13,6 +13,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
 use App\Mail\UbahStatusKenaikanPangkat;
 use App\Models\berkas_kenaikan_pangkat_reguler;
+use App\Models\history;
 use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
@@ -238,6 +239,16 @@ class PegawaiController extends Controller
         User::where('id',$user->id)->update($validatedData);
         berkas_kenaikan_pangkat_reguler::where('user_id', $user->id)->update($check_berkas_ditolak);
 
+        //preparing history
+        $data_history = [
+            'status' => 'Ditolak',
+            'tanggapan' => $request->tanggapan,
+            'user_id' => null,
+        ];
+
+        // Buat history
+        history::where('user_id', $user->id)->update($data_history);
+
         $data = [
             'title' => 'Notifikasi Dosen',
             'open' => 'Status Kenaikan Pangkat Anda Diperbarui Menjadi '. $validatedData['status'], 
@@ -289,6 +300,17 @@ class PegawaiController extends Controller
 
 
         status_kenaikan_pangkat::where('user_id', $user->id)->update(['status' => null]);
+
+          //preparing history
+          $data_history = [
+            'user_id' =>null,
+            'status' => 'Selesai',
+            'pangkat_sekarang' => $user->pangkat_id + 1,
+            'pangkat_berikut' => null,
+        ];
+
+        // Buat history
+        history::where('user_id', $user->id)->update($data_history);
 
         $terbaru = pangkat::where('id', $validatedData['pangkat_id'])->first();
         $data = [

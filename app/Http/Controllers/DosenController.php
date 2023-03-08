@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\my_storage;
 use App\Models\berkas_kenaikan_pangkat_reguler;
+use App\Models\history;
 use App\Models\status_kenaikan_pangkat;
 use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -83,6 +84,8 @@ class DosenController extends Controller
         // ubah status
         status_kenaikan_pangkat::where('user_id', $user->id)->update(['status' => 'Belum Tersedia']);
 
+        
+
         // dd($validatedData);
         if (berkas_kenaikan_pangkat_reguler::where('user_id', $user->id)->doesntExist()) {
             // User doesn't have a record, so create a new one
@@ -93,6 +96,24 @@ class DosenController extends Controller
         }
 
         User::where('id', $user->id)->update(['status' => 'Sedang Diperiksa']);
+
+        //preparing history
+        $data_history = [
+            'user_id' => $user->id,
+            'user_id_old' => $user->id,
+            'nama' => $user->name,
+            'email' => $user->email,
+            'nip' => $user->nip,
+            'nidn' => $user->nidn,
+            'fakultas' => $user->fakultas,
+            'jurusan_prodi' => $user->jurusan_prodi,
+            'status' => 'Sedang Diperiksa',
+            'pangkat_sekarang' => $user->pangkat_id,
+            'pangkat_berikut' => $user->pangkat_id + 1,
+        ];
+
+        // Buat history
+        history::where('user_id', $user->id)->create($data_history);
    
         // Save the file path to the kartu_pegawai_nip_baru_bkn column of the berkas_kenaikan_pangkat_regulers table
         // $berkas = new berkas_kenaikan_pangkat_reguler();
@@ -295,6 +316,24 @@ class DosenController extends Controller
         }
 
         User::where('id', $user->id)->update(['status' => 'Sedang Diperiksa']);
+
+          //preparing history
+          $data_history = [
+            'user_id' => $user->id,
+            'user_id_old' => $user->id,
+            'nama' => $user->name,
+            'email' => $user->email,
+            'nip' => $user->nip,
+            'nidn' => $user->nidn,
+            'fakultas' => $user->fakultas,
+            'jurusan_prodi' => $user->jurusan_prodi,
+            'status' => 'Sedang Diperiksa',
+            'pangkat_sekarang' => $user->pangkat_id,
+            'pangkat_berikut' => $user->pangkat_id + 1,
+        ];
+
+        // Buat history
+        history::where('user_id', $user->id)->create($data_history);
    
 
         Alert::success('Berhasil','Pengajuan Kenaikan Pangkat Berhasil Dibuat');

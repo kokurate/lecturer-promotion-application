@@ -210,15 +210,17 @@ class DosenController extends Controller
     public function verify_nip_and_nidn_store(Request $request){
         
         $validator = Validator::make($request->all(),[
-            'nip' => 'required|numeric|',
-            'nidn' => 'required|numeric|'
+            'nip' => 'required|numeric|digits_between:18,18',
+            'nidn' => 'required|numeric|digits_between:10,10'
         ],[
             'nip.required' => 'NIP harus diisi',
-            'nip.max' => 'Maksimal NIP 19 angka',
+            // 'nip.digits_between' => ':attribute harus minimal :min dan maksimal :max angka',
+            'nip.digits_between' => 'NIP Harus 18 angka',
             'nip.numeric' => 'NIP Hanya berupa angka',
             'nidn.numeric' => 'NIDN Hanya berupa angka',
             'nidn.required' => 'NIDN harus diisi',
-            'nidn.max' => 'Maksimal NIDN 25 angka',
+            // 'nidn.digits_between' => ':attribute harus minimal :min dan maksimal :max angka',
+            'nidn.digits_between' => 'NIDN harus 10 angka',
         ]);
         
 

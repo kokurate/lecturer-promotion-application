@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->foreignId('pangkat_id')->nullable();
             $table->string('name');
             $table->string('email')->unique();
-            $table->integer('nip')->unique()->nullable();
-            $table->integer('nidn')->unique()->nullable();
+            $table->string('nip')->unique()->nullable();
+            $table->string('nidn')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('level')->nullable();

@@ -89,11 +89,22 @@ class PegawaiController extends Controller
             'email' => 'required|email|unique:users,email',
             // 'jurusan_prodi' => 'required',
             'pangkat_id' => 'required|exists:pangkats,id',
-            'jurusan_prodi' => 'required|exists:jurusan_prodis,nama'
+            'jurusan_prodi' => 'required|exists:jurusan_prodis,nama',
+            'nip' => 'required|numeric|digits_between:18,18|unique:users,nip',
+            'nidn' => 'required|numeric|digits_between:10,10|unique:users,nidn',
+
          ],[
             'pangkat_id.exists' => 'Golongan Belum dipilih',
             'jurusan_prodi.exists' => 'Belum Memilih Program Studi',
             'email.unique' => 'Email Sudah Terdaftar',
+            'nip.unique' => 'NIP Sudah Terdaftar',
+            'nidn.unique' => 'NIDN Sudah Terdaftar',
+            'nip.required' => 'NIP harus diisi',
+            'nip.digits_between' => 'NIP Harus 18 angka',
+            'nip.numeric' => 'NIP Hanya berupa angka',
+            'nidn.numeric' => 'NIDN Hanya berupa angka',
+            'nidn.required' => 'NIDN harus diisi',
+            'nidn.digits_between' => 'NIDN harus 10 angka',
          ]);
 
          if ($validator->fails()) {
@@ -107,8 +118,36 @@ class PegawaiController extends Controller
         $validatedData['level'] = 'dosen'; 
         $validatedData['fakultas'] = auth()->user()->fakultas; 
 
-        User::create($validatedData);
-        // dd($validatedData);
+        $newUser = User::create($validatedData);
+
+        $user = request();
+        // Create password and send to their email
+            $plain = Str::random(5); 
+            $password = bcrypt($plain);
+
+            // dd($user->email);
+            User::where('id', $newUser->id )->update(['password' => $password]);
+
+            // preparing for sending email
+                $email_to = $user->email;
+                $data = [
+                            'title' => 'DIHARAPKAN UNTUK SEGERA MENGUBAH PASSWORD ANDA !!!',
+                            'p1' => 'Akun anda berhasil dibuat' , 
+                            'p2' =>  'Anda Sudah Bisa Login Ke Website Kenaikan Pangkat Dosen Dengan Menggunakan Akun berikut Ini',
+                            'credentials' =>  'Email = '.$user->email.' 
+                                                Password = '.$plain.' 
+                                                ',
+                            'url' => route('login'),
+                        ];
+                
+                // Send to Email
+                Mail::to($email_to)->send(new UbahStatusKenaikanPangkat($data));
+
+                // User doesn't have a record, so create a new one with passwords users
+                $newData['status'] = null; 
+                $newData['user_id'] = $newUser->id; 
+            status_kenaikan_pangkat::create($newData);
+
         
         Alert::success('Data Berhasil Ditambahkan');
         return back();

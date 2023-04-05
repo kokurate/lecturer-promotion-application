@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
             // ======= ======   NEW   = ==========
-            \App\Http\Middleware\VerifyNipAndNidn::class,
+            // \App\Http\Middleware\VerifyNipAndNidn::class, nda jadi pake 
             \App\Http\Middleware\ExpiredUsersMyToken::class,
 
         ],

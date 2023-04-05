@@ -27,6 +27,21 @@
                             <label for="email" class="mt-3 form-label"><strong>email</strong></label>
                             <input id="email"  class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email" value="{{ old('email') }}" required>
                         </div>
+                        <div class="form-group my-2">
+                            <label for="nip" class="mt-3 form-label"><strong>NIP</strong></label>
+                            <input id="nip" class="form-control{{ $errors->has('nip') ? ' is-invalid' : '' }}" type="text" name="nip" value="{{ old('nip') }}" required autocomplete="off">
+                            @error('nip')
+                                <p class="text-danger my-2"><strong>{{ $message }}</strong></p>    
+                            @enderror
+                        </div>
+                    
+                        <div class="form-group my-2">
+                            <label for="nidn" class="mt-3 form-label"><strong>NIDN</strong></label>
+                            <input id="nidn" class="form-control{{ $errors->has('nidn') ? ' is-invalid' : '' }}" type="text" name="nidn" value="{{ old('nidn') }}" required autocomplete="off">
+                            @error('nidn')
+                                <p class="text-danger my-2"><strong>{{ $message }}</strong></p>    
+                            @enderror
+                        </div>
                     </div>
                                             
                     

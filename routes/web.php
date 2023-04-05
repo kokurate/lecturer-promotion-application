@@ -63,8 +63,8 @@ Route::middleware('auth', 'level:admin,dosen',)->group(function () {
     Route::get('/dosen/status-kenaikan-pangkat', [DosenController::class,('status_kenaikan_pangkat')])->name('dosen.status_kenaikan_pangkat');
 
     // Verifikasi NIP dan NIDN
-    Route::get('/dosen/verifikasi-nip-dan-nidn', [DosenController::class,('verify_nip_and_nidn')])->name('dosen.verify_nip_and_nidn');
-    Route::post('/dosen/verifikasi-nip-dan-nidn', [DosenController::class,('verify_nip_and_nidn_store')])->name('dosen.verify_nip_and_nidn_store');
+    // Route::get('/dosen/verifikasi-nip-dan-nidn', [DosenController::class,('verify_nip_and_nidn')])->name('dosen.verify_nip_and_nidn');
+    // Route::post('/dosen/verifikasi-nip-dan-nidn', [DosenController::class,('verify_nip_and_nidn_store')])->name('dosen.verify_nip_and_nidn_store');
 
 
     

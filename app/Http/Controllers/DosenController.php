@@ -207,37 +207,38 @@ class DosenController extends Controller
         ]);
     }
 
-    public function verify_nip_and_nidn_store(Request $request){
+    
+    // public function verify_nip_and_nidn_store(Request $request){
         
-        $validator = Validator::make($request->all(),[
-            'nip' => 'required|numeric|digits_between:18,18',
-            'nidn' => 'required|numeric|digits_between:10,10'
-        ],[
-            'nip.required' => 'NIP harus diisi',
-            // 'nip.digits_between' => ':attribute harus minimal :min dan maksimal :max angka',
-            'nip.digits_between' => 'NIP Harus 18 angka',
-            'nip.numeric' => 'NIP Hanya berupa angka',
-            'nidn.numeric' => 'NIDN Hanya berupa angka',
-            'nidn.required' => 'NIDN harus diisi',
-            // 'nidn.digits_between' => ':attribute harus minimal :min dan maksimal :max angka',
-            'nidn.digits_between' => 'NIDN harus 10 angka',
-        ]);
+    //     $validator = Validator::make($request->all(),[
+    //         'nip' => 'required|numeric|digits_between:18,18',
+    //         'nidn' => 'required|numeric|digits_between:10,10'
+    //     ],[
+    //         'nip.required' => 'NIP harus diisi',
+    //         // 'nip.digits_between' => ':attribute harus minimal :min dan maksimal :max angka',
+    //         'nip.digits_between' => 'NIP Harus 18 angka',
+    //         'nip.numeric' => 'NIP Hanya berupa angka',
+    //         'nidn.numeric' => 'NIDN Hanya berupa angka',
+    //         'nidn.required' => 'NIDN harus diisi',
+    //         // 'nidn.digits_between' => ':attribute harus minimal :min dan maksimal :max angka',
+    //         'nidn.digits_between' => 'NIDN harus 10 angka',
+    //     ]);
         
 
-        if ($validator->fails()) {
-            Alert::error($validator->errors()->all()[0]);
-            return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Gagal Menambahkan Akun Dosen');
-        }
+    //     if ($validator->fails()) {
+    //         Alert::error($validator->errors()->all()[0]);
+    //         return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Gagal Menambahkan Akun Dosen');
+    //     }
 
-        // Validasi
-        $validatedData = $validator->validated();
-        $user = auth()->user()->id;
-        User::where('id', $user)->update($validatedData);
+    //     // Validasi
+    //     $validatedData = $validator->validated();
+    //     $user = auth()->user()->id;
+    //     User::where('id', $user)->update($validatedData);
 
-        Alert::success('Berhasil','NIP dan NIDN berhasil disimpan');
-        return redirect()->route('dosen.index');
-        // dd($validatedData);
-    }
+    //     Alert::success('Berhasil','NIP dan NIDN berhasil disimpan');
+    //     return redirect()->route('dosen.index');
+    //     // dd($validatedData);
+    // }
 
     public function status_kenaikan_pangkat(){
         return view('dosen.status_kenaikan_pangkat',[

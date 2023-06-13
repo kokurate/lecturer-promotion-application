@@ -66,8 +66,9 @@ Route::middleware('auth', 'level:admin,dosen',)->group(function () {
     // Route::get('/dosen/verifikasi-nip-dan-nidn', [DosenController::class,('verify_nip_and_nidn')])->name('dosen.verify_nip_and_nidn');
     // Route::post('/dosen/verifikasi-nip-dan-nidn', [DosenController::class,('verify_nip_and_nidn_store')])->name('dosen.verify_nip_and_nidn_store');
 
-
-    
+    // Simulasi
+    Route::get('dosen/simulasi-pak',[DosenController::class,('simulasi')])->name('dosen.simulasi');
+    Route::get('dosen/simulasi-pak/pendidikan-dan-pengajaran',[DosenController::class,('pendidikan_dan_pengajaran')])->name('pendidikan_dan_pengajaran');
 
 });
 

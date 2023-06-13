@@ -244,7 +244,7 @@
                     <div class="col-6 text-end">
                       <a href="#" class="mb-0 mt-4 btn btn-primary" id="showDiv" style="background-color:#012970 ">+ Tambah</a>
                     </div>
-                  </div>
+                </div>
 
                 
 
@@ -265,14 +265,17 @@
                             @foreach($all_dosen as $data)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td><p>{{ $data->name }}</p></td>
-                                    <td><p>{{ $data->jurusan_prodi }}</p></td>
+                                    <td class="text-center"><p>{{ $data->name }}</p></td>
+                                    <td class="text-center"><p>{{ $data->jurusan_prodi }}</p></td>
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                            <a href="{{ route('pegawai.ubah_status_kenaikan_pangkat', $data->email) }}" class="text-center badge bg-outline-primary" >
+                                            {{-- <a href="{{ route('pegawai.ubah_status_kenaikan_pangkat', $data->email) }}" class="text-center badge bg-outline-primary" >
                                                 <span class="badge bg-primary">
                                                     Ubah Status Kenaikan Pangkat
                                                 </span>
+                                            </a> --}}
+                                            <a href="{{ route('pegawai.ubah_status_kenaikan_pangkat', $data->email) }}" class="text-center" style="color:rgb(255, 0, 0);font-size:15px;a:hover{color:blue;}" >
+                                                    Ubah Status Kenaikan Pangkat
                                             </a>
                                         </div>
                                     </td>
@@ -282,12 +285,13 @@
                           </table>
                     </div>
                   </div>
+
             </div>
           </div>
         </div>
       </div>
     </section>
-
+</main>
 
 @endsection
 

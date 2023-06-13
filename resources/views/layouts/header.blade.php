@@ -22,7 +22,7 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             {{-- <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> --}}
-            <img src="/logo.jpg" alt="Profile" class="rounded-circle">
+            <img src="/logo.png" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">Setting</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -113,8 +113,15 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed {{ Request::is('dosen/storage*') ? 'bg-secondary text-light' : '' }}" href="{{ route('dosen.storage') }}">
-          <i class="bi bi-grid"></i>
+          <i class="bi bi-sd-card"></i>
           <span>Storage</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed {{ Request::is('dosen/simulasi*') ? 'bg-secondary text-light' : '' }}" href="{{ route('dosen.simulasi') }}">
+          <i class="bi bi-question-diamond"></i>
+          <span>Simulasi</span>
         </a>
       </li><!-- End Dashboard Nav -->
       @endif

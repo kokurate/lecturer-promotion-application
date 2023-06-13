@@ -344,4 +344,19 @@ class DosenController extends Controller
         return redirect()->route('dosen.index');
     }
 
+    public function simulasi(){
+        return view('dosen.simulasi.index',[
+            'title' => 'Dosen | Simulasi',
+
+        ]);
+
+    }
+
+    public function pendidikan_dan_pengajaran(){
+        return view('dosen.simulasi.pendidikan_dan_pengajaran',[
+        'title' => 'Simulasi Pendidikan dan Pengajaran',
+    ]);
+    }
+
+
 }

@@ -59,7 +59,7 @@
                       <div class="col-12">
                         <label for="yourUsername" class="form-label">Email</label>
                         <div class="input-group has-validation">
-                          <input type="email" name="email" class="form-control" id="email" value="{{ old('email') }}" placeholder="rivaysamangka@unima.ac.id" required>
+                          <input type="email" name="email" class="form-control" id="email" value="{{ old('email') }}" placeholder="example@gmail.com" required>
                           <div class="invalid-feedback">Masukan Email Anda</div>
                         </div>
                       </div>

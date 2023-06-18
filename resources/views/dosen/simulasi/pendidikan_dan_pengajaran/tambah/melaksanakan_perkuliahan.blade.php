@@ -26,8 +26,8 @@
     <div id="perkuliahan" style="display: none;">
         <div class="col my-3">
             <label for="perkuliahan" class="mt-0 form-label" style="color:#012970;"><strong>SKS (Jika Kegiatan Perkuliahan)</strong></label>
-            {{-- <input id="inputPerkuliahan" class="form-control{{ $errors->has('perkuliahan') ? ' is-invalid' : '' }}" type="text" name="perkuliahan" value="{{ old('perkuliahan') }}" placeholder="Contoh 2"> --}}
-            <select name="perkuliahan" class="form-select">
+            <input id="inputPerkuliahan" class="form-control{{ $errors->has('perkuliahan') ? ' is-invalid' : '' }}" type="text" name="perkuliahan" value="{{ old('perkuliahan') }}" placeholder="Contoh 2">
+            {{-- <select name="perkuliahan" class="form-select">
                 <option value="1" selected>1</option>
                 <option value="2" >2</option>
                 <option value="3" >3</option>
@@ -40,7 +40,7 @@
                 <option value="10" >10</option>
                 <option value="11" >11</option>
                 <option value="12" >12</option>
-            </select>
+            </select> --}}
             <label for=""  style="color:#012970;">SKS sekarang : {{ $sks_now }} Maksimal 12. </label>
             
         </div> 

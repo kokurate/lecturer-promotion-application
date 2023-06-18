@@ -64,4 +64,8 @@ class User extends Authenticatable
         return $this->hasOne(status_kenaikan_pangkat::class);
     }
 
+    public function pak_kegiatan_pendidikan_dan_pengajaran(){
+        return $this->hasMany(pak_kegiatan_pendidikan_dan_pengajaran::class);
+    }
+
 }

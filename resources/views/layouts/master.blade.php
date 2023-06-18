@@ -29,6 +29,9 @@
   <!-- Template Main CSS File -->
   <link href="/templates/assets/css/style.css" rel="stylesheet">
 
+  <!-- My CSS -->
+  <link href="/css/mycss.css" rel="stylesheet">
+
   @stack('css')
 
   <!-- =======================================================

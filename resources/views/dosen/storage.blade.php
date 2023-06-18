@@ -83,7 +83,7 @@
                                             <form action="{{ route('dosen.storage_destroy', $all->filename) }}" method="post">
                                                 @method('delete')
                                                 @csrf
-                                                <button class="text-decoration-none border-0 p-0 m-0" type="submit" onclick="return confirm('Yakin mau hapus data ?')">
+                                                <button class="text-decoration-none border-0 p-0 m-0" type="submit" onclick="confirmDelete(event)">
                                                     <div class="d-flex justify-content-center badge bg-danger">
                                                         <i class="text-light bi bi-trash"></i>
                                                     </div>
@@ -112,6 +112,25 @@
 @endsection
 
 @push('script')
+
+    <!-- Delete Trigger -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            function confirmDelete(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Apakah Anda yakin ingin menghapus data ini?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Tidak'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.target.closest('form').submit();
+                    }
+                });
+            }
+        </script>
 
     <script>
         // show the form

@@ -38,15 +38,16 @@
                               </tr>
                             </thead>
                             <tbody>
-                            {{-- @foreach($all_dosen as $data) --}}
+                            @foreach($kategori_pak as $data)
                                 <tr>
                                     <th scope="row"></th>
-                                    <td class="text-center"><a href="#" class="text-decoration:none" style="color:rgb(0, 0, 0)">Pengabdian Pada Masyarakan atau KKN</a></td>
-                                    <td class="text-center"><p>20</p></td>
-                                    <td class="text-center"><p>51.5</p></td>
+                                    <!-- Depe nama route ada custom sama dengan slug, cek the web.php for the detail -->
+                                    <td class="text-center"><a href="{{ route($data->slug)  }}" class="text-decoration:none" style="color:rgb(0, 0, 0)">{{ $data->nama }}</a></td>
+                                    <td class="text-center"><p style="color:#012970;">{{ $data->pak_kegiatan_pendidikan_dan_pengajaran_count }}</p></td>
+                                    <td class="text-center"><p style="color:#012970;">{{ $data->pak_kegiatan_pendidikan_dan_pengajaran->sum('angka_kredit') }}</p></td>
                                     
                                 </tr>
-                            {{-- @endforeach  --}}
+                            @endforeach 
                             </tbody>
                           </table>
                     </div>
@@ -65,11 +66,11 @@
             <div class="row justify-content-between">
 
                 <div class="col-md-3">
-                  <p class="mt-3"><strong>Total Kegiatan: 22</strong></p>
+                  <p class="mt-3"><strong>Total Kegiatan: {{ $total_kegiatan }}</strong></p>
 
               </div>
               <div class="col-md-3">
-                  <p class="mt-3"><strong>Jumlah Kredit: 22.5</strong></p>
+                  <p class="mt-3"><strong>Jumlah Kredit: {{ $jumlah_kredit }}</strong></p>
               </div>
 
               <div class="col-md-6"></div>

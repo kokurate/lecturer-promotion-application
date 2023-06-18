@@ -1,0 +1,17 @@
+.btn-primary {
+    background-color: #012970;
+    /* Add any other styles you want for the button */
+}
+
+.custom-card-20 {
+    border-radius: 20px; /* Atur radius lengkungan sesuai keinginan */
+}
+
+.custom-card-30 {
+    border-radius: 30px; /* Atur radius lengkungan sesuai keinginan */
+}
+
+.inline-form {
+    display: inline-block;
+    margin-right: 5px;
+}

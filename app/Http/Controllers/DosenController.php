@@ -684,7 +684,7 @@ class DosenController extends Controller
                                 $sksLain = $perkuliahan - $sks10; // Sisa SKS di atas 10
                                 $nilaiSks = ($sks10 * 0.5) + ($sksLain * 0.25);
                                 $validatedData['kode'] = 'II.A.1.b';
-                            }elseif($totalSks > 11 && $totalSks = 12){
+                            }elseif($totalSks > 11 && $totalSks < 13){
 
 
                                 $nilaiSks = $perkuliahan * 0.25;
@@ -772,14 +772,14 @@ class DosenController extends Controller
                             if ($totalSks <= 10) {
                                 // Hitung jumlah SKS
                                 $nilaiSks = $perkuliahan * 1;
-                                $validatedData['kode'] = 'II.A.2.b';
+                                $validatedData['kode'] = 'II.A.2.a';
                             }elseif($totalSks > 10 && $totalSks <= 12){
                                 // Hitung jumlah SKS
                                 $sks10 = 10 - $sksNow; // SKS yang dibutuhkan untuk mencapai 10
                                 $sksLain = $perkuliahan - $sks10; // Sisa SKS di atas 10
                                 $nilaiSks = ($sks10 * 1) + ($sksLain * 0.5);
                                 $validatedData['kode'] = 'II.A.2.b';
-                            }elseif($totalSks > 11 && $totalSks = 12){
+                            }elseif($totalSks > 11 && $totalSks < 13){
 
 
                                 $nilaiSks = $perkuliahan * 0.5;
@@ -1239,9 +1239,9 @@ class DosenController extends Controller
                                     }else{
                                         $validatedData['angka_kredit'] = 5;
                                         $validatedData['kode'] = $kode;
-                                        $validatedData['komponen_kegiatan'] = 'Diklat,Modul,Ptunjuk praktikum,Model,Alat bantu, Alat visual, 
+                                        $validatedData['komponen_kegiatan'] = substr('Diklat,Modul,Ptunjuk praktikum,Model,Alat bantu, Alat visual, 
                                                                                 Naskah	tutorial, Job sheet praktikum terkait dengan 
-                                                                                mata kuliah yang dilampau';
+                                                                                mata kuliah yang dilampau', 0, 500);
                                     }
 
                             }

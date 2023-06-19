@@ -20,7 +20,9 @@ class CreatePakKegiatanPendidikanDanPengajaransTable extends Migration
             $table->string('kegiatan')->nullable();
             $table->string('tipe_kegiatan')->nullable();
             $table->string('jenis_pendidikan')->nullable();
-            $table->string('komponen_kegiatan')->nullable();
+            // $table->string('komponen_kegiatan')->nullable();
+            // $table->string('komponen_kegiatan', 500)->change()->nullable();
+            $table->string('komponen_kegiatan', 500)->nullable();
             $table->string('kode')->nullable();
             $table->string('sks')->nullable()->default('-');
             // $table->string('sks')->nullable();

@@ -68,4 +68,16 @@ class User extends Authenticatable
         return $this->hasMany(pak_kegiatan_pendidikan_dan_pengajaran::class);
     }
 
+    public function pak_kegiatan_penelitian(){
+        return $this->hasMany(pak_kegiatan_penelitian::class);
+    }
+
+    public function pak_kegiatan_pengabdian_pada_masyarakat(){
+        return $this->hasMany(pak_kegiatan_pengabdian_pada_masyarakat::class);
+    }
+
+    public function pak_kegiatan_penunjang_tri_dharma_pt(){
+        return $this->hasMany(pak_kegiatan_penunjang_tri_dharma_pt::class);
+    }
+
 }

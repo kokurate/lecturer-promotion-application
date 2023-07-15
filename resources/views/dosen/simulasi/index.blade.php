@@ -40,13 +40,30 @@
                             <tbody>
                             @foreach($kategori_pak as $data)
                                 <tr>
-                                    <th scope="row"></th>
-                                    <!-- Depe nama route ada custom sama dengan slug, cek the web.php for the detail -->
-                                    <td class="text-center"><a href="{{ route($data->slug)  }}" class="text-decoration:none" style="color:rgb(0, 0, 0)">{{ $data->nama }}</a></td>
+                                  <th scope="row"></th>
+                                  @if($data->slug == 'pendidikan-dan-pengajaran')
+                                    <td class="text-center"><a href="{{ route($data->slug) }}" class="text-decoration:none" style="color:rgb(0, 0, 0)">{{ $data->nama }}</a></td>
                                     <td class="text-center"><p style="color:#012970;">{{ $data->pak_kegiatan_pendidikan_dan_pengajaran_count }}</p></td>
                                     <td class="text-center"><p style="color:#012970;">{{ $data->pak_kegiatan_pendidikan_dan_pengajaran->sum('angka_kredit') }}</p></td>
-                                    
-                                </tr>
+                                  @endif
+                                  @if($data->slug == 'penelitian')
+                                    <td class="text-center"><a href="{{ route($data->slug) }}" class="text-decoration:none" style="color:rgb(0, 0, 0)">{{ $data->nama }}</a></td>
+                                    <td class="text-center"><p style="color:#012970;">{{ $data->pak_kegiatan_penelitian_count }}</p></td>
+                                    <td class="text-center"><p style="color:#012970;">{{ $data->pak_kegiatan_penelitian->sum('angka_kredit') }}</p></td>
+
+                                  @endif
+                                  @if($data->slug == 'pengabdian-pada-masyarakat')
+                                    <td class="text-center"><a href="{{ route($data->slug) }}" class="text-decoration:none" style="color:rgb(0, 0, 0)">{{ $data->nama }}</a></td>
+                                    <td class="text-center"><p style="color:#012970;">{{ $data->pak_kegiatan_pengabdian_pada_masyarakat_count }}</p></td>
+                                    <td class="text-center"><p style="color:#012970;">{{ $data->pak_kegiatan_pengabdian_pada_masyarakat->sum('angka_kredit') }}</p></td>
+
+                                  @endif
+                                  @if($data->slug == 'penunjang-tri-dharma-pt')
+                                    <td class="text-center"><a href="{{ route($data->slug) }}" class="text-decoration:none" style="color:rgb(0, 0, 0)">{{ $data->nama }}</a></td>
+                                    <td class="text-center"><p style="color:#012970;">{{ $data->pak_kegiatan_penunjang_tri_dharma_pt_count }}</p></td>
+                                    <td class="text-center"><p style="color:#012970;">{{ $data->pak_kegiatan_penunjang_tri_dharma_pt->sum('angka_kredit') }}</p></td>
+                                  @endif
+                              </tr>
                             @endforeach 
                             </tbody>
                           </table>

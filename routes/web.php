@@ -69,17 +69,38 @@ Route::middleware('auth', 'level:admin,dosen',)->group(function () {
     //  ======= ======   Simulasi
     Route::get('dosen/simulasi-pak',[DosenController::class,('simulasi')])->name('dosen.simulasi');
     
-    // Pendidikan dan Pengajaran
+    // Pendidikan dan Pengajaran 1
     Route::get('dosen/simulasi-pak/pendidikan-dan-pengajaran/',[DosenController::class,('pendidikan_dan_pengajaran')])->name('pendidikan-dan-pengajaran');
     Route::get('dosen/simulasi-pangkat/pendidikan-dan-pengajaran/{detail}',[DosenController::class,('pendidikan_dan_pengajaran_detail')])->name('pendidikan_dan_pengajaran_detail');
     Route::get('dosen/simulasi-pak/pendidikan-dan-pengajaran/tambah',[DosenController::class,('pendidikan_dan_pengajaran_tambah')])->name('pendidikan_dan_pengajaran_tambah');
     Route::post('dosen/simulasi-pak/pendidikan-dan-pengajaran/tambah',[DosenController::class,('pendidikan_dan_pengajaran_tambah_store')])->name('pendidikan_dan_pengajaran_tambah_store');
     Route::delete('dosen/simulasi-pak/pendidikan-dan-pengajaran/{slug}',[DosenController::class,('pendidikan_dan_pengajaran_destroy')])->name('pendidikan_dan_pengajaran_destroy');
 
-    
+    // Penelitian 2
     Route::get('dosen/simulasi-pak/penelitian',[DosenController::class,('penelitian')])->name('penelitian');
+    Route::get('dosen/simulasi-pak/penelitian/tambah',[DosenController::class,('penelitian_tambah')])->name('penelitian_tambah');
+    Route::post('dosen/simulasi-pak/penelitian/tambah',[DosenController::class,('penelitian_tambah_store')])->name('penelitian_tambah_store');
+    Route::delete('dosen/simulasi-pak/penelitian/{slug}',[DosenController::class,('penelitian_destroy')])->name('penelitian_destroy');
+    Route::get('dosen/simulasi-pangkat/penelitian/{detail}',[DosenController::class,('penelitian_detail')])->name('penelitian_detail');
+
+    
+    # Pengabdian Pada Masyarakat
     Route::get('dosen/simulasi-pak/pengabdian-pada-masyarakat',[DosenController::class,('pengabdian_pada_masyarakat')])->name('pengabdian-pada-masyarakat');
+    Route::get('dosen/simulasi-pak/pengabdian-pada-masyarakat/tambah',[DosenController::class,('pengabdian_pada_masyarakat_tambah')])->name('pengabdian_pada_masyarakat_tambah');
+    Route::post('dosen/simulasi-pak/pengabdian-pada-masyarakat/tambah',[DosenController::class,('pengabdian_pada_masyarakat_tambah_store')])->name('pengabdian_pada_masyarakat_tambah_store');
+    Route::delete('dosen/simulasi-pak/pengabdian-pada-masyarakat/{slug}',[DosenController::class,('pengabdian_pada_masyarakat_destroy')])->name('pengabdian_pada_masyarakat_destroy');
+    Route::get('dosen/simulasi-pangkat/pengabdian-pada-masyarakat/{detail}',[DosenController::class,('pengabdian_pada_masyarakat_detail')])->name('pengabdian_pada_masyarakat_detail');
+
+
+
+    // penunjang tri dharma pt 4
     Route::get('dosen/simulasi-pak/penunjang-tri-dharma-pt',[DosenController::class,('penunjang_tri_dharma_pt')])->name('penunjang-tri-dharma-pt');
+    Route::get('dosen/simulasi-pak/penunjang-tri-dharma-pt/tambah',[DosenController::class,('penunjang_tri_dharma_pt_tambah')])->name('penunjang_tri_dharma_pt_tambah');
+    Route::post('dosen/simulasi-pak/penunjang-tri-dharma-pt/tambah',[DosenController::class,('penunjang_tri_dharma_pt_tambah_store')])->name('penunjang_tri_dharma_pt_tambah_store');
+    Route::delete('dosen/simulasi-pak/penunjang-tri-dharma-pt/{slug}',[DosenController::class,('penunjang_tri_dharma_pt_destroy')])->name('penunjang_tri_dharma_pt_destroy');
+    Route::get('dosen/simulasi-pangkat/penunjang-tri-dharma-pt/{detail}',[DosenController::class,('penunjang_tri_dharma_pt_detail')])->name('penunjang_tri_dharma_pt_detail');
+
+
 
 });
 

@@ -20,21 +20,21 @@ class KategoriPakSeeder extends Seeder
         ]); // 1 
     
         
-        // kategori_pak::create([
-        //     'nama' => 'Penelitian',
-        //     'slug' => 'penelitian'
-        // ]); // 2
+        kategori_pak::create([
+            'nama' => 'Penelitian',
+            'slug' => 'penelitian'
+        ]); // 2
 
-        // kategori_pak::create([
-        //     'nama' => 'Pengabdian Pada Masyarakat',
-        //     'slug' => 'pengabdian-pada-masyarakat',
-        // ]); // 3 
+        kategori_pak::create([
+            'nama' => 'Pengabdian Pada Masyarakat',
+            'slug' => 'pengabdian-pada-masyarakat',
+        ]); // 3 
    
         
-        // kategori_pak::create([
-        //     'nama' => 'Penunjang Tri Dharma PT',
-        //     'slug' => 'penunjang-tri-dharma-pt'
-        // ]); // 4
+        kategori_pak::create([
+            'nama' => 'Penunjang Tri Dharma PT',
+            'slug' => 'penunjang-tri-dharma-pt'
+        ]); // 4
 
     }
 }

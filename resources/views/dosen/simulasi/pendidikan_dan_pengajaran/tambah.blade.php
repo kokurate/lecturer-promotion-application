@@ -235,8 +235,8 @@
                     </div>
 
                 <div class="col-lg text-center">
-                    <a href="{{ route('pendidikan-dan-pengajaran') }}" class="btn btn-lg btn-warning rounded-pill" style="color:#012970;padding-left: 50px; padding-right: 50px;">Kembali</a>
-                    <button type="submit" class="btn btn-primary btn-lg rounded-pill" style="background-color:#012970; color:#ffffff;padding-left: 50px; padding-right: 50px;">Tambah</button>
+                    <a href="{{ route('pendidikan-dan-pengajaran') }}" class="my-2 btn btn-lg btn-warning rounded-pill" style="color:#012970;padding-left: 50px; padding-right: 50px;">Kembali</a>
+                    <button type="submit" class="my-2 btn btn-primary btn-lg rounded-pill" style="background-color:#012970; color:#ffffff;padding-left: 50px; padding-right: 50px;">Tambah</button>
                 </div>
             </form><!-- Vertical Form -->
 

@@ -83,6 +83,21 @@ class PegawaiController extends Controller
         ]);
     }
 
+    public function permintaan_kenaikan_pangkat(){
+
+        return view('pegawai.permintaan_kenaikan_pangkat',[
+            'title' => 'Pegawai | Permintaan Kenaikan Pangkat',
+            'permintaan_kenaikan' => User::where('status', 'Permintaan Kenaikan Pangkat Reguler')
+                                        ->orderBy('updated_at', 'ASC')
+                                        ->get(),
+        ]);
+
+    }
+
+    public function permintaan_kenaikan_pangkat_store(Request $request){
+
+    }
+
     public function semua_dosen_store(Request $request){
         $validator = Validator::make($request->all(),[ 
             'name' => 'required|max:255|string',

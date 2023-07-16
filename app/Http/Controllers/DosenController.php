@@ -37,6 +37,32 @@ class DosenController extends Controller
         ]);
     }
 
+    public function sudah_bisa_naik_pangkat_reguler(Request $request){
+
+        // dd($request->all());
+        $validator = Validator::make($request->all(),[ 
+            'status' => 'required',
+        ],[
+            // 'golongan.exists' => 'Golongan Belum dipilih'
+        ]);
+
+        if ($validator->fails()) {
+            Alert::error($validator->errors()->all()[0]);
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Validasi
+        $validatedData = $validator->validated();
+        $validatedData['status'] = 'Permintaan Kenaikan Pangkat Reguler'; 
+
+        User::where('id', auth()->user()->id )->update($validatedData);
+
+        status_kenaikan_pangkat::where('user_id', auth()->user()->id)->update(['status' => 'Permintaan Kenaikan Pangkat Reguler']);
+    
+        Alert::success('Permintaan Kenaikan Pangkat Berhasil');
+        return back();
+    }
+
     public function tambah_pangkat_reguler(User $user){
         return view('dosen.tambah_pangkat_reguler',[
             'title' => 'Unggah Berkas',

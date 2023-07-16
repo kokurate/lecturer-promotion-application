@@ -36,7 +36,7 @@
                         <span class="mt-3">Untuk Naik Ke Golongan {{ auth()->user()->status_kenaikan_pangkat->golongan ?? ''}}</span>
                     @elseif(auth()->user()->status_kenaikan_pangkat->status == 'Belum Tersedia')
                         <span style="color:#00ff66">Tersedia</span><br>
-                    @elseif(auth()->user()->status_kenaikan_pangkat->status == NULL)
+                    @elseif(auth()->user()->status_kenaikan_pangkat->status == NULL || auth()->user()->status_kenaikan_pangkat->status == 'Permintaan Kenaikan Pangkat Reguler')
                         <span style="color:#cc0808"> Belum Tersedia </span>
                     @endif
                 @else
@@ -52,7 +52,15 @@
                       <a href="{{ route('dosen.status_kenaikan_pangkat') }}" class="btn btn-success btn-lg rounded-pill" style="background-color:#0fcc08; padding-left: 50px; padding-right: 50px;border:none;">Lihat Status <br> Kenaikan Pangkat</a>
                   @elseif(auth()->user()->status_kenaikan_pangkat->status == 'Tersedia')
                       <a href="{{ route('dosen.tambah_pangkat_reguler', $user->email) }}" class="btn btn-primary btn-lg rounded-pill" style="background-color:#012970; padding-left: 50px; padding-right: 50px;border:none;">Ajukan Kenaikan <br> Pangkat</a>
-                  @elseif(auth()->user()->status_kenaikan_pangkat->status == NULL)
+                  @elseif(auth()->user()->status_kenaikan_pangkat->status == 'Permintaan Kenaikan Pangkat Reguler') <!-- Nothing -->
+                  @elseif(auth()->user()->status_kenaikan_pangkat->status == NULL)                    
+                    <form action="{{ route('dosen.sudah_bisa_naik_pangkat_reguler') }}" method="post">
+                      @csrf
+                      <input type="hidden" name="status" value="Tersedia">
+                      <button class="btn btn-primary btn-lg rounded-pill" type="submit"  style="background-color:#012970; padding-left: 40px; padding-right: 40px; border:none;" onclick="confirmNaikPangkat(event)">
+                          Saya Sudah Bisa <br> Naik Pangkat
+                      </button>
+                    </form>
                   @endif
               @else
               
@@ -76,3 +84,24 @@
   @include('layouts.footer')
  
 @endsection
+
+@push('script')
+      <!-- Tambahkan kode berikut di bagian bawah template untuk mengaktifkan sweet alert -->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+      <script>
+          function confirmNaikPangkat(event) {
+              event.preventDefault();
+              Swal.fire({
+                  title: 'Apakah Anda yakin sudah bisa naik pangkat?',
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonText: 'Ya',
+                  cancelButtonText: 'Tidak'
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                      event.target.closest('form').submit();
+                  }
+              });
+          }
+      </script>
+@endpush

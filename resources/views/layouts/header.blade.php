@@ -2,9 +2,16 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="{{ route('dosen.index') }}" class="logo d-flex align-items-center">
+        @if(auth()->user()->level == 'admin')
+          <a href="{{ route('admin.index') }}" class="logo d-flex align-items-center">
+        @elseif(auth()->user()->level == 'dosen')
+          <a href="{{ route('dosen.index') }}" class="logo d-flex align-items-center">
+        @elseif(auth()->user()->level == 'pegawai')
+          <a href="{{ route('pegawai.index') }}" class="logo d-flex align-items-center">
+        @endif
         {{-- <img src="/templates/assets/img/logo.png" alt=""> --}}
-        <span class="d-none d-lg-block my-1">Pengajuan Kenaikan Pangkat</span>
+        <span class="d-none d-lg-block my-1">Pengelolaan Data Dosen</span>
+    
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -137,8 +144,15 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed {{ request()->routeIs('pegawai.permintaan_kenaikan_pangkat') ? 'bg-secondary text-light' : '' }}" href="{{ route('pegawai.permintaan_kenaikan_pangkat') }}">
+          <i class="bi bi-circle"></i>
+          <span>Permintaan Kenaikan</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Category</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-journal-text"></i><span>Data Pengajuan</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>

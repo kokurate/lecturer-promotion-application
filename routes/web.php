@@ -44,23 +44,28 @@ Route::post('/reset-password/{user:my_token}',[AuthController::class, ('store_re
 // ============================= Dosen =========================== 
 Route::middleware('auth', 'level:admin,dosen',)->group(function () {
     Route::get('/dosen',[DosenController::class,('index')])->name('dosen.index');
+
+    // Sudah Bisa Naik Pangkat Reguler
+        Route::post('/dosen', [DosenController::class,('sudah_bisa_naik_pangkat_reguler')])->name('dosen.sudah_bisa_naik_pangkat_reguler');
+
     
     // Storage
-    Route::get('/dosen/storage',[DosenController::class,('storage')])->name('dosen.storage');
-    Route::post('/dosen/storage',[DosenController::class,('storage_store')])->name('dosen.storage_store');
-    Route::delete('/dosen/storage/{my_storage:filename}',[DosenController::class,('storage_destroy')])->name('dosen.storage_destroy');
+        Route::get('/dosen/storage',[DosenController::class,('storage')])->name('dosen.storage');
+        Route::post('/dosen/storage',[DosenController::class,('storage_store')])->name('dosen.storage_store');
+        Route::delete('/dosen/storage/{my_storage:filename}',[DosenController::class,('storage_destroy')])->name('dosen.storage_destroy');
 
     // tambah berkas kenaikan pangkat reguler
-    Route::get('/dosen/kenaikan-pangkat-reguler/tambah/{user:email}',[DosenController::class,('tambah_pangkat_reguler')])->name('dosen.tambah_pangkat_reguler');
-    Route::post('/dosen/kenaikan-pangkat-reguler/tambah/{user:email}',[DosenController::class,('tambah_pangkat_reguler_store')])->name('dosen.tambah_pangkat_reguler_store');
+        Route::get('/dosen/kenaikan-pangkat-reguler/tambah/{user:email}',[DosenController::class,('tambah_pangkat_reguler')])->name('dosen.tambah_pangkat_reguler');
+        Route::post('/dosen/kenaikan-pangkat-reguler/tambah/{user:email}',[DosenController::class,('tambah_pangkat_reguler_store')])->name('dosen.tambah_pangkat_reguler_store');
   
     // sanggah 
-    Route::get('/dosen/kenaikan-pangkat-reguler/sanggah',[DosenController::class,('sanggah')])->name('dosen.sanggah');
-    Route::post('/dosen/kenaikan-pangkat-reguler/sanggah/{user:email}',[DosenController::class,('sanggah_store')])->name('dosen.sanggah_store');
+        Route::get('/dosen/kenaikan-pangkat-reguler/sanggah',[DosenController::class,('sanggah')])->name('dosen.sanggah');
+        Route::post('/dosen/kenaikan-pangkat-reguler/sanggah/{user:email}',[DosenController::class,('sanggah_store')])->name('dosen.sanggah_store');
    
     
     // status kenaikan pangkat
-    Route::get('/dosen/status-kenaikan-pangkat', [DosenController::class,('status_kenaikan_pangkat')])->name('dosen.status_kenaikan_pangkat');
+        Route::get('/dosen/status-kenaikan-pangkat', [DosenController::class,('status_kenaikan_pangkat')])->name('dosen.status_kenaikan_pangkat');
+        
 
     // Verifikasi NIP dan NIDN
     // Route::get('/dosen/verifikasi-nip-dan-nidn', [DosenController::class,('verify_nip_and_nidn')])->name('dosen.verify_nip_and_nidn');
@@ -108,30 +113,36 @@ Route::middleware('auth', 'level:admin,dosen',)->group(function () {
 
 // ============================= Pegawai =========================== 
 Route::middleware('auth', 'level:admin,pegawai')->group(function () {
-    Route::get('/pegawai',[PegawaiController::class,('index')])->name('pegawai.index');
-    Route::get('/pegawai/semua-dosen', [PegawaiController::class,('semua_dosen')])->name('pegawai.semua_dosen');
-    Route::post('/pegawai/semua-dosen', [PegawaiController::class,('semua_dosen_store')])->name('pegawai.semua_dosen_store');
+        Route::get('/pegawai',[PegawaiController::class,('index')])->name('pegawai.index');
+        
+    // permintaan_kenaikan_pangkat
+        Route::get('/pegawai/permintaan-kenaikan-pangkat',[PegawaiController::class,('permintaan_kenaikan_pangkat')])->name('pegawai.permintaan_kenaikan_pangkat');
+        Route::post('/pegawai/permintaan-kenaikan-pangkat',[PegawaiController::class,('permintaan_kenaikan_pangkat_store')])->name('pegawai.permintaan_kenaikan_pangkat_store');
+
+    // semua dosen
+        Route::get('/pegawai/semua-dosen', [PegawaiController::class,('semua_dosen')])->name('pegawai.semua_dosen');
+        Route::post('/pegawai/semua-dosen', [PegawaiController::class,('semua_dosen_store')])->name('pegawai.semua_dosen_store');
     
 
-    Route::get('/pegawai/ubah-status-kenaikan-pangkat/{user:email}', [PegawaiController::class,('ubah_status_kenaikan_pangkat')])->name('pegawai.ubah_status_kenaikan_pangkat');
-    Route::post('/pegawai/ubah-status-kenaikan-pangkat/{user:email}', [PegawaiController::class,('ubah_status_kenaikan_pangkat_store')])->name('pegawai.ubah_status_kenaikan_pangkat_store');
+        Route::get('/pegawai/ubah-status-kenaikan-pangkat/{user:email}', [PegawaiController::class,('ubah_status_kenaikan_pangkat')])->name('pegawai.ubah_status_kenaikan_pangkat');
+        Route::post('/pegawai/ubah-status-kenaikan-pangkat/{user:email}', [PegawaiController::class,('ubah_status_kenaikan_pangkat_store')])->name('pegawai.ubah_status_kenaikan_pangkat_store');
 
     // Pengajuan Masuk / Sanggah
-    Route::get('/pegawai/semua-pengajuan-masuk', [PegawaiController::class, ('pengajuan_masuk')])->name('pegawai.pengajuan_masuk');
-    Route::get('/pegawai/pengajuan-masuk/{user:email}', [PegawaiController::class, ('pengajuan_masuk_user')])->name('pegawai.pengajuan_masuk_user');
-    Route::get('/pegawai/pengajuan-masuk/detail/{user:email}', [PegawaiController::class, ('pengajuan_masuk_detail')])->name('pegawai.pengajuan_masuk_detail');
+        Route::get('/pegawai/semua-pengajuan-masuk', [PegawaiController::class, ('pengajuan_masuk')])->name('pegawai.pengajuan_masuk');
+        Route::get('/pegawai/pengajuan-masuk/{user:email}', [PegawaiController::class, ('pengajuan_masuk_user')])->name('pegawai.pengajuan_masuk_user');
+        Route::get('/pegawai/pengajuan-masuk/detail/{user:email}', [PegawaiController::class, ('pengajuan_masuk_detail')])->name('pegawai.pengajuan_masuk_detail');
     
     // Dalam Proses
-    Route::get('/pegawai/pengajuan-dalam-proses', [PegawaiController::class, ('pengajuan_dalam_proses')])->name('pegawai.pengajuan_dalam_proses');
+        Route::get('/pegawai/pengajuan-dalam-proses', [PegawaiController::class, ('pengajuan_dalam_proses')])->name('pegawai.pengajuan_dalam_proses');
     
     // selesai
-    Route::post('/pegawai/pengajuan-selesai/{user:email}', [PegawaiController::class, ('pengajuan_selesai_store')])->name('pegawai.selesai_store');
+        Route::post('/pegawai/pengajuan-selesai/{user:email}', [PegawaiController::class, ('pengajuan_selesai_store')])->name('pegawai.selesai_store');
 
 
     // tolak
-    Route::post('/pegawai/pengajuan-masuk/detail/{user:email}/tolak', [PegawaiController::class, ('pengajuan_masuk_detail_tolak_store')])->name('pegawai.pengajuan_masuk_detail_tolak_store');
+        Route::post('/pegawai/pengajuan-masuk/detail/{user:email}/tolak', [PegawaiController::class, ('pengajuan_masuk_detail_tolak_store')])->name('pegawai.pengajuan_masuk_detail_tolak_store');
     // terima
-    Route::post('/pegawai/pengajuan-masuk/detail/{user:email}/setuju', [PdfController::class, ('merge')])->name('pdf.merge');
+        Route::post('/pegawai/pengajuan-masuk/detail/{user:email}/setuju', [PdfController::class, ('merge')])->name('pdf.merge');
 
 
 });

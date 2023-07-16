@@ -258,7 +258,7 @@
                                 <th scope="col" class="text-center">#</th>
                                 <th scope="col" class="text-center">Nama</th>
                                 <th scope="col" class="text-center">Program Studi</th>
-                                <th scope="col" class="text-center">Action</th>
+                                <th scope="col" class="text-center">Detail</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -274,8 +274,8 @@
                                                     Ubah Status Kenaikan Pangkat
                                                 </span>
                                             </a> --}}
-                                            <a href="{{ route('pegawai.ubah_status_kenaikan_pangkat', $data->email) }}" class="text-center" style="color:rgb(255, 0, 0);font-size:15px;a:hover{color:blue;}" >
-                                                    Ubah Status Kenaikan Pangkat
+                                            <a href="{{ route('pegawai.ubah_status_kenaikan_pangkat', $data->email) }}" class="text-center" style="color:#012970;font-size:15px;a:hover{color:blue;}" >
+                                                <i class="bi bi-info-square-fill"></i>
                                             </a>
                                         </div>
                                     </td>

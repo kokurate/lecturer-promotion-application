@@ -8,13 +8,15 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg">
-                    <form class="inline-form" action="{{ route('truncate_tahun_ajaran') }}" method="post">
-                        @method('delete')
-                        @csrf
-                            <div class="mt-4 mb-3">
-                                <button type="submit" class="btn btn-danger" onclick="truncateData(event)">Truncate Data Tahun Ajaran</button>
-                            </div>
-                    </form>
+                    <!-- Tahu Ajaran Truncate -->
+                        {{-- <form class="inline-form" action="{{ route('truncate_tahun_ajaran') }}" method="post">
+                                @method('delete')
+                                @csrf
+                                    <div class="mt-4 mb-3">
+                                        <button type="submit" class="btn btn-danger" onclick="truncateData(event)">Truncate Data Tahun Ajaran</button>
+                                    </div>
+                        </form>  --}}
+                    
 
                     <div class="card">
                         <div class="card-body">
@@ -122,7 +124,7 @@
 
                 <!--  ====================== Kategori simulasi =============================== -->
 
-                <div class="col-lg">
+                {{-- <div class="col-lg">
 
                     <div class="card">
                         <div class="card-body">
@@ -192,20 +194,17 @@
                                                     </div>
                                                 </form>
                                         </div>
-                                          
+                                        
                                     </div>
                                 </div> <!-- End Modal -->
-                                  
-
-                                    
-
                         </div><!-- End Card Body -->
                     </div> <!-- End Card -->
+                </div> <!-- End Col Lg --> --}}
 
-                </div> <!-- End Col Lg -->
+
             </div> <!-- End Row -->
 
-            <div class="row">
+            {{-- <div class="row">
                 
                 <!-- Id 1 Pendidikan Dan Pengajaran -->
                     <div class="col" id="additionalComponents1" style="display: none;"> <!-- id 1 -->
@@ -318,7 +317,7 @@
 
 
             </div> <!-- End Row -->
-            <br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br> --}}
 
         </section>
 
@@ -395,6 +394,7 @@
             Swal.fire({
                 title: 'Apakah Anda Ingin Mengaktifkan Tahun Ajaran Ini ?',
                 icon: 'warning',
+                text: 'Semua Data Tahun Ajaran Yang Tidak Aktif Akan Ikut Terhapus!!!',
                 showCancelButton: true,
                 confirmButtonText: 'Ya',
                 cancelButtonText: 'Tidak'

@@ -224,19 +224,13 @@ class AdminController extends Controller
             $record->update(['now' => true]);
 
 
-        Alert::success('Sukses','Berhasil Update Data');
-        return back();
-
-    }
-
-    public function truncate_tahun_ajaran(){
-
-
+        // Truncate Data
             // Dapatkan data TahunAjaran yang memenuhi kondisi now = false
             $tahunAjaran = tahun_ajaran::where('now', false)->get();
 
              // Loop setiap TahunAjaran dan hapus data PakKegiatanPendidikanDanPengajaran yang terkait
-                foreach ($tahunAjaran as $tahun) {
+                foreach ($tahunAjaran as $tahun) 
+                {
                     $pakKegiatan1 = $tahun->pak_kegiatan_pendidikan_dan_pengajaran; # pak_kegiatan_pendidikan_dan_pengajaran ini model
                     $pakKegiatan2 = $tahun->pak_kegiatan_penelitian; # pak_kegiatan_penelitian ini model
                     $pakKegiatan3 = $tahun->pak_kegiatan_pengabdian_pada_masyarakat; # pak_kegiatan_pengabdian_pada_masyarakat ini model
@@ -277,9 +271,64 @@ class AdminController extends Controller
                     $tahun->pak_kegiatan_pengabdian_pada_masyarakat()->delete();
                     $tahun->pak_kegiatan_penunjang_tri_dharma_pt()->delete();
                 }
-            Alert::success('success', 'Data tahun ajaran yang tidak aktif berhasil dihapus');
-            return redirect()->back();
-        
+
+
+        Alert::success('Sukses','Berhasil Update Data');
+        return back();
+
     }
+
+    // public function truncate_tahun_ajaran(){
+
+
+    //         // Dapatkan data TahunAjaran yang memenuhi kondisi now = false
+    //         $tahunAjaran = tahun_ajaran::where('now', false)->get();
+
+    //          // Loop setiap TahunAjaran dan hapus data PakKegiatanPendidikanDanPengajaran yang terkait
+    //             foreach ($tahunAjaran as $tahun) {
+    //                 $pakKegiatan1 = $tahun->pak_kegiatan_pendidikan_dan_pengajaran; # pak_kegiatan_pendidikan_dan_pengajaran ini model
+    //                 $pakKegiatan2 = $tahun->pak_kegiatan_penelitian; # pak_kegiatan_penelitian ini model
+    //                 $pakKegiatan3 = $tahun->pak_kegiatan_pengabdian_pada_masyarakat; # pak_kegiatan_pengabdian_pada_masyarakat ini model
+    //                 $pakKegiatan4 = $tahun->pak_kegiatan_penunjang_tri_dharma_pt; # pak_kegiatan_penunjang_tri_dharma_pt ini model
+
+    //                 // Hapus file PDF yang terkait
+    //                     foreach ($pakKegiatan1 as $data) {
+    //                         if ($data->bukti) {
+    //                             Storage::delete($data->bukti);
+    //                         }
+    //                     }
+
+    //                 // Hapus file PDF yang terkait
+    //                     foreach ($pakKegiatan2 as $data) {
+    //                         if ($data->bukti) {
+    //                             Storage::delete($data->bukti);
+    //                         }
+    //                     }
+
+    //                 // Hapus file PDF yang terkait
+    //                     foreach ($pakKegiatan3 as $data) {
+    //                         if ($data->bukti) {
+    //                             Storage::delete($data->bukti);
+    //                         }
+    //                     } 
+
+    //                 // Hapus file PDF yang terkait
+    //                     foreach ($pakKegiatan4 as $data) {
+    //                         if ($data->bukti) {
+    //                             Storage::delete($data->bukti);
+    //                         }
+    //                     }
+
+
+    //                 // Hapus data 
+    //                 $tahun->pak_kegiatan_pendidikan_dan_pengajaran()->delete();
+    //                 $tahun->pak_kegiatan_penelitian()->delete();
+    //                 $tahun->pak_kegiatan_pengabdian_pada_masyarakat()->delete();
+    //                 $tahun->pak_kegiatan_penunjang_tri_dharma_pt()->delete();
+    //             }
+    //         Alert::success('success', 'Data tahun ajaran yang tidak aktif berhasil dihapus');
+    //         return redirect()->back();
+        
+    // }
 
 }

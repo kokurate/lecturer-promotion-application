@@ -121,7 +121,7 @@ class AuthController extends Controller
     }
 
     public function store_reset_password(Request $request, User $user){
-       
+    
         $validator = Validator::make($request->all(),[
             'password' => 'required|confirmed|min:8',
         ],[
@@ -145,6 +145,43 @@ class AuthController extends Controller
         
         Alert::success('Reset Password Berhasil','Silahkan login menggunakan password baru anda');
         return redirect()->route('login');
+    }
+
+    public function change_password(){
+
+        return view('auth.change_password',[
+            'title' => 'Ubah Password'
+        ]);
+
+    }
+
+
+    public function change_password_store(Request $request){
+        
+        $validator = Validator::make($request->all(),[
+            'password' => 'required|confirmed|min:8',
+        ],[
+            'password.required' => 'Password harus diisi',
+            'password.confirmed' => 'Password tidak cocok',
+            'password.min' => 'Password minimal 8 karakter',
+
+        ]);
+        
+        if ($validator->fails()) {
+            Alert::error($validator->errors()->all()[0]);
+            return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Gagal mengubah password');
+        }
+
+        // Validasi
+        $validatedData = $validator->validated();
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+        // dd($validatedData);
+        User::where('email', auth()->user()->email)->update(['password' => $validatedData['password']]);
+        
+        Alert::success('Password Changed','Password Berhasil Diubah');
+        return redirect()->back();
+
     }
 
 

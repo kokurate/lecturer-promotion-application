@@ -27,23 +27,30 @@ use Illuminate\Support\Facades\Route;
 // }));
 
 
-Route::get('/',[AuthController::class, ('login')])->name('login');
-Route::post('authenticate',[AuthController::class,'authenticate'])->name('authenticate');
-Route::post('logout',[AuthController::class,'logout'])->name('logout');
+    Route::get('/',[AuthController::class, ('login')])->name('login');
+    Route::post('authenticate',[AuthController::class,'authenticate'])->name('authenticate');
+    Route::post('logout',[AuthController::class,'logout'])->name('logout');
 
 // PDF
-Route::get('/pdf/{path}', [PdfController::class,('show')] )->name('pdf.show');
+    Route::get('/pdf/{path}', [PdfController::class,('show')] )->name('pdf.show');
 
 
 // Reset Password Alternative
-Route::get('/forgot-password',[AuthController::class, ('show_forgot_password')])->name('show_forgot_password');
-Route::post('/forgot-password',[AuthController::class, ('store_forgot_password')])->name('store_forgot_password');
-Route::get('/reset-password/{user:my_token}',[AuthController::class, ('show_reset_password')])->name('show_reset_password');
-Route::post('/reset-password/{user:my_token}',[AuthController::class, ('store_reset_password')])->name('store_reset_password');
+    Route::get('/forgot-password',[AuthController::class, ('show_forgot_password')])->name('show_forgot_password');
+    Route::post('/forgot-password',[AuthController::class, ('store_forgot_password')])->name('store_forgot_password');
+    Route::get('/reset-password/{user:my_token}',[AuthController::class, ('show_reset_password')])->name('show_reset_password');
+    Route::post('/reset-password/{user:my_token}',[AuthController::class, ('store_reset_password')])->name('store_reset_password');
+
+// Change Password
+    Route::get('/change-password',[AuthController::class, ('change_password')])->name('change_password')->middleware('auth');
+    Route::post('/change-password',[AuthController::class, ('change_password_store')])->name('change_password_store')->middleware('auth');
+
+
 
 // ============================= Dosen =========================== 
 Route::middleware('auth', 'level:admin,dosen',)->group(function () {
     Route::get('/dosen',[DosenController::class,('index')])->name('dosen.index');
+
 
     // Sudah Bisa Naik Pangkat Reguler
         Route::post('/dosen', [DosenController::class,('sudah_bisa_naik_pangkat_reguler')])->name('dosen.sudah_bisa_naik_pangkat_reguler');

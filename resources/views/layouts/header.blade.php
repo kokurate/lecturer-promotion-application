@@ -46,6 +46,7 @@
               <span>Admin</span>
               @endif
             </li>
+
             {{-- <li>
               <hr class="dropdown-divider">
             </li>
@@ -56,16 +57,8 @@
                 <span>My Profile</span>
               </a>
             </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
+          
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -76,6 +69,20 @@
                 <span>Need Help?</span>
               </a>
             </li> --}}
+
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+                <!-- ubahpass -->
+                <a class="dropdown-item d-flex align-items-center" href="{{ route('change_password') }}">
+                    <i class="bi bi-gear"></i>
+                    <span>Ubah Password</span>
+                </a>
+            </li>
+
 
             <li>
               <hr class="dropdown-divider">
@@ -216,3 +223,11 @@
     </ul>
 
   </aside><!-- End Sidebar-->
+
+@push('script')
+  <script>
+       // Modal    
+  </script>
+  
+
+@endpush

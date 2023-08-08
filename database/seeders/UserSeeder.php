@@ -17,22 +17,30 @@ class UserSeeder extends Seeder
         // there's 3 level admin, pegawai, dosen
         // Admin
         User::create([
-            'name' => 'Sondy Kumajas',
+            'name' => 'Rivay Samangka',
             'level' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('password'), //password
         ]);
 
         User::create([
-            'name' => 'Rivay Samangka',
+            'name' => 'Pegawai Fakultas Teknik',
             'level' => 'pegawai',
-            'email' => 'pegawai@gmail.com',
+            'email' => 'fatek@gmail.com',
             'fakultas' => 'Fakultas Teknik',
             'password' => bcrypt('password'), //password
         ]);
 
         User::create([
-            'name' => 'Kristofel Santa',
+            'name' => 'Pegawai Fakultas Ekonomi',
+            'level' => 'pegawai',
+            'email' => 'fekon@gmail.com',
+            'fakultas' => 'Fakultas Ekonomi dan Bisnis',
+            'password' => bcrypt('password'), //password
+        ]);
+
+        User::create([
+            'name' => 'Glory',
             'pangkat_id' => 2,
             'level' => 'dosen',
             'email' => 'dosen@gmail.com',
@@ -43,12 +51,12 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Ferdinand Sangkop',
+            'name' => 'Celine',
             'pangkat_id' => 4,
             'level' => 'dosen',
-            'email' => 'dosen1@gmail.com',
-            'fakultas' => 'Fakultas Teknik',
-            'jurusan_prodi' => 'Program Studi Teknik Informatika',
+            'email' => 'dosenfekon@gmail.com',
+            'fakultas' => 'Fakultas Ekonomi dan Bisnis',
+            'jurusan_prodi' => 'Program Studi Pendidikan Ekonomi',
             'password' => bcrypt('password'), //password
             'my_token' => 'asdasdasd'
         ]);

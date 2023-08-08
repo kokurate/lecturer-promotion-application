@@ -21,9 +21,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Tahun Ajaran</h5>
-                            
                             <table id="tahun_ajaran" class="table" style="width:100%">
-                                
                                     <thead>
                                         <tr>
                                             <th></th>

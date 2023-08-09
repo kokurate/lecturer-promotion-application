@@ -50,6 +50,20 @@
                 
                     @if($record->nilai_kegiatan)<p class="mt-0 mb-0" style="color:#012970;"><strong>Nilai Kegiatan</strong></p>@endif
                     <p class="mt-0" style="color:#012970;">{{ $record->nilai_kegiatan ?? '' }}</p>
+
+                    <p class="mt-3 mb-0" style="color:#012970;"><strong>Angka Kredit : {{ $record->angka_kredit }} </strong></p>
+                
+                    <p class="mt-3 mb-0" style="color:#012970;"><strong>Tempat/Instansi</strong></p>
+                    <p class="mt-0" style="color:#012970;">{{ $record->tempat }}</p>
+
+                    <p class="mt-3 mb-0" style="color:#012970;"><strong>Tanggal Pelaksanaan</strong></p>
+                    <p class="mt-0" style="color:#012970;">{{ \Carbon\Carbon::parse($record->tanggal_pelaksanaan)->format('d-m-Y') }}</p>
+
+                    <p class="mt-3 mb-0" style="color:#012970;"><strong>Bukti</strong></p>
+                    <a href="{{ asset('storage/'. $record->bukti ) }}" class="text-secondary text-xs mt-3" target="__blank">
+                        <i class="fas fa-solid fa-file-pdf ps-3"></i> Lihat Bukti
+                    </a>
+
                 </div> <!-- End Card Body -->
             </div> <!-- End card -->
         </div>
@@ -57,16 +71,75 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <p class="mt-3 mb-0" style="color:#012970;"><strong>Angka Kredit : {{ $record->angka_kredit }} </strong></p>
-                    <p class="mt-3 mb-0" style="color:#012970;"><strong>Bukti</strong></p>
-                    <a href="{{ asset('storage/'. $record->bukti ) }}" class="text-secondary text-xs mt-3" target="__blank">
-                        <i class="fas fa-solid fa-file-pdf ps-3"></i> Lihat Bukti
-                    </a>
-                    <p class="mt-3 mb-0" style="color:#012970;"><strong>Tempat/Instansi</strong></p>
-                    <p class="mt-0" style="color:#012970;">{{ $record->tempat }}</p>
+                    <!-- Vertical Form -->
+                    <form class="my-3" action="{{ route('pengabdian_pada_masyarakat_edit_store', $record->slug) }}" method="post" enctype="multipart/form-data">
+                        @csrf
 
-                    <p class="mt-3 mb-0" style="color:#012970;"><strong>Tanggal Pelaksanaan</strong></p>
-                    <p class="mt-0" style="color:#012970;">{{ \Carbon\Carbon::parse($record->tanggal_pelaksanaan)->format('d-m-Y') }}</p>
+                            <div class="col-my-3">
+                                <label for="kegiatan" class="mt-3 form-label" style="color:#012970;"><strong>Kegiatan</strong> (optional)</label>
+                                <input class="form-control{{ $errors->has('kegiatan') ? ' is-invalid' : '' }}" type="text" name="kegiatan" value="{{ old('kegiatan', $record->kegiatan) }}" required>
+                                
+                                @if ($errors->has('kegiatan'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('kegiatan') }}
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="col-my-3">
+                                <label for="angka_kredit" class="mt-3 form-label" style="color:#012970;"><strong>Angka Kredit</strong> (optional)</label>
+                                <input id="angka_kredit" class="form-control{{ $errors->has('angka_kredit') ? ' is-invalid' : '' }}" type="text" name="angka_kredit" value="{{ old('angka_kredit', $record->angka_kredit) }}" pattern="[0-9.]*" oninput="this.value = this.value.replace(/,/g, '')" placeholder="" title="Hanya Angka Yang Diperbolehkan" required>
+                                
+                                @if ($errors->has('angka_kredit'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('angka_kredit') }}
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="col-my-3">
+                                <label for="tempat" class="mt-3 form-label" style="color:#012970;"><strong>Tempat/ Instansi</strong> (optional)</label>
+                                <input id="tempat" class="form-control{{ $errors->has('tempat') ? ' is-invalid' : '' }}" type="text" name="tempat" value="{{ old('tempat', $record->tempat) }}"  required>
+                                
+                                @if ($errors->has('tempat'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('tempat') }}
+                                    </div>
+                                @endif
+                            </div>
+
+                            
+                            <div class="col-my-3">
+                                <label for="tanggal_pelaksanaan" class="mt-3 form-label" style="color:#012970;"><strong>Tanggal Pelaksanaan</strong> (optional)</label>
+                                <input type="date" id="tanggal_pelaksanaan" class="form-control{{ $errors->has('tanggal_pelaksanaan') ? ' is-invalid' : '' }}"  name="tanggal_pelaksanaan" value="{{ old('tanggal_pelaksanaan', $record->tanggal_pelaksanaan) }}"  required>
+                                
+                                @if ($errors->has('tanggal_pelaksanaan'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('tanggal_pelaksanaan') }}
+                                    </div>
+                                @endif
+                            </div>
+
+
+                            <div class="col my-3">
+                                <label for="inputNanme4" class="form-label" style="color:#012970;"><strong>Bukti</strong> (optional)</label>
+                                <input class="form-control{{ $errors->has('bukti') ? ' is-invalid' : '' }}" type="file" id="pdf_file" name="bukti" accept=".pdf">
+                                @if ($errors->has('bukti'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('bukti') }}
+                                    </div>
+                                @endif
+
+                                <div id="preview" class="my-2 text-center">
+                                    
+                                </div>
+
+                            </div>
+                            <div class="col-lg text-center">
+                                <button type="submit" class="my-2 btn btn-primary btn-lg rounded-pill" style="background-color:#012970; color:#ffffff;padding-left: 50px; padding-right: 50px;">Edit</button>
+                            </div>
+
+                    </form><!-- Vertical Form -->
 
 
                 </div> <!-- End Card Body -->

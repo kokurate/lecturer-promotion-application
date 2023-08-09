@@ -595,7 +595,7 @@ class DosenController extends Controller
 
         // dd($request->all());
         $validator = Validator::make($request->all(),[
-            'kegiatan' => 'regex:/^[a-zA-Z\s]+$/|required|max:255|',
+            'kegiatan' => 'regex:/^[a-zA-Z0-9\s]+$/|required|max:255|',
             'tipe_kegiatan' => 'required|max:255',
             'tahun_ajaran_id' => 'required' ,
             'bukti' => 'required|max:1024|mimes:pdf',
@@ -1784,6 +1784,91 @@ class DosenController extends Controller
 
     }
 
+    public function pendidikan_dan_pengajaran_edit_store($detail, Request $request){
+        // Retrieve the record from the table based on the slug
+            $record = pak_kegiatan_pendidikan_dan_pengajaran::where('slug', $detail)->first();
+
+        if (!$record) {
+            // Handle the case where the record is not found
+            abort(404);
+        }
+
+
+        $validator = Validator::make($request->all(),[
+            // 'kegiatan' => 'regex:/^[a-zA-Z0-9\s]+$/|max:255',
+            'kegiatan' => '|max:255',
+            'bukti' => 'mimes:pdf|max:1024|',
+        ],[
+            'kegiatan.max' => 'Maksimal 255 Karakter',
+            'kegiatan.regex' => 'Nama Kegiatan hanya boleh mengandung huruf dan spasi',
+            'bukti.max' => 'Maksimal file 1 MB',
+            'bukti.mimes' => 'File harus format pdf',
+        ]);
+
+        // Error Message
+        if ($validator->fails()) {
+            Alert::error($validator->errors()->all()[0]);
+            return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Gagal Mengedit Data');
+        }
+
+        // simpan data
+        $validatedData = $validator->validated();
+
+        if ($request->input('kegiatan') ==  NULL){
+            $validator = Validator::make($request->all(),[
+                'kegiatan' => 'required',
+            ],[
+                'kegiatan.required' => 'Kegiatan harus diisi',
+            ]);
+
+            if ($validator->fails()) {
+                Alert::error($validator->errors()->all()[0]);
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+        }
+
+
+        if (!$request->hasFile('bukti')) {
+            // Handle the case where the user didn't provide a file
+
+            $namadosen = auth()->user()->name;
+            $direktori_dosen = Str::slug($namadosen);
+            $nama_bukti = Str::slug($request->input('kegiatan'));
+        
+            // Use Storage::copy to copy the existing file to the desired directory
+            $newFilePath = 'dosen/' . $direktori_dosen . '/' . time() . '-' . $nama_bukti . '.pdf';
+            Storage::copy($record->bukti, $newFilePath);
+        
+            $validatedData['bukti'] = $newFilePath;
+        
+            // Delete the old file
+            if ($record->bukti) {
+                Storage::delete($record->bukti);
+            }
+        } else {
+            // Handle the case where the user provided a file
+
+            $namadosen = auth()->user()->name;
+            $direktori_dosen = Str::slug($namadosen);
+            $nama_bukti = Str::slug($request->input('kegiatan'));
+        
+            $validatedData['bukti'] = $request->file('bukti')->storeAs('dosen/' . $direktori_dosen, time() . '-' . $nama_bukti . '.pdf');
+        
+            // Delete the old file
+            if ($record->bukti) {
+                Storage::delete($record->bukti);
+            }
+        }
+        
+    
+        // Create 
+            pak_kegiatan_pendidikan_dan_pengajaran::where('slug', $detail)->update($validatedData);
+
+            Alert::success('Berhasil','Update Data');
+            return redirect()->back();
+
+    }
+
     # Penelitian
     ############################################
     public function penelitian(){
@@ -2905,6 +2990,95 @@ class DosenController extends Controller
           return redirect()->route('penelitian');
     }
 
+
+    public function penelitian_edit_store($detail, Request $request){
+        // Retrieve the record from the table based on the slug
+            $record = pak_kegiatan_penelitian::where('slug', $detail)->first();
+
+        if (!$record) {
+            // Handle the case where the record is not found
+            abort(404);
+        }
+
+
+        $validator = Validator::make($request->all(),[
+            'kegiatan' => 'max:255',
+            'bukti' => 'mimes:pdf|max:1024|',
+            'angka_kredit' => 'max:255',
+        ],[
+            'kegiatan.max' => 'Maksimal 255 Karakter',
+            'kegiatan.regex' => 'Nama Kegiatan hanya boleh mengandung huruf dan spasi',
+            'bukti.max' => 'Maksimal file 1 MB',
+            'bukti.mimes' => 'File harus format pdf',
+        ]);
+
+        // Error Message
+        if ($validator->fails()) {
+            Alert::error($validator->errors()->all()[0]);
+            return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Gagal Mengedit Data');
+        }
+
+        // simpan data
+        $validatedData = $validator->validated();
+
+        if ($request->input('kegiatan') == NULL || $request->input('angka_kredit') == NULL){
+            $validator = Validator::make($request->all(),[
+                'kegiatan' => 'required',
+                'angka_kredit' => 'required',
+            ],[
+                'kegiatan.required' => 'Kegiatan harus diisi',
+                'angka_kredit.required' => 'Angka Kredit harus diisi',
+            ]);
+
+            if ($validator->fails()) {
+                Alert::error($validator->errors()->all()[0]);
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+        }
+
+
+        if (!$request->hasFile('bukti')) {
+            // Handle the case where the user didn't provide a file
+
+            $namadosen = auth()->user()->name;
+            $direktori_dosen = Str::slug($namadosen);
+            $nama_bukti = Str::slug($request->input('kegiatan'));
+        
+            // Use Storage::copy to copy the existing file to the desired directory
+            $newFilePath = 'dosen/' . $direktori_dosen . '/' . time() . '-' . $nama_bukti . '.pdf';
+            Storage::copy($record->bukti, $newFilePath);
+        
+            $validatedData['bukti'] = $newFilePath;
+        
+            // Delete the old file
+            if ($record->bukti) {
+                Storage::delete($record->bukti);
+            }
+        } else {
+            // Handle the case where the user provided a file
+
+            $namadosen = auth()->user()->name;
+            $direktori_dosen = Str::slug($namadosen);
+            $nama_bukti = Str::slug($request->input('kegiatan'));
+        
+            $validatedData['bukti'] = $request->file('bukti')->storeAs('dosen/' . $direktori_dosen, time() . '-' . $nama_bukti . '.pdf');
+        
+            // Delete the old file
+            if ($record->bukti) {
+                Storage::delete($record->bukti);
+            }
+        }
+        
+    
+        // Create 
+            pak_kegiatan_penelitian::where('slug', $detail)->update($validatedData);
+
+            Alert::success('Berhasil','Update Data');
+            return redirect()->back();
+
+    }
+
+
     # Pengabdian Pada Masyarakat
     ############################################
     public function pengabdian_pada_masyarakat(){
@@ -3399,6 +3573,101 @@ class DosenController extends Controller
             'title' => 'Pengabdian Pada Masyarakat',
             'record' => $record,
         ]);
+
+    }
+
+    public function pengabdian_pada_masyarakat_edit_store($detail, Request $request){
+        // Retrieve the record from the table based on the slug
+            $record = pak_kegiatan_pengabdian_pada_masyarakat::where('slug', $detail)->first();
+
+        if (!$record) {
+            // Handle the case where the record is not found
+            abort(404);
+        }
+
+
+        $validator = Validator::make($request->all(),[
+            'kegiatan' => 'max:255',
+            'bukti' => 'mimes:pdf|max:1024|',
+            'angka_kredit' => 'max:255',
+            'tempat' => 'max:255',
+            'tanggal_pelaksanaan' => 'date'
+        ],[
+            'kegiatan.max' => 'Maksimal 255 Karakter',
+            'kegiatan.regex' => 'Nama Kegiatan hanya boleh mengandung huruf dan spasi',
+            'bukti.max' => 'Maksimal file 1 MB',
+            'bukti.mimes' => 'File harus format pdf',
+        ]);
+
+        // Error Message
+        if ($validator->fails()) {
+            Alert::error($validator->errors()->all()[0]);
+            return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Gagal Mengedit Data');
+        }
+
+        // simpan data
+        $validatedData = $validator->validated();
+
+        if ($request->input('kegiatan') == NULL || $request->input('angka_kredit') == NULL ||
+            $request->input('tempat') == NULL || $request->input('tanggal_pelaksanaan') == NULL
+        ){
+            $validator = Validator::make($request->all(),[
+                'kegiatan' => 'required',
+                'angka_kredit' => 'required',
+                'tempat' => 'required',
+                'tanggal_pelaksanaan' => 'required',
+            ],[
+                'kegiatan.required' => 'Kegiatan harus diisi',
+                'angka_kredit.required' => 'Angka Kredit harus diisi',
+                'tempat.required' => 'Tempat harus diisi',
+                'tanggal_pelaksanaan.required' => 'Tanggal Pelaksanaan harus diisi',
+            ]);
+
+            if ($validator->fails()) {
+                Alert::error($validator->errors()->all()[0]);
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+        }
+
+
+        if (!$request->hasFile('bukti')) {
+            // Handle the case where the user didn't provide a file
+
+            $namadosen = auth()->user()->name;
+            $direktori_dosen = Str::slug($namadosen);
+            $nama_bukti = Str::slug($request->input('kegiatan'));
+        
+            // Use Storage::copy to copy the existing file to the desired directory
+            $newFilePath = 'dosen/' . $direktori_dosen . '/' . time() . '-' . $nama_bukti . '.pdf';
+            Storage::copy($record->bukti, $newFilePath);
+        
+            $validatedData['bukti'] = $newFilePath;
+        
+            // Delete the old file
+            if ($record->bukti) {
+                Storage::delete($record->bukti);
+            }
+        } else {
+            // Handle the case where the user provided a file
+
+            $namadosen = auth()->user()->name;
+            $direktori_dosen = Str::slug($namadosen);
+            $nama_bukti = Str::slug($request->input('kegiatan'));
+        
+            $validatedData['bukti'] = $request->file('bukti')->storeAs('dosen/' . $direktori_dosen, time() . '-' . $nama_bukti . '.pdf');
+        
+            // Delete the old file
+            if ($record->bukti) {
+                Storage::delete($record->bukti);
+            }
+        }
+        
+    
+        // Create 
+            pak_kegiatan_pengabdian_pada_masyarakat::where('slug', $detail)->update($validatedData);
+
+            Alert::success('Berhasil','Update Data');
+            return redirect()->back();
 
     }
 
@@ -4558,5 +4827,100 @@ class DosenController extends Controller
 
     }
 
+   
+    public function  penunjang_tri_dharma_pt_edit_store($detail, Request $request){
+        // Retrieve the record from the table based on the slug
+            $record = pak_kegiatan_penunjang_tri_dharma_pt::where('slug', $detail)->first();
+
+        if (!$record) {
+            // Handle the case where the record is not found
+            abort(404);
+        }
+
+
+        $validator = Validator::make($request->all(),[
+            'kegiatan' => 'max:255',
+            'bukti' => 'mimes:pdf|max:1024|',
+            'angka_kredit' => 'max:255',
+            'tempat' => 'max:255',
+            'tanggal_pelaksanaan' => 'date'
+        ],[
+            'kegiatan.max' => 'Maksimal 255 Karakter',
+            'kegiatan.regex' => 'Nama Kegiatan hanya boleh mengandung huruf dan spasi',
+            'bukti.max' => 'Maksimal file 1 MB',
+            'bukti.mimes' => 'File harus format pdf',
+        ]);
+
+        // Error Message
+        if ($validator->fails()) {
+            Alert::error($validator->errors()->all()[0]);
+            return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Gagal Mengedit Data');
+        }
+
+        // simpan data
+        $validatedData = $validator->validated();
+
+        if ($request->input('kegiatan') == NULL || $request->input('angka_kredit') == NULL ||
+            $request->input('tempat') == NULL || $request->input('tanggal_pelaksanaan') == NULL
+        ){
+            $validator = Validator::make($request->all(),[
+                'kegiatan' => 'required',
+                'angka_kredit' => 'required',
+                'tempat' => 'required',
+                'tanggal_pelaksanaan' => 'required',
+            ],[
+                'kegiatan.required' => 'Kegiatan harus diisi',
+                'angka_kredit.required' => 'Angka Kredit harus diisi',
+                'tempat.required' => 'Tempat harus diisi',
+                'tanggal_pelaksanaan.required' => 'Tanggal Pelaksanaan harus diisi',
+            ]);
+
+            if ($validator->fails()) {
+                Alert::error($validator->errors()->all()[0]);
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+        }
+
+
+        if (!$request->hasFile('bukti')) {
+            // Handle the case where the user didn't provide a file
+
+            $namadosen = auth()->user()->name;
+            $direktori_dosen = Str::slug($namadosen);
+            $nama_bukti = Str::slug($request->input('kegiatan'));
+        
+            // Use Storage::copy to copy the existing file to the desired directory
+            $newFilePath = 'dosen/' . $direktori_dosen . '/' . time() . '-' . $nama_bukti . '.pdf';
+            Storage::copy($record->bukti, $newFilePath);
+        
+            $validatedData['bukti'] = $newFilePath;
+        
+            // Delete the old file
+            if ($record->bukti) {
+                Storage::delete($record->bukti);
+            }
+        } else {
+            // Handle the case where the user provided a file
+
+            $namadosen = auth()->user()->name;
+            $direktori_dosen = Str::slug($namadosen);
+            $nama_bukti = Str::slug($request->input('kegiatan'));
+        
+            $validatedData['bukti'] = $request->file('bukti')->storeAs('dosen/' . $direktori_dosen, time() . '-' . $nama_bukti . '.pdf');
+        
+            // Delete the old file
+            if ($record->bukti) {
+                Storage::delete($record->bukti);
+            }
+        }
+        
+    
+        // Create 
+            pak_kegiatan_penunjang_tri_dharma_pt::where('slug', $detail)->update($validatedData);
+
+            Alert::success('Berhasil','Update Data');
+            return redirect()->back();
+
+    }
 
 }

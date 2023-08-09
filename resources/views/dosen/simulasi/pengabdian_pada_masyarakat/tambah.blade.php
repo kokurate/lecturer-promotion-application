@@ -16,7 +16,7 @@
           <div class="card">
             <div class="card-body">
               <h2 class="mt-5 text-center" style="color:#012970;"><strong>Tambah Kegiatan Simulasi PAK </strong></h2>
-              <h2 class="text-center" style="color:#012970;"><strong>Penunjang Tri Dharma PT</strong></h2>
+              <h2 class="text-center" style="color:#012970;"><strong>Pengabdian Pada Masyarakat</strong></h2>
               
               <div class="text-center mt-3">
                 <a href="#" class="btn btn-primary" onclick="clickURL()">Click disini jika terjadi error</a>

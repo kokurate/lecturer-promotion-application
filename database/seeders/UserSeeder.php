@@ -32,10 +32,10 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Pegawai Fakultas Ekonomi',
+            'name' => 'Pegawai Fakultas Ekonomi Dan Bisnis',
             'level' => 'pegawai',
             'email' => 'fekon@gmail.com',
-            'fakultas' => 'Fakultas Ekonomi dan Bisnis',
+            'fakultas' => 'Fakultas Ekonomi Dan Bisnis',
             'password' => bcrypt('password'), //password
         ]);
 
@@ -55,7 +55,7 @@ class UserSeeder extends Seeder
             'pangkat_id' => 4,
             'level' => 'dosen',
             'email' => 'dosenfekon@gmail.com',
-            'fakultas' => 'Fakultas Ekonomi dan Bisnis',
+            'fakultas' => 'Fakultas Ekonomi Dan Bisnis',
             'jurusan_prodi' => 'Program Studi Pendidikan Ekonomi',
             'password' => bcrypt('password'), //password
             'my_token' => 'asdasdasd'

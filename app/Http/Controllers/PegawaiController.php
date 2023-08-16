@@ -61,11 +61,11 @@ class PegawaiController extends Controller
         // dd($data);
         // $login = auth()->user()->fakultas
         if(auth()->user()->fakultas == 'Fakultas Ilmu Pendidikan'){$namafakultas = 'Fakultas Ilmu Pendidikan';}
-        elseif(auth()->user()->fakultas == 'Fakultas Matematika Dan Ilmu Pengetahuan Alam'){$namafakultas = 'Fakultas Matematika Dan Ilmu Pengetahuan Alam';}
-        elseif(auth()->user()->fakultas == 'Fakultas Ilmu Keolahragaan'){$namafakultas = 'Fakultas Ilmu Keolahragaan';}
+        elseif(auth()->user()->fakultas == 'Fakultas Matematika Ilmu Pengetahuan Alam Dan Kebumian'){$namafakultas = 'Fakultas Matematika Ilmu Pengetahuan Alam Dan Kebumian';}
+        elseif(auth()->user()->fakultas == 'Fakultas Ilmu Keolahragaan Dan Kesejahteraan Masyarakat'){$namafakultas = 'Fakultas Ilmu Keolahragaan Dan Kesejahteraan Masyarakat';}
         elseif(auth()->user()->fakultas == 'Fakultas Teknik'){$namafakultas = 'Fakultas Teknik';}
-        elseif(auth()->user()->fakultas == 'Fakultas Ekonomi'){$namafakultas = 'Fakultas Ekonomi';}
-        elseif(auth()->user()->fakultas == 'Fakultas Ilmu Sosial'){$namafakultas = 'Fakultas Ilmu Sosial';}
+        elseif(auth()->user()->fakultas == 'Fakultas Ekonomi Dan Bisnis'){$namafakultas = 'Fakultas Ekonomi Dan Bisnis';}
+        elseif(auth()->user()->fakultas == 'Fakultas Ilmu Sosial Dan Hukum'){$namafakultas = 'Fakultas Ilmu Sosial Dan Hukum';}
         elseif(auth()->user()->fakultas == 'Fakultas Bahasa Dan Seni'){$namafakultas = 'Fakultas Bahasa Dan Seni';}
         
 
@@ -75,10 +75,10 @@ class PegawaiController extends Controller
            'fip' => jurusan_prodi::whereIn('id',[1,2,3,4,5,6])->get(),
            'fmipa' => jurusan_prodi::whereIn('id',[7,8,9,10,11,12,13,14])->get(),
            'fik' => jurusan_prodi::whereIn('id',[15,16,17,18])->get(),
-           'fatek' => jurusan_prodi::whereIn('id',[19,20,21,22,23,24,25,26,27,28,29])->get(),
-           'fekon' => jurusan_prodi::whereIn('id',[30,31,32,33,34])->get(),
-           'fis' => jurusan_prodi::whereIn('id',[35,36,37,38,39,40,41,42])->get(),
-           'fbs' => jurusan_prodi::whereIn('id',[43,44,45,46,47,48,49,50])->get(),
+           'fatek' => jurusan_prodi::whereIn('id',[19,20,21,22,23,24,25,26,27,28,29,30])->get(),
+           'fekon' => jurusan_prodi::whereIn('id',[31,32,33,34,35])->get(),
+           'fis' => jurusan_prodi::whereIn('id',[36,37,38,39,40,41,42,43])->get(),
+           'fbs' => jurusan_prodi::whereIn('id',[44,45,46,47,48,49,50,51])->get(),
            'all_dosen' => User::where('fakultas', $namafakultas )->where('level', 'dosen')->get(),
         ]);
     }

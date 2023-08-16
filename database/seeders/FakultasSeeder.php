@@ -16,9 +16,9 @@ class FakultasSeeder extends Seeder
     {
         fakultas::create(['nama' => 'Fakultas Ilmu Pendidikan']); //1 
         fakultas::create(['nama' => 'Fakultas Matematika Ilmu Pengetahuan Alam Dan Kebumian']); // 2
-        fakultas::create(['nama' => 'Fakultas Ilmu Keolahragaan dan Kesejahteraan Masyarakat']); // 3
+        fakultas::create(['nama' => 'Fakultas Ilmu Keolahragaan Dan Kesejahteraan Masyarakat']); // 3
         fakultas::create(['nama' => 'Fakultas Teknik']); // 4
-        fakultas::create(['nama' => 'Fakultas Ekonomi dan Bisnis']); // 5
+        fakultas::create(['nama' => 'Fakultas Ekonomi Dan Bisnis']); // 5
         fakultas::create(['nama' => 'Fakultas Ilmu Sosial Dan Hukum']); // 6
         fakultas::create(['nama' => 'Fakultas Bahasa Dan Seni']); // 7
 

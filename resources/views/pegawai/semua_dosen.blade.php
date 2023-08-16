@@ -55,10 +55,10 @@
                             "@if(auth()->user()->fakultas == 'Fakultas Teknik')Fakultas Teknik
                             @elseif(auth()->user()->fakultas == 'Fakultas Bahasa Dan Seni')Fakultas Bahasa Dan Seni
                             @elseif(auth()->user()->fakultas == 'Fakultas Ilmu Pendidikan')Fakultas Ilmu Pendidikan
-                            @elseif(auth()->user()->fakultas == 'Fakultas Matematika Dan Ilmu Pengetahuan Alam')Fakultas Matematika Dan Ilmu Pengetahuan Alam
-                            @elseif(auth()->user()->fakultas == 'Fakultas Ilmu Keolahragaan')Fakultas Ilmu Keolahragaan
-                            @elseif(auth()->user()->fakultas == 'Fakultas Ekonomi')Fakultas Ekonomi
-                            @elseif(auth()->user()->fakultas == 'Fakultas Ilmu Sosial')Fakultas Ilmu Sosial
+                            @elseif(auth()->user()->fakultas == 'Fakultas Matematika Ilmu Pengetahuan Alam Dan Kebumian')Fakultas Matematika Ilmu Pengetahuan Alam Dan Kebumian
+                            @elseif(auth()->user()->fakultas == 'Fakultas Ilmu Keolahragaan Dan Kesejahteraan Masyarakat')Fakultas Ilmu Keolahragaan Dan Kesejahteraan Masyarakat
+                            @elseif(auth()->user()->fakultas == 'Fakultas Ekonomi Dan Bisnis')Fakultas Ekonomi Dan Bisnis
+                            @elseif(auth()->user()->fakultas == 'Fakultas Ilmu Sosial Dan Hukum')Fakultas Ilmu Sosial Dan Hukum
                             @endif
                             " disabled>
                         </div>
@@ -83,8 +83,8 @@
                             </div>
                         
                         
-                        @elseif(auth()->user()->fakultas == 'Fakultas Matematika Dan Ilmu Pengetahuan Alam')
-                        <!-- ========================== Fakultas Matematika Dan Ilmu Pengetahuan Alam==============  -->
+                        @elseif(auth()->user()->fakultas == 'Fakultas Matematika Ilmu Pengetahuan Alam Dan Kebumian')
+                        <!-- ========================== Fakultas Matematika Ilmu Pengetahuan Alam Dan Kebumian==============  -->
                             <div class="col">
                                 <label for="jurusan_prodi" class="mt-3 form-label"><strong>Program Studi</strong></label>
                                 <select name="jurusan_prodi" class="form-select">
@@ -102,8 +102,8 @@
                                 @enderror
                             </div>
 
-                        @elseif(auth()->user()->fakultas == 'Fakultas Ilmu Keolahragaan')
-                        <!-- ========================== Fakultas Ilmu Keolahragaan ==============  -->
+                        @elseif(auth()->user()->fakultas == 'Fakultas Ilmu Keolahragaan Dan Kesejahteraan Masyarakat')
+                        <!-- ========================== Fakultas Ilmu Keolahragaan Dan Kesejahteraan Masyarakat ==============  -->
                             <div class="col">
                                 <label for="jurusan_prodi" class="mt-3 form-label"><strong>Program Studi</strong></label>
                                 <select name="jurusan_prodi" class="form-select">
@@ -140,8 +140,8 @@
                                 @enderror
                             </div>
 
-                        @elseif(auth()->user()->fakultas == 'Fakultas Ekonomi')
-                        <!-- ========================== Fakultas Ekonomi ==============  -->
+                        @elseif(auth()->user()->fakultas == 'Fakultas Ekonomi Dan Bisnis')
+                        <!-- ========================== Fakultas Ekonomi Dan Bisnis ==============  -->
                             <div class="col">
                                 <label for="jurusan_prodi" class="mt-3 form-label"><strong>Program Studi</strong></label>
                                 <select name="jurusan_prodi" class="form-select">
@@ -159,8 +159,8 @@
                                 @enderror
                             </div>
 
-                        @elseif(auth()->user()->fakultas == 'Fakultas Ilmu Sosial')
-                        <!-- ========================== Fakultas Ilmu Sosial ==============  -->
+                        @elseif(auth()->user()->fakultas == 'Fakultas Ilmu Sosial Dan Hukum')
+                        <!-- ========================== Fakultas Ilmu Sosial Dan Hukum ==============  -->
                             <div class="col">
                                 <label for="jurusan_prodi" class="mt-3 form-label"><strong>Program Studi</strong></label>
                                 <select name="jurusan_prodi" class="form-select">

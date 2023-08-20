@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             'name' => 'Pegawai Fakultas Ilmu Pendidikan',
             'level' => 'pegawai',
             'email' => 'pegawaifip@gmail.com', 
-            'fakultas' => 'Pegawai Fakultas Ilmu Pendidikan',
+            'fakultas' => 'Fakultas Ilmu Pendidikan',
             'password' => bcrypt('password'), //password
         ]);
 

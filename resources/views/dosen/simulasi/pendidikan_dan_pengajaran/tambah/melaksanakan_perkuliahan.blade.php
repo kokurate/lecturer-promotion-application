@@ -45,7 +45,7 @@
                 <option value="11" >11</option>
                 <option value="12" >12</option>
             </select> --}}
-            <label for=""  style="color:#012970;">SKS sekarang : {{ $sks_now }} Maksimal 12. </label>
+            {{-- <label for=""  style="color:#012970;">SKS sekarang : {{ $sks_now }} Maksimal 12. </label> --}}
             
         </div> 
     </div>

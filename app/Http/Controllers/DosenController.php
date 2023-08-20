@@ -3311,16 +3311,16 @@ class DosenController extends Controller
             // deklarasi variable
             $kode = '7.1';
 
-            $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
-                                                                            ->where('kode',$kode)->sum('angka_kredit');
+            // $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
+            //                                                                 ->where('kode',$kode)->sum('angka_kredit');
 
-            $result = $count_angka_kredit + $request->input('angka_kredit');
+            // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                if($result > 5.5){
-                    $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 5.5 . Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
-                    Alert::error($errorMessage);
-                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                }
+            //     if($result > 5.5){
+            //         $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 5.5 . Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
+            //         Alert::error($errorMessage);
+            //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+            //     }
 
 
             $validatedData['kode'] = $kode;
@@ -3332,16 +3332,16 @@ class DosenController extends Controller
                 // deklarasi variable
                 $kode = '7.2';
 
-                $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
-                                                                                ->where('kode',$kode)->sum('angka_kredit');
+                // $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
+                //                                                                 ->where('kode',$kode)->sum('angka_kredit');
 
-                $result = $count_angka_kredit + $request->input('angka_kredit');
+                // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                    if($result > 3){
-                        $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 3 . Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
-                        Alert::error($errorMessage);
-                        return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                    }
+                //     if($result > 3){
+                //         $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 3 . Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
+                //         Alert::error($errorMessage);
+                //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                //     }
 
 
                 $validatedData['kode'] = $kode;
@@ -3361,16 +3361,16 @@ class DosenController extends Controller
                     # Internasional
                     if($request->input('satu_semester_atau_lebih') == $internasional){
                         // validasi maksimal angka kredit 
-                        $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
-                                                                        ->where('kode',$internasional)->sum('angka_kredit');
+                        // $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
+                        //                                                 ->where('kode',$internasional)->sum('angka_kredit');
                         
-                        $result = $count_angka_kredit + $request->input('angka_kredit');
+                        // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            if($result > 4){
-                                $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 4. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                        //     if($result > 4){
+                        //         $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 4. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
+                        //         Alert::error($errorMessage);
+                        //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                        //     }
 
                         $validatedData['kode'] = $internasional;
                         $validatedData['nilai_kegiatan'] = 'Tingkat Internasional Tiap Program';
@@ -3380,18 +3380,18 @@ class DosenController extends Controller
                     }
                     # Nasional
                     elseif($request->input('satu_semester_atau_lebih') == $nasional){
-                        // validasi maksimal angka kredit 
-                            $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
-                                                                        ->where('kode',$nasional)->sum('angka_kredit');
+                        // // validasi maksimal angka kredit 
+                        //     $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
+                        //                                                 ->where('kode',$nasional)->sum('angka_kredit');
 
-                        $result = $count_angka_kredit + $request->input('angka_kredit');
+                        // $result = $count_angka_kredit + $request->input('angka_kredit');
             
 
-                            if($result > 3){
-                                $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 3. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                        //     if($result > 3){
+                        //         $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 3. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
+                        //         Alert::error($errorMessage);
+                        //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                        //     }
 
                         $validatedData['kode'] = $nasional;
                         $validatedData['nilai_kegiatan'] = 'Tingkat Nasional, Tiap Program';
@@ -3401,18 +3401,18 @@ class DosenController extends Controller
                     }
                     # Lokal
                     elseif($request->input('satu_semester_atau_lebih') == $lokal){
-                        // validasi maksimal angka kredit 
-                            $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
-                                                                        ->where('kode',$lokal)->sum('angka_kredit');
+                        // // validasi maksimal angka kredit 
+                        //     $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
+                        //                                                 ->where('kode',$lokal)->sum('angka_kredit');
 
-                        $result = $count_angka_kredit + $request->input('angka_kredit');
+                        // $result = $count_angka_kredit + $request->input('angka_kredit');
             
 
-                            if($result > 2){
-                                $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 2. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                        //     if($result > 2){
+                        //         $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 2. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
+                        //         Alert::error($errorMessage);
+                        //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                        //     }
 
                         $validatedData['kode'] = $lokal;
                         $validatedData['nilai_kegiatan'] = 'Tingkat Lokal, Tiap Program';
@@ -3458,17 +3458,17 @@ class DosenController extends Controller
 
                     # Internasional
                     if($request->input('kurang_satu_semester') == $internasional){
-                        // validasi maksimal angka kredit 
-                        $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
-                                                                        ->where('kode',$internasional)->sum('angka_kredit');
+                        // // validasi maksimal angka kredit 
+                        // $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
+                        //                                                 ->where('kode',$internasional)->sum('angka_kredit');
                         
-                        $result = $count_angka_kredit + $request->input('angka_kredit');
+                        // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            if($result > 3){
-                                $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 3. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                        //     if($result > 3){
+                        //         $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 3. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
+                        //         Alert::error($errorMessage);
+                        //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                        //     }
 
                         $validatedData['kode'] = $internasional;
                         $validatedData['nilai_kegiatan'] = 'Tingkat Internasional Tiap Program';
@@ -3478,18 +3478,18 @@ class DosenController extends Controller
                     }
                     # Nasional
                     elseif($request->input('kurang_satu_semester') == $nasional){
-                        // validasi maksimal angka kredit 
-                            $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
-                                                                        ->where('kode',$nasional)->sum('angka_kredit');
+                        // // validasi maksimal angka kredit 
+                        //     $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
+                        //                                                 ->where('kode',$nasional)->sum('angka_kredit');
 
-                        $result = $count_angka_kredit + $request->input('angka_kredit');
+                        // $result = $count_angka_kredit + $request->input('angka_kredit');
             
 
-                            if($result > 2){
-                                $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 2. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                        //     if($result > 2){
+                        //         $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 2. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
+                        //         Alert::error($errorMessage);
+                        //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                        //     }
 
                         $validatedData['kode'] = $nasional;
                         $validatedData['nilai_kegiatan'] = 'Tingkat Nasional, Tiap Program';
@@ -3499,18 +3499,18 @@ class DosenController extends Controller
                     }
                     # Lokal
                     elseif($request->input('kurang_satu_semester') == $lokal){
-                        // validasi maksimal angka kredit 
-                            $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
-                                                                        ->where('kode',$lokal)->sum('angka_kredit');
+                        // // validasi maksimal angka kredit 
+                        //     $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
+                        //                                                 ->where('kode',$lokal)->sum('angka_kredit');
 
-                        $result = $count_angka_kredit + $request->input('angka_kredit');
+                        // $result = $count_angka_kredit + $request->input('angka_kredit');
             
 
-                            if($result > 1){
-                                $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 1. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                        //     if($result > 1){
+                        //         $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 1. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
+                        //         Alert::error($errorMessage);
+                        //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                        //     }
 
                         $validatedData['kode'] = $lokal;
                         $validatedData['nilai_kegiatan'] = 'Tingkat Lokal, Tiap Program';
@@ -3519,18 +3519,18 @@ class DosenController extends Controller
                     }
                     # Insidental
                     elseif($request->input('kurang_satu_semester') == $insidental){
-                        // validasi maksimal angka kredit 
-                            $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
-                                                                        ->where('kode',$insidental)->sum('angka_kredit');
+                        // // validasi maksimal angka kredit 
+                        //     $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
+                        //                                                 ->where('kode',$insidental)->sum('angka_kredit');
 
-                        $result = $count_angka_kredit + $request->input('angka_kredit');
+                        // $result = $count_angka_kredit + $request->input('angka_kredit');
             
 
-                            if($result > 1){
-                                $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 1. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                        //     if($result > 1){
+                        //         $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 1. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
+                        //         Alert::error($errorMessage);
+                        //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                        //     }
 
                         $validatedData['kode'] = $insidental;
                         $validatedData['nilai_kegiatan'] = 'Insidental, Tiap Kegiatan/ Program ';
@@ -3576,18 +3576,18 @@ class DosenController extends Controller
 
                     # Keahlian
                     if($request->input('komponen_kegiatan') == $keahlian){
-                        // validasi maksimal angka kredit 
-                            $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
-                                                                            ->where('kode',$kode_keahlian)->sum('angka_kredit');
+                        // // validasi maksimal angka kredit 
+                        //     $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
+                        //                                                     ->where('kode',$kode_keahlian)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                        //     $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                                if($result > 1.5){
-                                    $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 1.5. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
-                                    Alert::error($errorMessage);
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                                }
+                        //     // cek maksimal angka kredit
+                        //         if($result > 1.5){
+                        //             $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 1.5. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
+                        //             Alert::error($errorMessage);
+                        //             return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                        //         }
 
                             $validatedData['kode'] = $kode_keahlian;
                             $validatedData['angka_kredit'] = $request->input('angka_kredit');
@@ -3597,18 +3597,18 @@ class DosenController extends Controller
                     # Penugasan
                     elseif($request->input('komponen_kegiatan') == $penugasan){
 
-                            // validasi maksimal angka kredit 
-                                $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
-                                                                                ->where('kode',$kode_penugasan)->sum('angka_kredit');
+                            // // validasi maksimal angka kredit 
+                            //     $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
+                            //                                                     ->where('kode',$kode_penugasan)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                            // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                            if($result > 1){
-                                $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 1. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                            // // cek maksimal angka kredit
+                            // if($result > 1){
+                            //     $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 1. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
+                            //     Alert::error($errorMessage);
+                            //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                            // }
 
                             $validatedData['kode'] = $kode_penugasan;
                             $validatedData['angka_kredit'] = $request->input('angka_kredit');
@@ -3617,18 +3617,18 @@ class DosenController extends Controller
                     # Fungsi
                     elseif($request->input('komponen_kegiatan') == $fungsi){
 
-                            // validasi maksimal angka kredit 
-                                $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
-                                                                                ->where('kode',$kode_fungsi)->sum('angka_kredit');
+                            // // validasi maksimal angka kredit 
+                            //     $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
+                            //                                                     ->where('kode',$kode_fungsi)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                            // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                            if($result > 0.5){
-                                $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 0.5. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                            // // cek maksimal angka kredit
+                            // if($result > 0.5){
+                            //     $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 0.5. Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
+                            //     Alert::error($errorMessage);
+                            //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                            // }
 
                             $validatedData['kode'] = $kode_fungsi;
                             $validatedData['angka_kredit'] = $request->input('angka_kredit');
@@ -3641,16 +3641,16 @@ class DosenController extends Controller
                 // deklarasi variable
                 $kode = '7.5';
 
-                $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
-                                                                                ->where('kode',$kode)->sum('angka_kredit');
+                // $count_angka_kredit = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->where('kategori_pak_id',3)
+                //                                                                 ->where('kode',$kode)->sum('angka_kredit');
 
-                $result = $count_angka_kredit + $request->input('angka_kredit');
+                // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                    if($result > 3){
-                        $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 3 . Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
-                        Alert::error($errorMessage);
-                        return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                    }
+                //     if($result > 3){
+                //         $errorMessage = 'Angka Kredit Paling Tinggi Yaitu 3 . Angka Kredit Anda Sekarang adalah '. $count_angka_kredit;
+                //         Alert::error($errorMessage);
+                //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                //     }
 
 
                 $validatedData['kode'] = $kode;

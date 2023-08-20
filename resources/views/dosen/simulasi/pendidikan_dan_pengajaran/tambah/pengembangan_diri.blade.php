@@ -8,43 +8,57 @@
                                         <div class="list-group">
                                             <div class="list-group-item">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" id="a_960" type="radio" name="pengembangan_diri"  value="II.M.1"> 
+                                                    <input class="form-check-input" id="a_960" type="radio" name="pengembangan_diri"  value="II.M.1"
+                                                        @if(old('pengembangan_diri') == 'II.M.1') checked @endif
+                                                    > 
                                                     <label class="form-check-label" for="a_960">Lamanya lebih dari 960 jam</label>
                                                 </div>
                                             </div>
                                             <div class="list-group-item">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" id="b_641"type="radio" name="pengembangan_diri" value="II.M.2"> 
+                                                    <input class="form-check-input" id="b_641"type="radio" name="pengembangan_diri" value="II.M.2"
+                                                        @if(old('pengembangan_diri') == 'II.M.2') checked @endif
+                                                    > 
                                                     <label class="form-check-label" for="b_641">Lamanya antara 641-960 jam </label>
                                                 </div>
                                             </div>
                                             <div class="list-group-item">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" id="c_481"type="radio" name="pengembangan_diri" value="II.M.3"> 
+                                                    <input class="form-check-input" id="c_481"type="radio" name="pengembangan_diri" value="II.M.3"
+                                                        @if(old('pengembangan_diri') == 'II.M.3') checked @endif
+                                                    > 
                                                     <label class="form-check-label" for="c_481">Lamanya antara 481-640 jam</label>
                                                 </div>
                                             </div>
                                             <div class="list-group-item">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" id="d_161"type="radio" name="pengembangan_diri" value="II.M.4"> 
+                                                    <input class="form-check-input" id="d_161"type="radio" name="pengembangan_diri" value="II.M.4"
+                                                        @if(old('pengembangan_diri') == 'II.M.4') checked @endif
+                                                    > 
                                                     <label class="form-check-label" for="d_161">Lamanya antara 161-480 jam</label>
                                                 </div>
                                             </div>
                                             <div class="list-group-item">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" id="e_81"type="radio" name="pengembangan_diri" value="II.M.5"> 
+                                                    <input class="form-check-input" id="e_81"type="radio" name="pengembangan_diri" value="II.M.5"
+                                                        @if(old('pengembangan_diri') == 'II.M.5') checked @endif
+                                                    > 
                                                     <label class="form-check-label" for="e_81">Lamanya 81-160 jam</label>
                                                 </div>
                                             </div>
                                             <div class="list-group-item">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" id="e_30"type="radio" name="pengembangan_diri" value="II.M.6"> 
+                                                    <input class="form-check-input" id="e_30"type="radio" name="pengembangan_diri" value="II.M.6"
+                                                        @if(old('pengembangan_diri') == 'II.M.6') checked @endif
+                                                    > 
                                                     <label class="form-check-label" for="e_30">Lamanya 30-80 jam</label>
                                                 </div>
                                             </div>
                                             <div class="list-group-item">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" id="f_10"type="radio" name="pengembangan_diri" value="II.M.7"> 
+                                                    <input class="form-check-input" id="f_10"type="radio" name="pengembangan_diri" value="II.M.7"
+                                                        @if(old('pengembangan_diri') == 'II.M.7') checked @endif
+                                                    > 
                                                     <label class="form-check-label" for="f_10">Lamanya 10-30 jam</label>
                                                 </div>
                                             </div>

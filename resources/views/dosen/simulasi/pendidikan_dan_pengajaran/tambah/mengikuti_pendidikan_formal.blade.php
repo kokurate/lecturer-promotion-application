@@ -3,13 +3,15 @@
     <div class="list-group">
         <div class="list-group-item">
             <div class="form-check">
-                <input id="dkr" class="my-2" type="radio" name="jenis_pendidikan" value="doktor">
+                <input id="dkr" class="my-2" type="radio" name="jenis_pendidikan" value="doktor"
+                    @if(old('jenis_pendidikan') == 'doktor') checked @endif>
                 <label for="dkr">Doktor/sederajat</label>
             </div>
         </div>     
         <div class="list-group-item">
             <div class="form-check">
-                <input id="mgr" class="my-2" type="radio" name="jenis_pendidikan" value="magister">
+                <input id="mgr" class="my-2" type="radio" name="jenis_pendidikan" value="magister"
+                    @if(old('jenis_pendidikan') == 'magister') checked @endif>
                 <label for="mgr">Magister/sederajat</label>
             </div>
         </div>

@@ -648,31 +648,19 @@ class DosenController extends Controller
                         return redirect()->back()->withInput()->with('error', 'Gagal Menambahkan Kegiatan');
                     }
 
-                    //    // Cek apakah pengguna telah memilih jenis pendidikan formal sebelumnya
-                    //     $previousPendidikan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)
-                    //     ->where('jenis_pendidikan', $jenisPendidikan)
-                    //     ->first();
+                        // // Mengecek apakah pengguna sudah memasukkan jenis pendidikan doktor atau magister sebelumnya
+                        // $existingPendidikan = pak_kegiatan_pendidikan_dan_pengajaran::where(function ($query) use ($jenisPendidikan, $user_id) {
+                        //     $query->where('jenis_pendidikan', 'doktor')
+                        //         ->orWhere('jenis_pendidikan', 'magister');
+                        // })
+                        //     ->where('user_id', $user_id)->where('kategori_pak_id', 1)
+                        //     ->exists();
 
-                    //     // jika sudah pernah kasih error
-                    //     if ($previousPendidikan) {
-                    //         Alert::error('Anda sudah memasukkan pendidikan ' . $jenisPendidikan);
-                    //         return redirect()->back()->withInput()->withErrors(['jenis_pendidikan' => 'Anda sudah memasukkan pendidikan ' . $jenisPendidikan])
-                    //                 ->with('error', 'Gagal Menambahkan Kegiatan');
-                    //     }
-
-                        // Mengecek apakah pengguna sudah memasukkan jenis pendidikan doktor atau magister sebelumnya
-                        $existingPendidikan = pak_kegiatan_pendidikan_dan_pengajaran::where(function ($query) use ($jenisPendidikan, $user_id) {
-                            $query->where('jenis_pendidikan', 'doktor')
-                                ->orWhere('jenis_pendidikan', 'magister');
-                        })
-                            ->where('user_id', $user_id)->where('kategori_pak_id', 1)
-                            ->exists();
-
-                        if ($existingPendidikan) {
-                            // Menampilkan pesan error jika pengguna sudah memasukkan jenis pendidikan doktor atau magister sebelumnya
-                            Alert::error('Anda sudah memasukkan jenis pendidikan doktor atau magister sebelumnya');
-                            return redirect()->back()->withInput()->withErrors(['jenis_pendidikan' => 'Anda sudah memasukkan jenis pendidikan doktor atau magister sebelumnya'])->with('error', 'Gagal Menambahkan Kegiatan');
-                        }
+                        // if ($existingPendidikan) {
+                        //     // Menampilkan pesan error jika pengguna sudah memasukkan jenis pendidikan doktor atau magister sebelumnya
+                        //     Alert::error('Anda sudah memasukkan jenis pendidikan doktor atau magister sebelumnya');
+                        //     return redirect()->back()->withInput()->withErrors(['jenis_pendidikan' => 'Anda sudah memasukkan jenis pendidikan doktor atau magister sebelumnya'])->with('error', 'Gagal Menambahkan Kegiatan');
+                        // }
 
                     // Simpan jenis pendidikan formal yang dipilih
                     $validatedData['jenis_pendidikan'] = $jenisPendidikan;
@@ -695,15 +683,15 @@ class DosenController extends Controller
                 if($request->input('tipe_kegiatan') == 'Mengikuti Diklat Pra-Jabatan'){
 
                     // Mengecek apakah pengguna sudah memasukkan diklat pra jabatan
-                    $existingDiklat = pak_kegiatan_pendidikan_dan_pengajaran::where('tipe_kegiatan', $request->input('tipe_kegiatan'))
-                        ->where('user_id', auth()->user()->id)->where('kategori_pak_id', 1)
-                        ->exists();
+                    // $existingDiklat = pak_kegiatan_pendidikan_dan_pengajaran::where('tipe_kegiatan', $request->input('tipe_kegiatan'))
+                    //     ->where('user_id', auth()->user()->id)->where('kategori_pak_id', 1)
+                    //     ->exists();
 
-                    if ($existingDiklat) {
-                        // Menampilkan pesan error jika pengguna sudah memasukkan Diklat pra jabatan sebelumnya
-                        Alert::error('Anda sudah memasukkan Diklat Pra-Jabatan sebelumnya');
-                        return redirect()->back()->withInput()->withErrors(['tipe_kegiatan' => 'Anda sudah memasukkan Diklat Pra-Jabatan sebelumnya'])->with('error', 'Gagal Menambahkan Kegiatan');
-                    }
+                    // if ($existingDiklat) {
+                    //     // Menampilkan pesan error jika pengguna sudah memasukkan Diklat pra jabatan sebelumnya
+                    //     Alert::error('Anda sudah memasukkan Diklat Pra-Jabatan sebelumnya');
+                    //     return redirect()->back()->withInput()->withErrors(['tipe_kegiatan' => 'Anda sudah memasukkan Diklat Pra-Jabatan sebelumnya'])->with('error', 'Gagal Menambahkan Kegiatan');
+                    // }
 
                     // jika aman sisipkan angka kredit 
                     $validatedData['angka_kredit'] = 3;
@@ -779,39 +767,6 @@ class DosenController extends Controller
                             }
                            
 
-                            // if ($totalSks <= 10) {
-                            //     // Hitung jumlah SKS
-                            //     $nilaiSks = $totalSks * 0.5;
-                            //     $validatedData['kode'] = 'II.A.1.a';
-                            // } else {
-                            //     // Hitung jumlah SKS
-                            //     $nilaiSks = (10 * 0.5) + (($totalSks - 10) * 0.25);
-                            //     $validatedData['kode'] = 'II.A.1.b';
-                            // }
-                            
-                            // if ($totalSks > 12) {
-                            //     // Tampilkan pesan error jika total SKS melebihi 12
-                            //     Alert::error('Jumlah SKS sudah melebihi batas maksimal.');
-                            //     return redirect()->back()->withInput()->withErrors(['total_sks' => 'Total SKS melebihi batas maksimum (12 SKS).']);
-                            // }
-
-
-                            // Operasi lama 
-                            // // Mengatur nilai SKS berdasarkan kondisi
-                            // if ($totalSks <= 10) {
-                            //     $nilaiSks = ($perkuliahan * 0.5);
-                            //     $validatedData['kode'] = 'II.A.1.a';
-                            // } elseif ($totalSks > 10 && $totalSks <= 11) {
-                            //     $nilaiSks = ($perkuliahan * 0.25);
-                            //     $validatedData['kode'] = 'II.A.1.b';
-                            // } elseif ($totalSks > 11 && $totalSks <= 12) {
-                            //     $nilaiSks =  ($perkuliahan * 0.25);
-                            //     $validatedData['kode'] = 'II.A.1.b';
-                            // } else {
-                            //     // Pesan error jika jumlah SKS melebihi batas maksimal
-                            //     Alert::error('Jumlah SKS sudah melebihi batas maksimal.');
-                            //     return redirect()->back()->withErrors(['perkuliahan' => 'Jumlah SKS sudah melebihi batas maksimal.'])->withInput();
-                            // }
 
                             // Set nilai angka kredit sesuai dengan nilai SKS
                             $validatedData['angka_kredit'] = $nilaiSks;
@@ -900,6 +855,7 @@ class DosenController extends Controller
 
                 }
 
+             
             
                 // input dokter_klinis
                 if ($request->filled('dokter_klinis') && $request->input('radio_option_1') == 'b') {
@@ -929,41 +885,45 @@ class DosenController extends Controller
                             //     $rumus2 = 11 - $rumus1; // 11 - 13 = 2
                             //     $total_angka_kredit = $rumus1 - $rumus2; // 13 - 2 = 11
 
-                            // cek nilai angka kredit sekarang jika 11 maka error
-                                if ($akNow == 11) {
-                                    Alert::error('Total Angka Kredit melebihi batas maksimum.');
-                                    return redirect()->back()->withInput()->withErrors(['dokter_klinis' => 'Total Angka Kredit melebihi batas maksimum.']);
-                                } else {
-                                    // tambahkan angka kredit ke nilai sekarang
-                                    $rumus1 = $akNow + $angka_kredit;
-                                    
-                                    // cek jika total angka kredit melebihi 11
-                                    if ($rumus1 > 11) {
-                                        $rumus2 = $rumus1 - 11;
-                                        $total_angka_kredit = $rumus1 - $rumus2;
+                                // // cek nilai angka kredit sekarang jika 11 maka error
+                                //     if ($akNow == 11) {
+                                //         Alert::error('Total Angka Kredit melebihi batas maksimum.');
+                                //         return redirect()->back()->withInput()->withErrors(['dokter_klinis' => 'Total Angka Kredit melebihi batas maksimum.']);
+                                //     } else {
+                                //         // tambahkan angka kredit ke nilai sekarang
+                                //         $rumus1 = $akNow + $angka_kredit;
+                                        
+                                //         // cek jika total angka kredit melebihi 11
+                                //         if ($rumus1 > 11) {
+                                //             $rumus2 = $rumus1 - 11;
+                                //             $total_angka_kredit = $rumus1 - $rumus2;
 
-                                        $validatedData['angka_kredit'] = $rumus2;
-                                        $validatedData['kode'] = $request->input('dokter_klinis');
-                                    } else {
-                                        $total_angka_kredit = $rumus1;
+                                //             $validatedData['angka_kredit'] = $rumus2;
+                                //             $validatedData['kode'] = $request->input('dokter_klinis');
+                                //         } else {
+                                //             $total_angka_kredit = $rumus1;
 
-                                        $validatedData['angka_kredit'] = $angka_kredit;
-                                        $validatedData['kode'] = $request->input('dokter_klinis');
-                                    }
-                                    # Gunakan $total_angka_kredit di bagian lain dari kode jika diperlukan
+                                //             $validatedData['angka_kredit'] = $angka_kredit;
+                                //             $validatedData['kode'] = $request->input('dokter_klinis');
+                                //         }
+                                //         # Gunakan $total_angka_kredit di bagian lain dari kode jika diperlukan
+                                //     }
 
-                                    if($request->input('dokter_klinis') == 'II.A.3.a'){
-                                        $validatedData['komponen_kegiatan'] = 'Melaksanakan pengajaran untuk peserta pendidikan dokter melalui tindakan medik spesialistik';
-                                    }elseif($request->input('dokter_klinis') == 'II.A.3.b' ){
-                                        $validatedData['komponen_kegiatan'] = 'Melakukan pengajaran konsultasi spesialis kepala peserta pendidikan dokter';
-                                    }elseif($request->input('dokter_klinis') == 'II.A.3.c' ){
-                                        $validatedData['komponen_kegiatan'] = 'Melakukan pemeriksaan luar dengan pembimbingan terhadap peserta pendidikan dokter';
-                                    }elseif($request->input('dokter_klinis') == 'II.A.3.d' ){
-                                        $validatedData['komponen_kegiatan'] = 'Melakukan pemeriksaan dalam dengan pembimbingan terhadap peserta pendidikan dokter';
-                                    }elseif($request->input('dokter_klinis') == 'II.A.3.e' ){
-                                        $validatedData['komponen_kegiatan'] = 'Menjadi saksi ahli dengan pembimbingan terhadap peserta pendidikan dokter';
-                                    }
-                                    
+
+                                
+                                $validatedData['angka_kredit'] =  $angka_kredit;
+                                $validatedData['kode'] = $request->input('dokter_klinis');
+
+                                if($request->input('dokter_klinis') == 'II.A.3.a'){
+                                    $validatedData['komponen_kegiatan'] = 'Melaksanakan pengajaran untuk peserta pendidikan dokter melalui tindakan medik spesialistik';
+                                }elseif($request->input('dokter_klinis') == 'II.A.3.b' ){
+                                    $validatedData['komponen_kegiatan'] = 'Melakukan pengajaran konsultasi spesialis kepala peserta pendidikan dokter';
+                                }elseif($request->input('dokter_klinis') == 'II.A.3.c' ){
+                                    $validatedData['komponen_kegiatan'] = 'Melakukan pemeriksaan luar dengan pembimbingan terhadap peserta pendidikan dokter';
+                                }elseif($request->input('dokter_klinis') == 'II.A.3.d' ){
+                                    $validatedData['komponen_kegiatan'] = 'Melakukan pemeriksaan dalam dengan pembimbingan terhadap peserta pendidikan dokter';
+                                }elseif($request->input('dokter_klinis') == 'II.A.3.e' ){
+                                    $validatedData['komponen_kegiatan'] = 'Menjadi saksi ahli dengan pembimbingan terhadap peserta pendidikan dokter';
                                 }
 
                            
@@ -1026,63 +986,86 @@ class DosenController extends Controller
 
                 // cek kode Disertasi
                     if($kode == $p1_disertasi){
-                        $max_lulusan = 4;
-                        $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                                ->where('kode','II.D.1.a')->count();
+
+                        $validatedData['angka_kredit'] = 8;
+                        $validatedData['kode'] = $kode;
+                        $validatedData['komponen_kegiatan'] = 'Pembimbing Utama Disertasi';
+
+                        // $max_lulusan = 4;
+                        // $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                                                // ->where('kode','II.D.1.a')->count();
                         // cek maksimal lulusan
-                            if($count_lulusan >= $max_lulusan){
-                                Alert::error('Jumlah lulusan sebagai Pembimbing Utama Disertasi melebihi batas maksimum');
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Utama Disertasi melebihi batas maksimum']);
-                            }else{
-                                $validatedData['angka_kredit'] = 8;
-                                $validatedData['kode'] = $kode;
-                                $validatedData['komponen_kegiatan'] = 'Pembimbing Utama Disertasi';
-                            }
+                            // if($count_lulusan >= $max_lulusan){
+                            //     Alert::error('Jumlah lulusan sebagai Pembimbing Utama Disertasi melebihi batas maksimum');
+                            //     return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Utama Disertasi melebihi batas maksimum']);
+                            // }else{
+                            //     $validatedData['angka_kredit'] = 8;
+                            //     $validatedData['kode'] = $kode;
+                            //     $validatedData['komponen_kegiatan'] = 'Pembimbing Utama Disertasi';
+                            // }
 
                 // cek kode Tesis
                     }elseif($kode == $p1_tesis){
-                        $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                                ->where('kode','II.D.1.b')->count();
 
-                            // cek maksimal lulusan
-                            if($count_lulusan >= 6){
-                                Alert::error('Jumlah lulusan sebagai Pembimbing Utama Tesis melebihi batas maksimum');
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Utama Tesis melebihi batas maksimum']);
-                            }else{
-                                $validatedData['angka_kredit'] = 3;
-                                $validatedData['kode'] = $kode;
-                                $validatedData['komponen_kegiatan'] = 'Pembimbing Utama Tesis';
-                            }
+                        $validatedData['angka_kredit'] = 3;
+                        $validatedData['kode'] = $kode;
+                        $validatedData['komponen_kegiatan'] = 'Pembimbing Utama Tesis';
+
+
+                        // $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                        //                                                         ->where('kode','II.D.1.b')->count();
+
+                        //     // cek maksimal lulusan
+                        //     if($count_lulusan >= 6){
+                        //         Alert::error('Jumlah lulusan sebagai Pembimbing Utama Tesis melebihi batas maksimum');
+                        //         return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Utama Tesis melebihi batas maksimum']);
+                        //     }else{
+                        //         $validatedData['angka_kredit'] = 3;
+                        //         $validatedData['kode'] = $kode;
+                        //         $validatedData['komponen_kegiatan'] = 'Pembimbing Utama Tesis';
+                        //     }
 
                 // cek kode Skripsi
                     }elseif($kode == $p1_skripsi){
-                        $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                                ->where('kode','II.D.1.c')->count();
 
-                            // cek maksimal lulusan
-                            if($count_lulusan >= 8){
-                                Alert::error('Jumlah lulusan sebagai Pembimbing Utama Skripsi melebihi batas maksimum');
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Utama Skripsi melebihi batas maksimum']);
-                            }else{
-                                $validatedData['angka_kredit'] = 1;
-                                $validatedData['kode'] = $kode;
-                                $validatedData['komponen_kegiatan'] = 'Pembimbing Utama Skripsi';
-                            }
+                        $validatedData['angka_kredit'] = 1;
+                        $validatedData['kode'] = $kode;
+                        $validatedData['komponen_kegiatan'] = 'Pembimbing Utama Skripsi';
+
+
+                        // $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                        //                                                         ->where('kode','II.D.1.c')->count();
+
+                        //     // cek maksimal lulusan
+                        //     if($count_lulusan >= 8){
+                        //         Alert::error('Jumlah lulusan sebagai Pembimbing Utama Skripsi melebihi batas maksimum');
+                        //         return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Utama Skripsi melebihi batas maksimum']);
+                        //     }else{
+                        //         $validatedData['angka_kredit'] = 1;
+                        //         $validatedData['kode'] = $kode;
+                        //         $validatedData['komponen_kegiatan'] = 'Pembimbing Utama Skripsi';
+                        //     }
 
                 // cek kode Laporan Akhir Studi
                     }elseif($kode == $p1_laporan_akhir_studi){
-                        $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                                ->where('kode','II.D.1.d')->count();
+                        
+                        $validatedData['angka_kredit'] = 1;
+                        $validatedData['kode'] = $kode;
+                        $validatedData['komponen_kegiatan'] = 'Pembimbing Utama Laporan Akhir Studi';
 
-                            // cek maksimal lulusan
-                            if($count_lulusan >= 10){
-                                Alert::error('Jumlah lulusan sebagai Pembimbing Utama Laporan Akhir Studi melebihi batas maksimum');
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Utama Laporan Akhir Studi melebihi batas maksimum']);
-                            }else{
-                                $validatedData['angka_kredit'] = 1;
-                                $validatedData['kode'] = $kode;
-                                $validatedData['komponen_kegiatan'] = 'Pembimbing Utama Laporan Akhir Studi';
-                            }
+                        
+                        // $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                        //                                                         ->where('kode','II.D.1.d')->count();
+
+                        //     // cek maksimal lulusan
+                        //     if($count_lulusan >= 10){
+                        //         Alert::error('Jumlah lulusan sebagai Pembimbing Utama Laporan Akhir Studi melebihi batas maksimum');
+                        //         return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Utama Laporan Akhir Studi melebihi batas maksimum']);
+                        //     }else{
+                        //         $validatedData['angka_kredit'] = 1;
+                        //         $validatedData['kode'] = $kode;
+                        //         $validatedData['komponen_kegiatan'] = 'Pembimbing Utama Laporan Akhir Studi';
+                        //     }
                     } # end elseif cek kode
 
             } elseif($request->input('radio_option_2') == 'a') {
@@ -1115,61 +1098,87 @@ class DosenController extends Controller
 
                     // cek kode Disertasi
                         if($kode == $p2_disertasi){
-                            $max_lulusan = 4;
-                            $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                                    ->where('kode','II.D.2.a')->count();
-                            // cek maksimal lulusan
-                                if($count_lulusan >= $max_lulusan){
-                                    Alert::error('Jumlah lulusan sebagai Pembimbing Pendamping Disertasi melebihi batas maksimum');
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Pendamping Disertasi melebihi batas maksimum']);
-                                }else{
-                                    $validatedData['angka_kredit'] = 6;
-                                    $validatedData['kode'] = $kode;
-                                    $validatedData['komponen_kegiatan'] = 'Pembimbing Pendamping Disertasi';
 
-                                }
+                            $validatedData['angka_kredit'] = 6;
+                            $validatedData['kode'] = $kode;
+                            $validatedData['komponen_kegiatan'] = 'Pembimbing Pendamping Disertasi';
+
+                            // $max_lulusan = 4;
+                            // $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                            //                                                         ->where('kode','II.D.2.a')->count();
+                            // // cek maksimal lulusan
+                            //     if($count_lulusan >= $max_lulusan){
+                            //         Alert::error('Jumlah lulusan sebagai Pembimbing Pendamping Disertasi melebihi batas maksimum');
+                            //         return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Pendamping Disertasi melebihi batas maksimum']);
+                            //     }else{
+                            //         $validatedData['angka_kredit'] = 6;
+                            //         $validatedData['kode'] = $kode;
+                            //         $validatedData['komponen_kegiatan'] = 'Pembimbing Pendamping Disertasi';
+
+                            //     }
+
+
 
                     // cek kode Tesis
                         }elseif($kode == $p2_tesis){
-                            $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                                    ->where('kode','II.D.2.b')->count();
-                            // cek maksimal lulusan
-                                if($count_lulusan >= 6){
-                                    Alert::error('Jumlah lulusan sebagai Pembimbing Pendamping Tesis melebihi batas maksimum');
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Pendamping Tesis melebihi batas maksimum']);
-                                }else{
-                                    $validatedData['angka_kredit'] = 2;
-                                    $validatedData['kode'] = $kode;
-                                    $validatedData['komponen_kegiatan'] = 'Pembimbing Pendamping Tesis';
-                                }
+
+                            $validatedData['angka_kredit'] = 2;
+                            $validatedData['kode'] = $kode;
+                            $validatedData['komponen_kegiatan'] = 'Pembimbing Pendamping Tesis';
+
+
+                            // $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                            //                                                         ->where('kode','II.D.2.b')->count();
+                            // // cek maksimal lulusan
+                            //     if($count_lulusan >= 6){
+                            //         Alert::error('Jumlah lulusan sebagai Pembimbing Pendamping Tesis melebihi batas maksimum');
+                            //         return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Pendamping Tesis melebihi batas maksimum']);
+                            //     }else{
+                            //         $validatedData['angka_kredit'] = 2;
+                            //         $validatedData['kode'] = $kode;
+                            //         $validatedData['komponen_kegiatan'] = 'Pembimbing Pendamping Tesis';
+                            //     }
+
                         }
                     // cek kode skripsi
                         elseif($kode == $p2_skripsi){
-                            $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                                    ->where('kode','II.D.2.c')->count();
-                            // cek maksimal lulusan
-                                if($count_lulusan >= 8){
-                                    Alert::error('Jumlah lulusan sebagai Pembimbing Pendamping Skripsi melebihi batas maksimum');
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Pendamping Skripsi melebihi batas maksimum']);
-                                }else{
-                                    $validatedData['angka_kredit'] = 0.5;
-                                    $validatedData['kode'] = $kode;
-                                    $validatedData['komponen_kegiatan'] = 'Pembimbing Pendamping Skripsi';
-                                }
+
+                            $validatedData['angka_kredit'] = 0.5;
+                            $validatedData['kode'] = $kode;
+                            $validatedData['komponen_kegiatan'] = 'Pembimbing Pendamping Skripsi';
+
+                            // $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                            //                                                         ->where('kode','II.D.2.c')->count();
+                            // // cek maksimal lulusan
+                            //     if($count_lulusan >= 8){
+                            //         Alert::error('Jumlah lulusan sebagai Pembimbing Pendamping Skripsi melebihi batas maksimum');
+                            //         return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Pendamping Skripsi melebihi batas maksimum']);
+                            //     }else{
+                            //         $validatedData['angka_kredit'] = 0.5;
+                            //         $validatedData['kode'] = $kode;
+                            //         $validatedData['komponen_kegiatan'] = 'Pembimbing Pendamping Skripsi';
+                            //     }
+
                         }
                     // cek kode Laporan Akhir Studi
                         elseif($kode == $p2_laporan_akhir_studi){
-                            $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                                    ->where('kode','II.D.2.d')->count();
-                            // cek maksimal lulusan
-                                if($count_lulusan >= 10){
-                                    Alert::error('Jumlah lulusan sebagai Pembimbing Pendamping Laporan Akhir Studi melebihi batas maksimum');
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Pendamping Laporan Akhir Studi melebihi batas maksimum']);
-                                }else{
-                                    $validatedData['angka_kredit'] = 0.5;
-                                    $validatedData['kode'] = $kode;
-                                    $validatedData['komponen_kegiatan'] = 'Pembimbing Pendamping Laporan Akhir Studi';
-                                }
+
+                            $validatedData['angka_kredit'] = 0.5;
+                            $validatedData['kode'] = $kode;
+                            $validatedData['komponen_kegiatan'] = 'Pembimbing Pendamping Laporan Akhir Studi';
+
+                            // $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                            //                                                         ->where('kode','II.D.2.d')->count();
+                            // // cek maksimal lulusan
+                            //     if($count_lulusan >= 10){
+                            //         Alert::error('Jumlah lulusan sebagai Pembimbing Pendamping Laporan Akhir Studi melebihi batas maksimum');
+                            //         return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Pembimbing Pendamping Laporan Akhir Studi melebihi batas maksimum']);
+                            //     }else{
+                            //         $validatedData['angka_kredit'] = 0.5;
+                            //         $validatedData['kode'] = $kode;
+                            //         $validatedData['komponen_kegiatan'] = 'Pembimbing Pendamping Laporan Akhir Studi';
+                            //     }
+
                         } # End Else if kode
 
             } elseif($request->input('radio_option_2') == 'b') {
@@ -1203,31 +1212,42 @@ class DosenController extends Controller
                     // cek kondisi request yang masuk
                         if($kode == $ketua_penguji){
 
-                                $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                                        ->where('kode','II.E.1')->count();
-                                // cek maksimal lulusan
-                                    if($count_lulusan >= 4){
-                                        Alert::error('Jumlah lulusan sebagai Ketua Penguji sudah melebihi batas maksimum');
-                                        return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Ketua Penguji sudah melebihi batas maksimum']);
-                                    }else{
-                                        $validatedData['angka_kredit'] = 1;
-                                        $validatedData['kode'] = $kode;
-                                        $validatedData['komponen_kegiatan'] = 'Ketua Penguji';
-                                    }
+                            $validatedData['angka_kredit'] = 1;
+                            $validatedData['kode'] = $kode;
+                            $validatedData['komponen_kegiatan'] = 'Ketua Penguji';
+
+
+                                // $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                //                                                         ->where('kode','II.E.1')->count();
+                                // // cek maksimal lulusan
+                                //     if($count_lulusan >= 4){
+                                //         Alert::error('Jumlah lulusan sebagai Ketua Penguji sudah melebihi batas maksimum');
+                                //         return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Ketua Penguji sudah melebihi batas maksimum']);
+                                //     }else{
+                                //         $validatedData['angka_kredit'] = 1;
+                                //         $validatedData['kode'] = $kode;
+                                //         $validatedData['komponen_kegiatan'] = 'Ketua Penguji';
+                                //     }
 
                         }elseif($kode == $anggota_penguji){
-                            // 
-                                $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                                        ->where('kode','II.E.2')->count();
-                                // cek maksimal lulusan
-                                    if($count_lulusan >= 8){
-                                        Alert::error('Jumlah lulusan sebagai Anggota Penguji sudah melebihi batas maksimum');
-                                        return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Anggota Penguji sudah melebihi batas maksimum']);
-                                    }else{
-                                        $validatedData['angka_kredit'] = 0.5;
-                                        $validatedData['kode'] = $kode;
-                                        $validatedData['komponen_kegiatan'] = 'Anggota Penguji';
-                                    }
+
+
+                            $validatedData['angka_kredit'] = 0.5;
+                            $validatedData['kode'] = $kode;
+                            $validatedData['komponen_kegiatan'] = 'Anggota Penguji';
+                     
+                                // $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                //                                                         ->where('kode','II.E.2')->count();
+                                // // cek maksimal lulusan
+                                //     if($count_lulusan >= 8){
+                                //         Alert::error('Jumlah lulusan sebagai Anggota Penguji sudah melebihi batas maksimum');
+                                //         return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah lulusan sebagai Anggota Penguji sudah melebihi batas maksimum']);
+                                //     }else{
+                                //         $validatedData['angka_kredit'] = 0.5;
+                                //         $validatedData['kode'] = $kode;
+                                //         $validatedData['komponen_kegiatan'] = 'Anggota Penguji';
+                                //     }
+
                         }
 
                     
@@ -1253,16 +1273,20 @@ class DosenController extends Controller
             // Membina Kegiatan Mahasiswa Di Bidang Akademik Dan Kemahasiswaan
                 if($request->input('tipe_kegiatan') == 'Membina Kegiatan Mahasiswa Di Bidang Akademik Dan Kemahasiswaan'){
                     
-                    $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                            ->where('kode','II.F')->count();
-                    // cek maksimal kegiatan
-                        if($count_lulusan >= 2){
-                            Alert::error('Kegiatan Membina kegiatan mahasiswa di bidang akademik dan kemahasiswan sudah maksimum');
-                            return redirect()->back()->withInput()->withErrors(['buat_error' => 'Kegiatan Membina kegiatan mahasiswa di bidang akademik dan kemahasiswan sudah maksimum']);
-                        }else{
-                            $validatedData['angka_kredit'] = 2;
-                            $validatedData['kode'] = 'II.F';
-                        }               
+                    $validatedData['angka_kredit'] = 2;
+                    $validatedData['kode'] = 'II.F';
+
+                    // $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                    //                                                         ->where('kode','II.F')->count();
+                    // // cek maksimal kegiatan
+                    //     if($count_lulusan >= 2){
+                    //         Alert::error('Kegiatan Membina kegiatan mahasiswa di bidang akademik dan kemahasiswan sudah maksimum');
+                    //         return redirect()->back()->withInput()->withErrors(['buat_error' => 'Kegiatan Membina kegiatan mahasiswa di bidang akademik dan kemahasiswan sudah maksimum']);
+                    //     }else{
+                    //         $validatedData['angka_kredit'] = 2;
+                    //         $validatedData['kode'] = 'II.F';
+                    //     }    
+
                 }
 
         
@@ -1270,17 +1294,22 @@ class DosenController extends Controller
             // Mengembangkan Program Kuliah
             if($request->input('tipe_kegiatan') == 'Mengembangkan Program Kuliah'){
                 
-                $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                        ->where('kode','II.G')->count();
-                // cek maksimal mata kuliah/semester
-                    if($count_lulusan >= 1){
-                        Alert::error('Menggembangkan program kuliah sudah melebihi batas maksimum');
-                        return redirect()->back()->withInput()->withErrors(['buat_error' => 'Menggembangkan program kuliah sudah melebihi batas maksimum']);
-                    }else{
-                        $validatedData['angka_kredit'] = 2;
-                        $validatedData['kode'] = 'II.G';
-                        $validatedData['komponen_kegiatan'] = 'Mengembangkan program kuliah yang mempunyai nilai kebaharuan metode atau subtansi (setiap produk)';
-                    }               
+                $validatedData['angka_kredit'] = 2;
+                $validatedData['kode'] = 'II.G';
+                $validatedData['komponen_kegiatan'] = 'Mengembangkan program kuliah yang mempunyai nilai kebaharuan metode atau subtansi (setiap produk)';
+
+                // $count_lulusan = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                //                                                         ->where('kode','II.G')->count();
+                // // cek maksimal mata kuliah/semester
+                //     if($count_lulusan >= 1){
+                //         Alert::error('Menggembangkan program kuliah sudah melebihi batas maksimum');
+                //         return redirect()->back()->withInput()->withErrors(['buat_error' => 'Menggembangkan program kuliah sudah melebihi batas maksimum']);
+                //     }else{
+                //         $validatedData['angka_kredit'] = 2;
+                //         $validatedData['kode'] = 'II.G';
+                //         $validatedData['komponen_kegiatan'] = 'Mengembangkan program kuliah yang mempunyai nilai kebaharuan metode atau subtansi (setiap produk)';
+                //     }  
+
             }
 
 
@@ -1298,33 +1327,46 @@ class DosenController extends Controller
                    
                             if($kode == $buku){
 
-                                    $count_produk = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                                            ->where('kode', $buku)->count();
-                                    // cek maksimal lulusan
-                                        if($count_produk >= 1){
-                                            Alert::error('Jumlah Buku Ajar maksimal 1');
-                                            return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah Buku Ajar maksimal 1']);
-                                        }else{
-                                            $validatedData['angka_kredit'] = 20;
-                                            $validatedData['kode'] = $kode;
-                                            $validatedData['komponen_kegiatan'] = 'Buku Ajar';
-                                        }
+                                $validatedData['angka_kredit'] = 20;
+                                $validatedData['kode'] = $kode;
+                                $validatedData['komponen_kegiatan'] = 'Buku Ajar';
+
+                                    // $count_produk = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                    //                                                         ->where('kode', $buku)->count();
+                                    // // cek maksimal lulusan
+                                    //     if($count_produk >= 1){
+                                    //         Alert::error('Jumlah Buku Ajar maksimal 1');
+                                    //         return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah Buku Ajar maksimal 1']);
+                                    //     }else{
+                                    //         $validatedData['angka_kredit'] = 20;
+                                    //         $validatedData['kode'] = $kode;
+                                    //         $validatedData['komponen_kegiatan'] = 'Buku Ajar';
+                                    //     }
+
+
                             } // cek kondisi kalau diklat dll
                             elseif($kode == $diklat){
 
-                                $count_produk = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                    ->where('kode', $diklat)->count();
-                                // cek maksimal lulusan
-                                    if($count_produk >= 1){
-                                        Alert::error('Jumlah Diklat, Modul dsb maksimal 1');
-                                        return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah Diklat, Modul dsb maksimal 1']);
-                                    }else{
-                                        $validatedData['angka_kredit'] = 5;
-                                        $validatedData['kode'] = $kode;
-                                        $validatedData['komponen_kegiatan'] = substr('Diklat,Modul,Ptunjuk praktikum,Model,Alat bantu, Alat visual, 
-                                                                                Naskah	tutorial, Job sheet praktikum terkait dengan 
-                                                                                mata kuliah yang dilampau', 0, 500);
-                                    }
+
+                                $validatedData['angka_kredit'] = 5;
+                                $validatedData['kode'] = $kode;
+                                $validatedData['komponen_kegiatan'] = substr('Diklat,Modul,Ptunjuk praktikum,Model,Alat bantu, Alat visual, 
+                                                                            Naskah	tutorial, Job sheet praktikum terkait dengan 
+                                                                            mata kuliah yang dilampau', 0, 500);
+
+                                // $count_produk = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                //                                     ->where('kode', $diklat)->count();
+                                // // cek maksimal lulusan
+                                //     if($count_produk >= 1){
+                                //         Alert::error('Jumlah Diklat, Modul dsb maksimal 1');
+                                //         return redirect()->back()->withInput()->withErrors(['buat_error' => 'Jumlah Diklat, Modul dsb maksimal 1']);
+                                //     }else{
+                                //         $validatedData['angka_kredit'] = 5;
+                                //         $validatedData['kode'] = $kode;
+                                //         $validatedData['komponen_kegiatan'] = substr('Diklat,Modul,Ptunjuk praktikum,Model,Alat bantu, Alat visual, 
+                                //                                                 Naskah	tutorial, Job sheet praktikum terkait dengan 
+                                //                                                 mata kuliah yang dilampau', 0, 500);
+                                //     }
 
                             }
 
@@ -1354,17 +1396,20 @@ class DosenController extends Controller
              // deklarasi kode orasi
                 $orasi = 'II.I';
 
-                $count_orasi = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                    ->where('kode',$orasi)->count();
+                $validatedData['angka_kredit'] = 5;
+                $validatedData['kode'] = $orasi;
+
+                // $count_orasi = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                //                                                     ->where('kode',$orasi)->count();
             
-            // cek maksimal orasi
-                if($count_orasi >= 2){
-                    Alert::error('Maksimal 2 orasi');
-                    return redirect()->back()->withInput()->withErrors(['buat_error' => 'Maksimal 2 orasi']);
-                }else{
-                    $validatedData['angka_kredit'] = 5;
-                    $validatedData['kode'] = $orasi;
-                }               
+                    // // cek maksimal orasi
+                    //     if($count_orasi >= 2){
+                    //         Alert::error('Maksimal 2 orasi');
+                    //         return redirect()->back()->withInput()->withErrors(['buat_error' => 'Maksimal 2 orasi']);
+                    //     }else{
+                    //         $validatedData['angka_kredit'] = 5;
+                    //         $validatedData['kode'] = $orasi;
+                    //     }               
         }
 
         // =========================== 12
@@ -1387,19 +1432,20 @@ class DosenController extends Controller
                 if($kode_request == $kode_1 || $kode_request == $kode_2){
 
                     // ambil nilai dari rektor maupun wakil rektor
-                        $count_rektor = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                                            ->where('kode',$kode_1)->count();
-                        $count_wakil_rektor = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
-                                                                                        ->where('kode',$kode_2)->count();
+                        // $count_rektor = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                        //                                                                     ->where('kode',$kode_1)->count();
+                        // $count_wakil_rektor = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                        //                                                                 ->where('kode',$kode_2)->count();
 
                     
-                    // cek maksimal jabatan
-                        if($count_rektor >= 1 || $count_wakil_rektor >= 1){
-                            Alert::error('Hanya dapat memiliki maksimal 1 jabatan sebagai rektor ataupun wakil rektor.');
-                            return redirect()->back()->withInput()->withErrors(['buat_error' => 'Hanya dapat memiliki maksimal 1 jabatan sebagai rektor ataupun wakil rektor.']);
-                        }
-                    
+                        // cek maksimal jabatan
+                            // if($count_rektor >= 1 || $count_wakil_rektor >= 1){
+                            //     Alert::error('Hanya dapat memiliki maksimal 1 jabatan sebagai rektor ataupun wakil rektor.');
+                            //     return redirect()->back()->withInput()->withErrors(['buat_error' => 'Hanya dapat memiliki maksimal 1 jabatan sebagai rektor ataupun wakil rektor.']);
+                            // }
                         // kalau belum maksimal tambahkan angka kredit sesuai request
+
+
                         if($kode_request == $kode_1 ){
                             $validatedData['angka_kredit'] = 6;
                             $validatedData['kode'] = $kode_1;
@@ -1409,7 +1455,9 @@ class DosenController extends Controller
                             $validatedData['kode'] = $kode_2;
                             $validatedData['komponen_kegiatan'] = 'Wakil rektor/ dekan/ direktur/ program pasca sarjana/ketua lembaga';
                         }
+
                 }  # End Rektor and wakil
+
                 // cek kondisi kalau ketua sekolah tinggi kode 3
                 elseif($kode_request == $kode_3){
                     $validatedData['angka_kredit'] = 4;
@@ -1501,40 +1549,51 @@ class DosenController extends Controller
                     // jika lektor kepala check kode pembimbing_pencangkokan dan reguler
                         // pembimbing pencangkokan
                         if($kode_request == $pembimbing_pencangkokan){
-                            // ambil count maksimal
-                                $count_maksimal = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)
-                                                                                        ->where('kategori_pak_id',1)
-                                                                                        ->where('kode', $pembimbing_pencangkokan)->count();
+                            
+
+                            $validatedData['angka_kredit'] = 2;
+                            $validatedData['kode'] = $pembimbing_pencangkokan;
+                            $validatedData['komponen_kegiatan'] = 'Pembimbing Pencangkokan';
+
+                                // ambil count maksimal
+                                // $count_maksimal = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)
+                                //                                                         ->where('kategori_pak_id',1)
+                                //                                                         ->where('kode', $pembimbing_pencangkokan)->count();
                         
-                            // cek maksimal 
-                                if($count_maksimal >= 1){
-                                    $errorMessage = 'Pembimbing Pencangkokan sudah maksimal';
-                                    Alert::error($errorMessage);
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                                }else{
-                                    $validatedData['angka_kredit'] = 2;
-                                    $validatedData['kode'] = $pembimbing_pencangkokan;
-                                    $validatedData['komponen_kegiatan'] = 'Pembimbing Pencangkokan';
-                                }
+                                // // cek maksimal 
+                                //     if($count_maksimal >= 1){
+                                //         $errorMessage = 'Pembimbing Pencangkokan sudah maksimal';
+                                //         Alert::error($errorMessage);
+                                //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                                //     }else{
+                                //         $validatedData['angka_kredit'] = 2;
+                                //         $validatedData['kode'] = $pembimbing_pencangkokan;
+                                //         $validatedData['komponen_kegiatan'] = 'Pembimbing Pencangkokan';
+                                //     }
 
                         }
                         // pembimbing Reguler
                         elseif($kode_request == $reguler){
-                            // ambil count maksimal
-                                $count_maksimal = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)
-                                                                                        ->where('kategori_pak_id',1)
-                                                                                        ->where('kode', $reguler)->count();
+
+                            $validatedData['angka_kredit'] = 1;
+                            $validatedData['kode'] = $reguler;
+                            $validatedData['komponen_kegiatan'] = 'Pembimbing Reguler';
+
+                                // ambil count maksimal
+                                // $count_maksimal = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)
+                                //                                                         ->where('kategori_pak_id',1)
+                                //                                                         ->where('kode', $reguler)->count();
                         
-                                // cek maksimal 
-                                if($count_maksimal >= 1){
-                                    $errorMessage = 'Pembimbing Reguler sudah maksimal';
-                                    Alert::error($errorMessage);
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                                }else{
-                                    $validatedData['angka_kredit'] = 1;
-                                    $validatedData['kode'] = $reguler;
-                                    $validatedData['komponen_kegiatan'] = 'Pembimbing Reguler';
-                                }
+                                // // cek maksimal 
+                                // if($count_maksimal >= 1){
+                                //     $errorMessage = 'Pembimbing Reguler sudah maksimal';
+                                //     Alert::error($errorMessage);
+                                //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                                // }else{
+                                //     $validatedData['angka_kredit'] = 1;
+                                //     $validatedData['kode'] = $reguler;
+                                //     $validatedData['komponen_kegiatan'] = 'Pembimbing Reguler';
+                                // }
                         
                         }
 
@@ -1589,40 +1648,51 @@ class DosenController extends Controller
                     // jika lektor kepala check kode pembimbing_pencangkokan dan reguler
                         // Detasering
                         if($kode_request == $detaseting){
+
+                            $validatedData['angka_kredit'] = 5;
+                            $validatedData['kode'] = $kode_request;
+                            $validatedData['komponen_kegiatan'] = 'Detasering';
+
                             // ambil count maksimal
-                                $count_maksimal = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)
-                                                                                        ->where('kategori_pak_id',1)
-                                                                                        ->where('kode', $detaseting)->count();
+                            //     $count_maksimal = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)
+                            //                                                             ->where('kategori_pak_id',1)
+                            //                                                             ->where('kode', $detaseting)->count();
                         
-                            // cek maksimal 
-                                if($count_maksimal >= 1){
-                                    $errorMessage = 'Kegiatan Detasering di luar institusi sudah maksimal';
-                                    Alert::error($errorMessage);
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                                }else{
-                                    $validatedData['angka_kredit'] = 5;
-                                    $validatedData['kode'] = $kode_request;
-                                    $validatedData['komponen_kegiatan'] = 'Detasering';
-                                }
+                            // // cek maksimal 
+                            //     if($count_maksimal >= 1){
+                            //         $errorMessage = 'Kegiatan Detasering di luar institusi sudah maksimal';
+                            //         Alert::error($errorMessage);
+                            //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                            //     }else{
+                            //         $validatedData['angka_kredit'] = 5;
+                            //         $validatedData['kode'] = $kode_request;
+                            //         $validatedData['komponen_kegiatan'] = 'Detasering';
+                            //     }
 
                         }
                         // Pencangkokan
                         elseif($kode_request == $pencangkokan){
-                            // ambil count maksimal
-                                $count_maksimal = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)
-                                                                                        ->where('kategori_pak_id',1)
-                                                                                        ->where('kode', $pencangkokan)->count();
+
+                            $validatedData['angka_kredit'] = 4;
+                            $validatedData['kode'] = $kode_request;
+                            $validatedData['komponen_kegiatan'] = 'Pencangkokan';
+
+
+                                // ambil count maksimal
+                                // $count_maksimal = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)
+                                //                                                         ->where('kategori_pak_id',1)
+                                //                                                         ->where('kode', $pencangkokan)->count();
                         
-                                // cek maksimal 
-                                if($count_maksimal >= 1){
-                                    $errorMessage = 'Kegiatan Pencangkokan di luar institusi sudah maksimal';
-                                    Alert::error($errorMessage);
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                                }else{
-                                    $validatedData['angka_kredit'] = 4;
-                                    $validatedData['kode'] = $kode_request;
-                                    $validatedData['komponen_kegiatan'] = 'Pencangkokan';
-                                }
+                                // // cek maksimal 
+                                // if($count_maksimal >= 1){
+                                //     $errorMessage = 'Kegiatan Pencangkokan di luar institusi sudah maksimal';
+                                //     Alert::error($errorMessage);
+                                //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                                // }else{
+                                //     $validatedData['angka_kredit'] = 4;
+                                //     $validatedData['kode'] = $kode_request;
+                                //     $validatedData['komponen_kegiatan'] = 'Pencangkokan';
+                                // }
                         
                         }
 

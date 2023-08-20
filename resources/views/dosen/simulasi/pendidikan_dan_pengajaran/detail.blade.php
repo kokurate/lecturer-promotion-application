@@ -68,7 +68,7 @@
                     @csrf
 
                         <div class="col-my-3">
-                            <label for="kegiatan" class="mt-3 form-label" style="color:#012970;"><strong>Kegiatan</strong> (optional)</label>
+                            <label for="kegiatan" class="mt-3 form-label" style="color:#012970;"><strong>Nama Kegiatan</strong> (optional)</label>
                             <input class="form-control{{ $errors->has('kegiatan') ? ' is-invalid' : '' }}" type="text" name="kegiatan" value="{{ old('kegiatan', $record->kegiatan) }}" required>
                             
                             @if ($errors->has('kegiatan'))

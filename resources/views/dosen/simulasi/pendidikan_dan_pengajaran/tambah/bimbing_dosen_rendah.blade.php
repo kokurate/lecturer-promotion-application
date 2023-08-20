@@ -11,13 +11,17 @@
                                         <div class="list-group">
                                             <div class="list-group-item">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" id="a_cangkok" type="radio" name="bimbing_dosen_rendah"  value="II.K.1"> 
+                                                    <input class="form-check-input" id="a_cangkok" type="radio" name="bimbing_dosen_rendah"  value="II.K.1"
+                                                        @if(old('bimbing_dosen_rendah') == 'II.K.1') checked @endif
+                                                    > 
                                                     <label class="form-check-label" for="a_cangkok">Pembimbing Pencangkokan</label>
                                                 </div>
                                             </div>
                                             <div class="list-group-item">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" id="b_reguler"type="radio" name="bimbing_dosen_rendah" value="II.K.2"> 
+                                                    <input class="form-check-input" id="b_reguler"type="radio" name="bimbing_dosen_rendah" value="II.K.2"
+                                                        @if(old('bimbing_dosen_rendah') == 'II.K.2') checked @endif
+                                                    > 
                                                     <label class="form-check-label" for="b_reguler">Reguler</label>
 
                                                 </div>

@@ -10,13 +10,17 @@
                                         <div class="list-group">
                                             <div class="list-group-item">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" id="a_detasering" type="radio" name="kegiatan_detasering_dan_pencangkokan"  value="II.L.1"> 
+                                                    <input class="form-check-input" id="a_detasering" type="radio" name="kegiatan_detasering_dan_pencangkokan"  value="II.L.1"
+                                                        @if(old('kegiatan_detasering_dan_pencangkokan') == 'II.L.1') checked @endif
+                                                    > 
                                                     <label class="form-check-label" for="a_detasering">Detasering</label>
                                                 </div>
                                             </div>
                                             <div class="list-group-item">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" id="b_pencangkokan"type="radio" name="kegiatan_detasering_dan_pencangkokan" value="II.L.2"> 
+                                                    <input class="form-check-input" id="b_pencangkokan"type="radio" name="kegiatan_detasering_dan_pencangkokan" value="II.L.2"
+                                                        @if(old('kegiatan_detasering_dan_pencangkokan') == 'II.L.2') checked @endif
+                                                    > 
                                                     <label class="form-check-label" for="b_pencangkokan">Pencangkokan</label>
 
                                                 </div>

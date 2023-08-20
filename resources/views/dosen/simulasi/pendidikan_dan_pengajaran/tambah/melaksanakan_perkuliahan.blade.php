@@ -7,13 +7,17 @@
         <div class="list-group-item">
             <div class="form-check">
                 <input type="hidden" name="sks_now" value="{{ $sks_now }}">
-                <input class="form-check-input" id="a_perkuliahan" type="radio" name="radio_option_1"  value="a" onclick="showInput('a')"> 
+                <input class="form-check-input" id="a_perkuliahan" type="radio" name="radio_option_1"  value="a" onclick="showInput('a')"
+                    @if(old('radio_option_1') == 'a') checked @endif
+                > 
                 <label class="form-check-label" for="a_perkuliahan">Perkuliahan</label>
             </div>
         </div>
         <div class="list-group-item">
             <div class="form-check">
-                <input class="form-check-input" id="b_dokter_klinis"type="radio" name="radio_option_1" value="b" onclick="showInput('b')"> 
+                <input class="form-check-input" id="b_dokter_klinis"type="radio" name="radio_option_1" value="b" onclick="showInput('b')"
+                    @if(old('radio_option_1') == 'b') checked @endif
+                > 
                 <label class="form-check-label" for="b_dokter_klinis">Kegiatan pelaksanaan pendidikan untuk pendidikan dokter klinis</label>
 
             </div>
@@ -54,31 +58,41 @@
             <div class="list-group-item">
                 <div class="form-check">
                     
-                    <input class="form-check-input" id="dokter_klinis_1" type="radio" name="dokter_klinis" value="II.A.3.a"> 
+                    <input class="form-check-input" id="dokter_klinis_1" type="radio" name="dokter_klinis" value="II.A.3.a"
+                        @if(old('dokter_klinis') == 'II.A.3.a') checked @endif
+                    > 
                     <label class="form-check-label" for="dokter_klinis_1">Melaksanakan Pengajaran Untuk Peserta Pendidikan Dokter Melalui Tindakan Medik Spesialistik</label>
                 </div>
             </div>
             <div class="list-group-item">
                 <div class="form-check">
-                    <input class="form-check-input" id="dokter_klinis_2"type="radio" name="dokter_klinis" value="II.A.3.b" > 
+                    <input class="form-check-input" id="dokter_klinis_2"type="radio" name="dokter_klinis" value="II.A.3.b" 
+                        @if(old('dokter_klinis') == 'II.A.3.b') checked @endif
+                    > 
                     <label class="form-check-label" for="dokter_klinis_2">Melakukan Pengajaran Konsultasi Spesialis Kepala Peserta Pendidikan Dokter</label>
                 </div>
             </div>
             <div class="list-group-item">
                 <div class="form-check">
-                    <input class="form-check-input" id="dokter_klinis_3"type="radio" name="dokter_klinis" value="II.A.3.c" > 
+                    <input class="form-check-input" id="dokter_klinis_3"type="radio" name="dokter_klinis" value="II.A.3.c" 
+                        @if(old('dokter_klinis') == 'II.A.3.c') checked @endif
+                    > 
                     <label class="form-check-label" for="dokter_klinis_3">Melakukan Pemeriksaan Luar Dengan Pembimbingan Terhadap Peserta Pendidikan Dokter</label>
                 </div>
             </div>
             <div class="list-group-item">
                 <div class="form-check">
-                    <input class="form-check-input" id="dokter_klinis_4"type="radio" name="dokter_klinis" value="II.A.3.d" > 
+                    <input class="form-check-input" id="dokter_klinis_4"type="radio" name="dokter_klinis" value="II.A.3.d" 
+                        @if(old('dokter_klinis') == 'II.A.3.d') checked @endif
+                    > 
                     <label class="form-check-label" for="dokter_klinis_4">Melakukan Pemeriksaan Dalam Dengan Pembimbingan Terhadap Peserta Pendidikan Dokter</label>
                 </div>
             </div>
             <div class="list-group-item">
                 <div class="form-check">
-                    <input class="form-check-input" id="dokter_klinis_5"type="radio" name="dokter_klinis" value="II.A.3.e" > 
+                    <input class="form-check-input" id="dokter_klinis_5"type="radio" name="dokter_klinis" value="II.A.3.e" 
+                        @if(old('dokter_klinis') == 'II.A.3.e') checked @endif
+                    > 
                     <label class="form-check-label" for="dokter_klinis_5">Menjadi Saksi Ahli Dengan Pembimbingan Terhadap Peserta Pendidikan Dokter</label>
                 </div>
             </div>

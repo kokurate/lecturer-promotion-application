@@ -120,28 +120,28 @@
               <div class="row justify-content-between">
 
                   <div class="col-md-3">
-                    <p class="mt-3 mb-1" style="font-size: 14px;" > K.I - Buku Referensi : <strong>{{ $k_i__buku_refrensi }}/40</strong></p>
-                    <p class="mt-2 mb-2" style="font-size: 14px;" >K.I - Monograf : <strong>{{ $k_i__monograf }}/20</strong></p>
-                    <p class="mt-2 mb-2" style="font-size: 14px;" >Buku Internasional :  <strong>{{ $buku_internasional }}/15</strong></p>
-                    <p class="mt-2 mb-2" style="font-size: 14px;" >Buku Nasional : <strong>{{ $buku_nasional }}/10</strong> </p>
-                    <p class="mt-2 mb-2" style="font-size: 14px;" >Jurnal Int. Bereputasi: <strong>{{ $jurnal_int_bereputasi }}/40</strong></p>
+                    <p class="mt-3 mb-1" style="font-size: 14px;" > K.I - Buku Referensi : <strong>{{ $k_i__buku_refrensi }} </strong></p>
+                    <p class="mt-2 mb-2" style="font-size: 14px;" >K.I - Monograf : <strong>{{ $k_i__monograf }}</strong></p>
+                    <p class="mt-2 mb-2" style="font-size: 14px;" >Buku Internasional :  <strong>{{ $buku_internasional }}</strong></p>
+                    <p class="mt-2 mb-2" style="font-size: 14px;" >Buku Nasional : <strong>{{ $buku_nasional }}</strong> </p>
+                    <p class="mt-2 mb-2" style="font-size: 14px;" >Jurnal Int. Bereputasi: <strong>{{ $jurnal_int_bereputasi }}</strong></p>
                    
                 </div>
                 <div class="col-md-5">
-                  <p class="mt-3 mb-2" style="font-size: 14px;" >Jurnal Int. Indek DB Bereputasi : <strong>{{ $jurnal_int_terindek_db_bereputpasi }}/30</strong></p>
-                  <p class="mt-2 mb-2" style="font-size: 14px;" >Jurnal Int. Indek DB Int. Luar Kategori: <strong>{{ $jurnal_int_terindek_db_int_luar_kategori_2 }}/20</strong></p>
-                  <p class="mt-2 mb-2" style="font-size: 14px;" >Jurnal Nas. Terakreditasi <strong>{{ $jurnal_nas_terakreditasi }}/25</strong></p>
-                  <p class="mt-2 mb-2" style="font-size: 14px;" >Jurnal Nas. Bhs. Indonesia DOAJ <strong>{{ $jurnal_nas_bhs_indonesia_doaj }}/15</strong></p>
-                  <p class="mt-2 mb-2" style="font-size: 14px;" >Jurnal Nas. Bhs. Inggris/Lainnya DOAJ: <strong>{{ $jurnal_nas_bhs_inggris_doaj }}/15</strong></p>
+                  <p class="mt-3 mb-2" style="font-size: 14px;" >Jurnal Int. Indek DB Bereputasi : <strong>{{ $jurnal_int_terindek_db_bereputpasi }}</strong></p>
+                  <p class="mt-2 mb-2" style="font-size: 14px;" >Jurnal Int. Indek DB Int. Luar Kategori: <strong>{{ $jurnal_int_terindek_db_int_luar_kategori_2 }}</strong></p>
+                  <p class="mt-2 mb-2" style="font-size: 14px;" >Jurnal Nas. Terakreditasi <strong>{{ $jurnal_nas_terakreditasi }}</strong></p>
+                  <p class="mt-2 mb-2" style="font-size: 14px;" >Jurnal Nas. Bhs. Indonesia DOAJ <strong>{{ $jurnal_nas_bhs_indonesia_doaj }}</strong></p>
+                  <p class="mt-2 mb-2" style="font-size: 14px;" >Jurnal Nas. Bhs. Inggris/Lainnya DOAJ: <strong>{{ $jurnal_nas_bhs_inggris_doaj }}</strong></p>
                 </div>
 
                 <div class="col-md-4">
-                  <p class="mt-3 mb-1" style="font-size: 14px;" >Jurnal Nasional : <strong>{{ $jurnal_nasional }}/10</strong></p>
-                  <p class="mt-0 mb-1" style="font-size: 14px;" >Jurnal Bhs. Resmi PBB : <strong>{{ $jurnal_bhs_resmi_pbb }}/10</strong></p>
-                  <p class="mt-0 mb-1" style="font-size: 14px;" >Dimuat dalam Prosiding Int. <strong>{{ $dimuat_dalam_prosiding_int }}/10</strong></p>
-                  <p class="mt-0 mb-1" style="font-size: 14px;" >Dimuat dalam Prosiding Nas. <strong>{{ $dimuat_dalam_prosiding_nas }}/5</strong></p>
-                  <p class="mt-0 mb-1" style="font-size: 14px;" >Poster dalam prosiding Int. <strong>{{ $poster_dalam_prosiding_int }}/10</strong></p>
-                  <p class="mt-0 mb-1" style="font-size: 14px;" >Poster dalam prosiding Nas. <strong>{{ $poster_dalam_prosiding_nas }}/5</strong></p>
+                  <p class="mt-3 mb-1" style="font-size: 14px;" >Jurnal Nasional : <strong>{{ $jurnal_nasional }}</strong></p>
+                  <p class="mt-0 mb-1" style="font-size: 14px;" >Jurnal Bhs. Resmi PBB : <strong>{{ $jurnal_bhs_resmi_pbb }}</strong></p>
+                  <p class="mt-0 mb-1" style="font-size: 14px;" >Dimuat dalam Prosiding Int. <strong>{{ $dimuat_dalam_prosiding_int }}</strong></p>
+                  <p class="mt-0 mb-1" style="font-size: 14px;" >Dimuat dalam Prosiding Nas. <strong>{{ $dimuat_dalam_prosiding_nas }}</strong></p>
+                  <p class="mt-0 mb-1" style="font-size: 14px;" >Poster dalam prosiding Int. <strong>{{ $poster_dalam_prosiding_int }}</strong></p>
+                  <p class="mt-0 mb-1" style="font-size: 14px;" >Poster dalam prosiding Nas. <strong>{{ $poster_dalam_prosiding_nas }}</strong></p>
                 
                 </div>
 
@@ -163,23 +163,23 @@
               <div class="row justify-content-between">
 
                   <div class="col-md-6">
-                    <p class="mt-3 mb-1" style="font-size: 14px;" >Int. tanpa prosiding - disajikan dalam Seminar,dsb: <strong>{{ $int_tanpa_prosiding_disajikan_dalam_seminar_dsb }}/5</strong> </p>
-                    <p class="mt-0 mb-1" style="font-size: 14px;" >Nas. tanpa prosiding - disajikan dalam Seminar,dsb: <strong>{{ $nas_tanpa_prosiding_disajikan_dalam_seminar_dsb }}/3</strong> </p>
-                    <p class="mt-0 mb-1" style="font-size: 14px;" >Int. prosiding - disajikan dalam Seminar,dsb: <strong>{{ $int_prosiding_disajikan_dalam_seminar_dsb }}/10</strong></p>
-                    <p class="mt-0 mb-1" style="font-size: 14px;" >Nas. prosiding - disajikan dalam Seminar,dsb: <strong>{{ $nas_prosiding_disajikan_dalam_seminar_dsb }}/5</strong></p>  
-                    <p class="mt-0 mb-1" style="font-size: 14px;">Disajikan dalam Koran/Majalah,dsb :<strong>{{ $disajikan_dalam_koran_majalah_dsb }}/1</strong></p>
-                    <p class="mt-0 mb-1" style="font-size: 14px;">Hasil Penelitian tidak dipublikasikan - tersimpan perpustakaan : <strong>{{ $hasil_penelitian_tidak_dipublikasikan_tersimpan_perpustakaan }}/2</strong></p>
-                    <p class="mt-0 mb-1" style="font-size: 14px;">Menerjemahkan buku ilmiah (ISBN): <strong>{{ $menerjemahkan_buku_ilmiah_isbn }}/15</strong></p>
+                    <p class="mt-3 mb-1" style="font-size: 14px;" >Int. tanpa prosiding - disajikan dalam Seminar,dsb: <strong>{{ $int_tanpa_prosiding_disajikan_dalam_seminar_dsb }}</strong> </p>
+                    <p class="mt-0 mb-1" style="font-size: 14px;" >Nas. tanpa prosiding - disajikan dalam Seminar,dsb: <strong>{{ $nas_tanpa_prosiding_disajikan_dalam_seminar_dsb }}</strong> </p>
+                    <p class="mt-0 mb-1" style="font-size: 14px;" >Int. prosiding - disajikan dalam Seminar,dsb: <strong>{{ $int_prosiding_disajikan_dalam_seminar_dsb }}</strong></p>
+                    <p class="mt-0 mb-1" style="font-size: 14px;" >Nas. prosiding - disajikan dalam Seminar,dsb: <strong>{{ $nas_prosiding_disajikan_dalam_seminar_dsb }}</strong></p>  
+                    <p class="mt-0 mb-1" style="font-size: 14px;">Disajikan dalam Koran/Majalah,dsb :<strong>{{ $disajikan_dalam_koran_majalah_dsb }}</strong></p>
+                    <p class="mt-0 mb-1" style="font-size: 14px;">Hasil Penelitian tidak dipublikasikan - tersimpan perpustakaan : <strong>{{ $hasil_penelitian_tidak_dipublikasikan_tersimpan_perpustakaan }}</strong></p>
+                    <p class="mt-0 mb-1" style="font-size: 14px;">Menerjemahkan buku ilmiah (ISBN): <strong>{{ $menerjemahkan_buku_ilmiah_isbn }}</strong></p>
 
                   </div>
 
                   <div class="col-md-6">
-                    <p class="mt-3 mb-1" style="font-size: 14px;">Menyunting Karya Ilmiah bentuk buku (ISBN): <strong>{{ $menyunting_karya_ilmiah_bentuk_buku_isbn }}/10</strong></p>
-                    <p class="mt-0 mb-1" style="font-size: 14px;">Paten Rancangan/Karya Teknologi/Seni Int.: <strong>{{ $paten_rancangan_teknologi_int }}/60</strong></p>
-                    <p class="mt-0 mb-1" style="font-size: 14px;">Paten Rancangan/Karya Teknologi/Seni Nasional: <strong>{{ $paten_rancangan_teknologi_nas }}/40</strong></p>
-                    <p class="mt-0 mb-1" style="font-size: 14px;">Tanpa Paten Rancangan/Karya Teknologi/Seni Int.: <strong>{{ $tanpa_paten_rancangan_teknologi_int }}/20</strong></p>
-                    <p class="mt-0 mb-1" style="font-size: 14px;">Tanpa Paten Rancangan/Karya Teknologi/Seni Nasional: <strong>{{ $tanpa_paten_rancangan_teknologi_nas }}/15</strong></p>
-                    <p class="mt-0 mb-1" style="font-size: 14px;">Tanpa Paten Rancangan/Karya Teknologi/Seni Lokal : <strong>{{ $tanpa_paten_rancangan_teknologi_lokal }}/10</strong></p>
+                    <p class="mt-3 mb-1" style="font-size: 14px;">Menyunting Karya Ilmiah bentuk buku (ISBN): <strong>{{ $menyunting_karya_ilmiah_bentuk_buku_isbn }}</strong></p>
+                    <p class="mt-0 mb-1" style="font-size: 14px;">Paten Rancangan/Karya Teknologi/Seni Int.: <strong>{{ $paten_rancangan_teknologi_int }}</strong></p>
+                    <p class="mt-0 mb-1" style="font-size: 14px;">Paten Rancangan/Karya Teknologi/Seni Nasional: <strong>{{ $paten_rancangan_teknologi_nas }}</strong></p>
+                    <p class="mt-0 mb-1" style="font-size: 14px;">Tanpa Paten Rancangan/Karya Teknologi/Seni Int.: <strong>{{ $tanpa_paten_rancangan_teknologi_int }}</strong></p>
+                    <p class="mt-0 mb-1" style="font-size: 14px;">Tanpa Paten Rancangan/Karya Teknologi/Seni Nasional: <strong>{{ $tanpa_paten_rancangan_teknologi_nas }}</strong></p>
+                    <p class="mt-0 mb-1" style="font-size: 14px;">Tanpa Paten Rancangan/Karya Teknologi/Seni Lokal : <strong>{{ $tanpa_paten_rancangan_teknologi_lokal }}</strong></p>
                     <p class="mt-0 mb-1" style="font-size: 14px;">Rancangan/Karya Teknologi/Seni Tanpa HKI: <strong>{{ $tanpa_hki_rancangan_teknologi }}</strong></p>
                   
                   </div>

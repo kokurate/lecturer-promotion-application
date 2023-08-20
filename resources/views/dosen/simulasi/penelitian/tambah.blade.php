@@ -150,19 +150,25 @@
                                             <div class="list-group">
                                                 <div class="list-group-item">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" id="a_hasil_penelitian" type="radio" name="komponen_kegiatan"  value="Hasil Penelitian Atau Hasil Dipublikasikan Dalam Bentuk Buku" onclick="showInputHasilPenelitian('a')"> 
+                                                        <input class="form-check-input" id="a_hasil_penelitian" type="radio" name="komponen_kegiatan"  value="Hasil Penelitian Atau Hasil Dipublikasikan Dalam Bentuk Buku" onclick="showInputHasilPenelitian('a')"
+                                                            @if(old('komponen_kegiatan') == 'Hasil Penelitian Atau Hasil Dipublikasikan Dalam Bentuk Buku') checked @endif
+                                                        > 
                                                         <label class="form-check-label" for="a_hasil_penelitian">Hasil Penelitian Atau Hasil Dipublikasikan Dalam Bentuk Buku</label>
                                                     </div>
                                                 </div>
                                                 <div class="list-group-item">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" id="b_hasil_penelitian" type="radio" name="komponen_kegiatan" value="Hasil Penelitian Atau Hasil Pemikiran Dalam Buku Yang Dipublikasikan Dan Berisi Berbagai Tulisan Dari Berbagai Penulis (Book Chapter)" onclick="showInputHasilPenelitian('b')"> 
+                                                        <input class="form-check-input" id="b_hasil_penelitian" type="radio" name="komponen_kegiatan" value="Hasil Penelitian Atau Hasil Pemikiran Dalam Buku Yang Dipublikasikan Dan Berisi Berbagai Tulisan Dari Berbagai Penulis (Book Chapter)" onclick="showInputHasilPenelitian('b')"
+                                                            @if(old('komponen_kegiatan') == 'Hasil Penelitian Atau Hasil Pemikiran Dalam Buku Yang Dipublikasikan Dan Berisi Berbagai Tulisan Dari Berbagai Penulis (Book Chapter)') checked @endif
+                                                        > 
                                                         <label class="form-check-label" for="b_hasil_penelitian">Hasil Penelitian Atau Hasil Pemikiran Dalam Buku Yang Dipublikasikan Dan Berisi Berbagai Tulisan Dari Berbagai Penulis (Book Chapter)</label>
                                                     </div>
                                                 </div>
                                                 <div class="list-group-item">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" id="c_hasil_penelitian" type="radio" name="komponen_kegiatan" value="Hasil Penelitian Atau Hasil Pemikiran Yang Dipublikasikan" onclick="showInputHasilPenelitian('c')"> 
+                                                        <input class="form-check-input" id="c_hasil_penelitian" type="radio" name="komponen_kegiatan" value="Hasil Penelitian Atau Hasil Pemikiran Yang Dipublikasikan" onclick="showInputHasilPenelitian('c')"
+                                                        @if(old('komponen_kegiatan') == 'Hasil Penelitian Atau Hasil Pemikiran Yang Dipublikasikan') checked @endif
+                                                        > 
                                                         <label class="form-check-label" for="c_hasil_penelitian">Hasil Penelitian Atau Hasil Pemikiran Yang Dipublikasikan</label>
                                                     </div>
                                                 </div>
@@ -176,14 +182,18 @@
                                                     <div class="list-group">
                                                         <div class="list-group-item">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" id="buku_refrensi" type="radio" name="dalam_bentuk_buku" value="II.A.1.a.1" onclick="updateHiddenInputValue('buku_refrensi')"> 
+                                                                <input class="form-check-input" id="buku_refrensi" type="radio" name="dalam_bentuk_buku" value="II.A.1.a.1" onclick="updateHiddenInputValue('buku_refrensi')"
+                                                                    @if(old('dalam_bentuk_buku') == 'II.A.1.a.1') checked @endif
+                                                                > 
                                                                 <label class="form-check-label" for="buku_refrensi">Buku Referensi</label>
                                                                 {{-- <input type="hidden" name="nilai_kegiatan" value="Buku Referensi" id="hidden_buku_refrensi"> --}}
                                                             </div>
                                                         </div>
                                                         <div class="list-group-item">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" id="monograf"type="radio" name="dalam_bentuk_buku" value="II.A.1.a.2" onclick="updateHiddenInputValue('monograf')"> 
+                                                                <input class="form-check-input" id="monograf"type="radio" name="dalam_bentuk_buku" value="II.A.1.a.2" onclick="updateHiddenInputValue('monograf')"
+                                                                    @if(old('dalam_bentuk_buku') == 'II.A.1.a.2') checked @endif
+                                                                > 
                                                                 <label class="form-check-label" for="monograf">Monograf</label>
                                                                 {{-- <input type="hidden" name="nilai_kegiatan" value="Monograf" id="hidden_monograf"> --}}
                                                             </div>
@@ -198,14 +208,18 @@
                                                         <div class="list-group-item">
                                                             <div class="form-check">
                                                                 {{-- <input type="hidden" name="nilai_kegiatan" value="Internasional" id="hidden_internasional"> --}}
-                                                                <input class="form-check-input" id="internasional" type="radio" name="book_chapter" value="II.A.1.a.2.1" onclick="updateHiddenInputValue('internasional')"> 
+                                                                <input class="form-check-input" id="internasional" type="radio" name="book_chapter" value="II.A.1.a.2.1" onclick="updateHiddenInputValue('internasional')"
+                                                                    @if(old('book_chapter') == 'II.A.1.a.2.1') checked @endif
+                                                                > 
                                                                 <label class="form-check-label" for="internasional">Internasional</label>
                                                             </div>
                                                         </div>
                                                         <div class="list-group-item">
                                                             <div class="form-check">
                                                                 {{-- <input type="hidden" name="nilai_kegiatan" value="Nasional" id="hidden_nasional"> --}}
-                                                                <input class="form-check-input" id="nasional"type="radio" name="book_chapter" value="II.A.1.a.2.2" onclick="updateHiddenInputValue('nasional')"> 
+                                                                <input class="form-check-input" id="nasional"type="radio" name="book_chapter" value="II.A.1.a.2.2" onclick="updateHiddenInputValue('nasional')"
+                                                                    @if(old('book_chapter') == 'II.A.1.a.2.2') checked @endif
+                                                                > 
                                                                 <label class="form-check-label" for="nasional">Nasional</label>
                                                             </div>
                                                         </div>
@@ -220,56 +234,72 @@
                                                         <div class="list-group-item">
                                                             <div class="form-check">
                                                                 {{-- <input type="hidden" name="nilai_kegiatan" value="Jurnal Internasional Bereputasi (Terindek Pada Database Internasional Bereputasi Dan Berfakrot Dampak)" id="hidden_radio3_1"> --}}
-                                                                <input class="form-check-input" id="radio3_1" type="radio" name="c_jurnal" value="II.A.1.b.1.1" onclick="updateHiddenInputValue('radio3_1')"> 
+                                                                <input class="form-check-input" id="radio3_1" type="radio" name="c_jurnal" value="II.A.1.b.1.1" onclick="updateHiddenInputValue('radio3_1')"
+                                                                    @if(old('c_jurnal') == 'II.A.1.b.1.1') checked @endif
+                                                                > 
                                                                 <label class="form-check-label" for="radio3_1">Jurnal Internasional Bereputasi (Terindek Pada Database Internasional Bereputasi Dan Berfakrot Dampak)</label>
                                                             </div>
                                                         </div>
                                                         <div class="list-group-item">
                                                             <div class="form-check">
                                                                 {{-- <input type="hidden" name="nilai_kegiatan" value="Jurnal Internasional Terindek Pada Database Internasional Bereputasi" id="hidden_radio3_2"> --}}
-                                                                <input class="form-check-input" id="radio3_2"type="radio" name="c_jurnal" value="II.A.1.b.1.2" onclick="updateHiddenInputValue('radio3_2')"> 
+                                                                <input class="form-check-input" id="radio3_2"type="radio" name="c_jurnal" value="II.A.1.b.1.2" onclick="updateHiddenInputValue('radio3_2')"
+                                                                    @if(old('c_jurnal') == 'II.A.1.b.1.2') checked @endif
+                                                                > 
                                                                 <label class="form-check-label" for="radio3_2">Jurnal Internasional Terindek Pada Database Internasional Bereputasi</label>
                                                             </div>
                                                         </div>
                                                         <div class="list-group-item">
                                                             <div class="form-check">
                                                                 {{-- <input type="hidden" name="nilai_kegiatan" value="Jurnal internasional terindeks pada database internasional di luar kategori 2" id="hidden_radio3_3"> --}}
-                                                                <input class="form-check-input" id="radio3_3"type="radio" name="c_jurnal" value="II.A.1.b.1.3" onclick="updateHiddenInputValue('radio3_3')"> 
+                                                                <input class="form-check-input" id="radio3_3"type="radio" name="c_jurnal" value="II.A.1.b.1.3" onclick="updateHiddenInputValue('radio3_3')"
+                                                                @if(old('c_jurnal') == 'II.A.1.b.1.3') checked @endif
+                                                                > 
                                                                 <label class="form-check-label" for="radio3_3">Jurnal internasional terindeks pada database internasional di luar kategori 2</label>
                                                             </div>
                                                         </div>
                                                         <div class="list-group-item">
                                                             <div class="form-check">
                                                                 {{-- <input type="hidden" name="nilai_kegiatan" value="Jurnal Nasional Terakreditasi" id="hidden_radio3_4"> --}}
-                                                                <input class="form-check-input" id="radio3_4"type="radio" name="c_jurnal" value="II.A.1.b.2" onclick="updateHiddenInputValue('radio3_4')"> 
+                                                                <input class="form-check-input" id="radio3_4"type="radio" name="c_jurnal" value="II.A.1.b.2" onclick="updateHiddenInputValue('radio3_4')"
+                                                                @if(old('c_jurnal') == 'II.A.1.b.2') checked @endif
+                                                                > 
                                                                 <label class="form-check-label" for="radio3_4">Jurnal Nasional Terakreditasi</label>
                                                             </div>
                                                         </div>
                                                         <div class="list-group-item">
                                                             <div class="form-check">
                                                                 {{-- <input type="hidden" name="nilai_kegiatan" value="Jurnal Nasional Berbahasa Indonesia Terindek Pada DOAJ" id="hidden_radio3_5a"> --}}
-                                                                <input class="form-check-input" id="radio3_5a"type="radio" name="c_jurnal" value="II.A.1.b.2.1" onclick="updateHiddenInputValue('radio3_5a')"> 
+                                                                <input class="form-check-input" id="radio3_5a"type="radio" name="c_jurnal" value="II.A.1.b.2.1" onclick="updateHiddenInputValue('radio3_5a')"
+                                                                @if(old('c_jurnal') == 'II.A.1.b.2.1') checked @endif
+                                                                > 
                                                                 <label class="form-check-label" for="radio3_5a">Jurnal Nasional Berbahasa Indonesia Terindek Pada DOAJ</label>
                                                             </div>
                                                         </div>
                                                         <div class="list-group-item">
                                                             <div class="form-check">
                                                                 {{-- <input type="hidden" name="nilai_kegiatan" value="Jurnal Nasional Berbahasa Inggris Atau Bahasa Resmi (PBB) Terindek Pada DOAJ" id="hidden_radio3_5b"> --}}
-                                                                <input class="form-check-input" id="radio3_5b"type="radio" name="c_jurnal" value="II.A.1.b.2.2" onclick="updateHiddenInputValue('radio3_5b')"> 
+                                                                <input class="form-check-input" id="radio3_5b"type="radio" name="c_jurnal" value="II.A.1.b.2.2" onclick="updateHiddenInputValue('radio3_5b')"
+                                                                @if(old('c_jurnal') == 'II.A.1.b.2.2') checked @endif
+                                                                > 
                                                                 <label class="form-check-label" for="radio3_5b">Jurnal Nasional Berbahasa Inggris Atau Bahasa Resmi (PBB) Terindek Pada DOAJ</label>
                                                             </div>
                                                         </div>
                                                         <div class="list-group-item">
                                                             <div class="form-check">
                                                                 {{-- <input type="hidden" name="nilai_kegiatan" value="Jurnal Nasional" id="hidden_radio3_6"> --}}
-                                                                <input class="form-check-input" id="radio3_6"type="radio" name="c_jurnal" value="II.A.1.b.3" onclick="updateHiddenInputValue('radio3_6')"> 
+                                                                <input class="form-check-input" id="radio3_6"type="radio" name="c_jurnal" value="II.A.1.b.3" onclick="updateHiddenInputValue('radio3_6')"
+                                                                @if(old('c_jurnal') == 'II.A.1.b.3') checked @endif
+                                                                > 
                                                                 <label class="form-check-label" for="radio3_6">Jurnal Nasional</label>
                                                             </div>
                                                         </div>
                                                         <div class="list-group-item">
                                                             <div class="form-check">
                                                                 {{-- <input type="hidden" name="nilai_kegiatan" value="Jurnal Ilmiah Yang Ditulis Dalam Bahasa Resmi PBB Namun Tidak Memenuhi Syarat-Syarat Sebagai Jurnal Ilmiah Internasional" id="hidden_radio3_7"> --}}
-                                                                <input class="form-check-input" id="radio3_7"type="radio" name="c_jurnal" value="II.A.1.b.3.1" onclick="updateHiddenInputValue('radio3_7')"> 
+                                                                <input class="form-check-input" id="radio3_7"type="radio" name="c_jurnal" value="II.A.1.b.3.1" onclick="updateHiddenInputValue('radio3_7')"
+                                                                @if(old('c_jurnal') == 'II.A.1.b.3.1') checked @endif
+                                                                > 
                                                                 <label class="form-check-label" for="radio3_7">Jurnal Ilmiah Yang Ditulis Dalam Bahasa Resmi PBB Namun Tidak Memenuhi Syarat-Syarat Sebagai Jurnal Ilmiah Internasional</label>
                                                             </div>
                                                         </div>

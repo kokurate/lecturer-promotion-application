@@ -2087,60 +2087,73 @@ class DosenController extends Controller
 
                 // if refrensi
                 if($request->input('dalam_bentuk_buku') == $buku_refrensi){
-                    // validasi maksimal angka kredit 
-                    $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                    ->where('kode',$buku_refrensi)->sum('angka_kredit');
+
+                    $validatedData['kode'] = $buku_refrensi;
+                    $validatedData['nilai_kegiatan'] = 'Buku Refrensi';
+                    $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                    $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+
+
+                    // // validasi maksimal angka kredit 
+                    // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                    //                                                 ->where('kode',$buku_refrensi)->sum('angka_kredit');
                     
-                    $result = $count_angka_kredit + $request->input('angka_kredit');
+                    // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                    if($result > 40){
-                        $errorMessage = 'Maksimal Angka Kredit Untuk Buku Refrensi Yaitu 40';
-                        Alert::error($errorMessage);
-                        return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                    }else{
-                        // periksa lagi so pernah b upload ato blm
-                            $cek_buku = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                ->where('kode',$buku_refrensi)->count();
-                            if($cek_buku == 1){
-                                $errorMessage = 'Maskimal Buku Refrensi 1 buku/tahun';
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                    // if($result > 40){
+                    //     $errorMessage = 'Maksimal Angka Kredit Untuk Buku Refrensi Yaitu 40';
+                    //     Alert::error($errorMessage);
+                    //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                    // }else{
+                    //     // periksa lagi so pernah b upload ato blm
+                    //         $cek_buku = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                    //                                             ->where('kode',$buku_refrensi)->count();
+                    //         if($cek_buku == 1){
+                    //             $errorMessage = 'Maskimal Buku Refrensi 1 buku/tahun';
+                    //             Alert::error($errorMessage);
+                    //             return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                    //         }
 
-                            $validatedData['kode'] = $buku_refrensi;
-                            $validatedData['nilai_kegiatan'] = 'Buku Refrensi';
-                            $validatedData['angka_kredit'] = $request->input('angka_kredit');
-                            $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
-                    }
+                    //         $validatedData['kode'] = $buku_refrensi;
+                    //         $validatedData['nilai_kegiatan'] = 'Buku Refrensi';
+                    //         $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                    //         $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+                    // }
                 
                 //if monograf
                 }elseif($request->input('dalam_bentuk_buku') == $monograf){
-                    // validasi maksimal angka kredit 
-                        $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                    ->where('kode',$monograf)->sum('angka_kredit');
 
-                    $result = $count_angka_kredit + $request->input('angka_kredit');
+                    $validatedData['kode'] = $monograf;
+                    $validatedData['nilai_kegiatan'] = 'Monograf';
+                    $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                    $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+
+                    // // validasi maksimal angka kredit 
+                    //     $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                    //                                                 ->where('kode',$monograf)->sum('angka_kredit');
+
+                    // $result = $count_angka_kredit + $request->input('angka_kredit');
          
 
-                    if($result > 20){
-                        $errorMessage = 'Maksimal Angka Kredit Untuk Buku Refrensi Yaitu 20';
-                        Alert::error($errorMessage);
-                        return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                    }else{
-                        // periksa lagi so pernah b upload ato blm
-                            $cek_buku = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                ->where('kode',$monograf)->count();
-                            if($cek_buku == 1){
-                                $errorMessage = 'Maskimal Buku Monograf 1 buku/tahun';
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                    // if($result > 20){
+                    //     $errorMessage = 'Maksimal Angka Kredit Untuk Buku Refrensi Yaitu 20';
+                    //     Alert::error($errorMessage);
+                    //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                    // }else{
+                    //     // periksa lagi so pernah b upload ato blm
+                    //         $cek_buku = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                    //                                             ->where('kode',$monograf)->count();
+                    //         if($cek_buku == 1){
+                    //             $errorMessage = 'Maskimal Buku Monograf 1 buku/tahun';
+                    //             Alert::error($errorMessage);
+                    //             return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                    //         }
 
-                        $validatedData['kode'] = $monograf;
-                        $validatedData['nilai_kegiatan'] = 'Monograf';
-                        $validatedData['angka_kredit'] = $request->input('angka_kredit');
-                        $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
-                    }
+                    //     $validatedData['kode'] = $monograf;
+                    //     $validatedData['nilai_kegiatan'] = 'Monograf';
+                    //     $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                    //     $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+                    // }
 
                 }
 
@@ -2177,64 +2190,75 @@ class DosenController extends Controller
                 // cek internasional
                 if($request->input('book_chapter') == $internasional){
 
-                        // validasi maksimal angka kredit 
-                        $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                        ->where('kode',$internasional)->sum('angka_kredit');
+                    $validatedData['kode'] = $internasional;
+                    $validatedData['nilai_kegiatan'] = 'Internasional';
+                    $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                    $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
 
-                        $result = $count_angka_kredit + $request->input('angka_kredit');
+                        // // validasi maksimal angka kredit 
+                        // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                        //                                                 ->where('kode',$internasional)->sum('angka_kredit');
 
-                        if($result > 15){
-                            $errorMessage = 'Maksimal Angka Kredit Internasional Yaitu 15';
-                            Alert::error($errorMessage);
-                            return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                        }else{
-                            // periksa lagi so pernah b upload ato blm
-                            $cek_buku = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                            ->where('kode',$internasional)->count();
+                        // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            if($cek_buku == 1){
-                                $errorMessage = 'Maksimal 1 buku/tahun';
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                        // if($result > 15){
+                        //     $errorMessage = 'Maksimal Angka Kredit Internasional Yaitu 15';
+                        //     Alert::error($errorMessage);
+                        //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                        // }else{
+                        //     // periksa lagi so pernah b upload ato blm
+                        //     $cek_buku = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                        //                     ->where('kode',$internasional)->count();
 
-                            $validatedData['kode'] = $internasional;
-                            $validatedData['nilai_kegiatan'] = 'Internasional';
-                            $validatedData['angka_kredit'] = $request->input('angka_kredit');
-                            $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
-                        }
+                        //     if($cek_buku == 1){
+                        //         $errorMessage = 'Maksimal 1 buku/tahun';
+                        //         Alert::error($errorMessage);
+                        //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                        //     }
+
+                        //     $validatedData['kode'] = $internasional;
+                        //     $validatedData['nilai_kegiatan'] = 'Internasional';
+                        //     $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                        //     $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+                        // }
 
 
 
 
                 // cek Nasional
                 }elseif($request->input('book_chapter') == $nasional){
-                        // validasi maksimal angka kredit 
-                        $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                        ->where('kode',$nasional)->sum('angka_kredit');
 
-                        $result = $count_angka_kredit + $request->input('angka_kredit');
+                    $validatedData['kode'] = $nasional;
+                    $validatedData['nilai_kegiatan'] = 'Nasional';
+                    $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                    $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
 
-                        if($result > 10){
-                            $errorMessage = 'Maksimal Angka Kredit Nasional Yaitu 10';
-                            Alert::error($errorMessage);
-                            return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                        }else{
-                            // periksa lagi so pernah b upload ato blm
-                            $cek_buku = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                ->where('kode',$nasional)->count();
+                        // // validasi maksimal angka kredit 
+                        // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                        //                                                 ->where('kode',$nasional)->sum('angka_kredit');
 
-                            if($cek_buku == 1){
-                                $errorMessage = 'Maksimal 1 buku/tahun';
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                        // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                        $validatedData['kode'] = $nasional;
-                        $validatedData['nilai_kegiatan'] = 'Nasional';
-                        $validatedData['angka_kredit'] = $request->input('angka_kredit');
-                        $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
-                        }
+                        // if($result > 10){
+                        //     $errorMessage = 'Maksimal Angka Kredit Nasional Yaitu 10';
+                        //     Alert::error($errorMessage);
+                        //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                        // }else{
+                        //     // periksa lagi so pernah b upload ato blm
+                        //     $cek_buku = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                        //                                         ->where('kode',$nasional)->count();
+
+                        //     if($cek_buku == 1){
+                        //         $errorMessage = 'Maksimal 1 buku/tahun';
+                        //         Alert::error($errorMessage);
+                        //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                        //     }
+
+                        // $validatedData['kode'] = $nasional;
+                        // $validatedData['nilai_kegiatan'] = 'Nasional';
+                        // $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                        // $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+                        // }
 
                 }
 
@@ -2274,164 +2298,214 @@ class DosenController extends Controller
                 // jurnal 1
                 if($request->input('c_jurnal') == $jurnal_1){
 
-                    // validasi maksimal angka kredit 
-                    $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                ->where('kode',$jurnal_1)->sum('angka_kredit');
-
-                    $result = $count_angka_kredit + $request->input('angka_kredit');
-
-                    if($result > 40){
-                        $errorMessage = 'Maksimal Angka Kredit Yaitu 40';
-                        Alert::error($errorMessage);
-                        return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                    }
-
                     $validatedData['kode'] = $jurnal_1;
                     $validatedData['nilai_kegiatan'] = 'Jurnal Internasional Bereputasi (Terindek Pada Database Internasional Bereputasi Dan Berfakrot Dampak)';
                     $validatedData['angka_kredit'] = $request->input('angka_kredit');
                     $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+
+                        // // validasi maksimal angka kredit 
+                        // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                        //                                             ->where('kode',$jurnal_1)->sum('angka_kredit');
+
+                        // $result = $count_angka_kredit + $request->input('angka_kredit');
+
+                        // if($result > 40){
+                        //     $errorMessage = 'Maksimal Angka Kredit Yaitu 40';
+                        //     Alert::error($errorMessage);
+                        //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                        // }
+
+                        // $validatedData['kode'] = $jurnal_1;
+                        // $validatedData['nilai_kegiatan'] = 'Jurnal Internasional Bereputasi (Terindek Pada Database Internasional Bereputasi Dan Berfakrot Dampak)';
+                        // $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                        // $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+
+                        
                 }
                 // jurnal 2    
                 elseif($request->input('c_jurnal') ==  $jurnal_2){
-                    // validasi maksimal angka kredit 
-                    $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                ->where('kode',$jurnal_2)->sum('angka_kredit');
-
-                    $result = $count_angka_kredit + $request->input('angka_kredit');
-
-                    if($result > 30){
-                        $errorMessage = 'Maksimal Angka Kredit Yaitu 30';
-                        Alert::error($errorMessage);
-                        return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                    }
-
+                    
                     $validatedData['kode'] = $jurnal_2;
                     $validatedData['nilai_kegiatan'] = 'Jurnal Internasional Terindek Pada Database Internasional Bereputasi';
                     $validatedData['angka_kredit'] = $request->input('angka_kredit');
                     $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+                    
+                    // // validasi maksimal angka kredit 
+                    // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                    //                                             ->where('kode',$jurnal_2)->sum('angka_kredit');
+
+                    // $result = $count_angka_kredit + $request->input('angka_kredit');
+
+                    // if($result > 30){
+                    //     $errorMessage = 'Maksimal Angka Kredit Yaitu 30';
+                    //     Alert::error($errorMessage);
+                    //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                    // }
+
+                    // $validatedData['kode'] = $jurnal_2;
+                    // $validatedData['nilai_kegiatan'] = 'Jurnal Internasional Terindek Pada Database Internasional Bereputasi';
+                    // $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                    // $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+
                 }
 
                 // jurnal 3    
                 elseif($request->input('c_jurnal') ==  $jurnal_3){
-                    // validasi maksimal angka kredit 
-                    $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                ->where('kode',$jurnal_3)->sum('angka_kredit');
-
-                    $result = $count_angka_kredit + $request->input('angka_kredit');
-
-                    if($result > 20){
-                        $errorMessage = 'Maksimal Angka Kredit Yaitu 20';
-                        Alert::error($errorMessage);
-                        return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                    }
-
+                    
                     $validatedData['kode'] = $jurnal_3;
                     $validatedData['nilai_kegiatan'] = 'Jurnal internasional terindeks pada database internasional di luar kategori 2';
                     $validatedData['angka_kredit'] = $request->input('angka_kredit');
                     $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+                    
+                    // // validasi maksimal angka kredit 
+                    // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                    //                                             ->where('kode',$jurnal_3)->sum('angka_kredit');
+
+                    // $result = $count_angka_kredit + $request->input('angka_kredit');
+
+                    // if($result > 20){
+                    //     $errorMessage = 'Maksimal Angka Kredit Yaitu 20';
+                    //     Alert::error($errorMessage);
+                    //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                    // }
+
+                    // $validatedData['kode'] = $jurnal_3;
+                    // $validatedData['nilai_kegiatan'] = 'Jurnal internasional terindeks pada database internasional di luar kategori 2';
+                    // $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                    // $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
                 }
 
                 // jurnal 4 
                 elseif($request->input('c_jurnal') ==  $jurnal_4){
-                    // validasi maksimal angka kredit 
-                    $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                ->where('kode',$jurnal_4)->sum('angka_kredit');
-
-                    $result = $count_angka_kredit + $request->input('angka_kredit');
-
-                    if($result > 25){
-                        $errorMessage = 'Maksimal Angka Kredit Yaitu 25';
-                        Alert::error($errorMessage);
-                        return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                    }
-
+                    
                     $validatedData['kode'] = $jurnal_4;
                     $validatedData['nilai_kegiatan'] = 'Jurnal Nasional Terakreditasi';
                     $validatedData['angka_kredit'] = $request->input('angka_kredit');
                     $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+                    
+                    // // validasi maksimal angka kredit 
+                    // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                    //                                             ->where('kode',$jurnal_4)->sum('angka_kredit');
+
+                    // $result = $count_angka_kredit + $request->input('angka_kredit');
+
+                    // if($result > 25){
+                    //     $errorMessage = 'Maksimal Angka Kredit Yaitu 25';
+                    //     Alert::error($errorMessage);
+                    //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                    // }
+
+                    // $validatedData['kode'] = $jurnal_4;
+                    // $validatedData['nilai_kegiatan'] = 'Jurnal Nasional Terakreditasi';
+                    // $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                    // $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
                 }
 
                 // jurnal 5a
                 elseif($request->input('c_jurnal') ==  $jurnal_5a){
-                    // validasi maksimal angka kredit 
-                    $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                ->where('kode',$jurnal_5a)->sum('angka_kredit');
-
-                    $result = $count_angka_kredit + $request->input('angka_kredit');
-
-                    if($result > 15){
-                        $errorMessage = 'Maksimal Angka Kredit Yaitu 15';
-                        Alert::error($errorMessage);
-                        return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                    }
-
+                    
                     $validatedData['kode'] = $jurnal_5a;
                     $validatedData['nilai_kegiatan'] = 'Jurnal Nasional Berbahasa Indonesia Terindek Pada DOAJ';
                     $validatedData['angka_kredit'] = $request->input('angka_kredit');
                     $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+
+                    // // validasi maksimal angka kredit 
+                    // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                    //                                             ->where('kode',$jurnal_5a)->sum('angka_kredit');
+
+                    // $result = $count_angka_kredit + $request->input('angka_kredit');
+
+                    // if($result > 15){
+                    //     $errorMessage = 'Maksimal Angka Kredit Yaitu 15';
+                    //     Alert::error($errorMessage);
+                    //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                    // }
+
+                    // $validatedData['kode'] = $jurnal_5a;
+                    // $validatedData['nilai_kegiatan'] = 'Jurnal Nasional Berbahasa Indonesia Terindek Pada DOAJ';
+                    // $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                    // $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
                 }
 
 
                 // jurnal 5b
                 elseif($request->input('c_jurnal') ==  $jurnal_5b){
-                    // validasi maksimal angka kredit 
-                    $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                ->where('kode',$jurnal_5b)->sum('angka_kredit');
-
-                    $result = $count_angka_kredit + $request->input('angka_kredit');
-
-                    if($result > 20){
-                        $errorMessage = 'Maksimal Angka Kredit Yaitu 20';
-                        Alert::error($errorMessage);
-                        return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                    }
-
+                    
                     $validatedData['kode'] = $jurnal_5b;
                     $validatedData['nilai_kegiatan'] = 'Jurnal Nasional Berbahasa Inggris Atau Bahasa Resmi (PBB) Terindek Pada DOAJ';
                     $validatedData['angka_kredit'] = $request->input('angka_kredit');
                     $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+
+                    // // validasi maksimal angka kredit 
+                    // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                    //                                             ->where('kode',$jurnal_5b)->sum('angka_kredit');
+
+                    // $result = $count_angka_kredit + $request->input('angka_kredit');
+
+                    // if($result > 20){
+                    //     $errorMessage = 'Maksimal Angka Kredit Yaitu 20';
+                    //     Alert::error($errorMessage);
+                    //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                    // }
+
+                    // $validatedData['kode'] = $jurnal_5b;
+                    // $validatedData['nilai_kegiatan'] = 'Jurnal Nasional Berbahasa Inggris Atau Bahasa Resmi (PBB) Terindek Pada DOAJ';
+                    // $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                    // $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
                 }
 
 
                 // jurnal 6
                 elseif($request->input('c_jurnal') ==  $jurnal_6){
-                    // validasi maksimal angka kredit 
-                    $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                ->where('kode',$jurnal_6)->sum('angka_kredit');
-
-                    $result = $count_angka_kredit + $request->input('angka_kredit');
-
-                    if($result > 10){
-                        $errorMessage = 'Maksimal Angka Kredit Yaitu 10';
-                        Alert::error($errorMessage);
-                        return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                    }
-
+                    
                     $validatedData['kode'] = $jurnal_6;
                     $validatedData['nilai_kegiatan'] = 'Jurnal Nasional';
                     $validatedData['angka_kredit'] = $request->input('angka_kredit');
                     $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+
+                    // // validasi maksimal angka kredit 
+                    // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                    //                                             ->where('kode',$jurnal_6)->sum('angka_kredit');
+
+                    // $result = $count_angka_kredit + $request->input('angka_kredit');
+
+                    // if($result > 10){
+                    //     $errorMessage = 'Maksimal Angka Kredit Yaitu 10';
+                    //     Alert::error($errorMessage);
+                    //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                    // }
+
+                    // $validatedData['kode'] = $jurnal_6;
+                    // $validatedData['nilai_kegiatan'] = 'Jurnal Nasional';
+                    // $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                    // $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
                 }
 
 
                 // jurnal 7
                 elseif($request->input('c_jurnal') ==  $jurnal_7){
-                    // validasi maksimal angka kredit 
-                    $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                ->where('kode',$jurnal_7)->sum('angka_kredit');
-
-                    $result = $count_angka_kredit + $request->input('angka_kredit');
-
-                    if($result > 10){
-                        $errorMessage = 'Maksimal Angka Kredit Yaitu 10';
-                        Alert::error($errorMessage);
-                        return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                    }
-
+                    
                     $validatedData['kode'] = $jurnal_7;
                     $validatedData['nilai_kegiatan'] = 'Jurnal Ilmiah Yang Ditulis Dalam Bahasa Resmi PBB Namun Tidak Memenuhi Syarat-Syarat Sebagai Jurnal Ilmiah Internasional';
                     $validatedData['angka_kredit'] = $request->input('angka_kredit');
                     $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+                    
+                    // // validasi maksimal angka kredit 
+                    // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                    //                                             ->where('kode',$jurnal_7)->sum('angka_kredit');
+
+                    // $result = $count_angka_kredit + $request->input('angka_kredit');
+
+                    // if($result > 10){
+                    //     $errorMessage = 'Maksimal Angka Kredit Yaitu 10';
+                    //     Alert::error($errorMessage);
+                    //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                    // }
+
+                    // $validatedData['kode'] = $jurnal_7;
+                    // $validatedData['nilai_kegiatan'] = 'Jurnal Ilmiah Yang Ditulis Dalam Bahasa Resmi PBB Namun Tidak Memenuhi Syarat-Syarat Sebagai Jurnal Ilmiah Internasional';
+                    // $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                    // $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
                 }else{
                     abort(404);
                 }
@@ -2465,18 +2539,18 @@ class DosenController extends Controller
                 // validasi nilai yang masuk
                     #internasional
                     if($request->input('dipresentasikan_secara_oral') == $internasional){
-                        // validasi maksimal angka kredit 
-                            $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                            ->where('kode',$internasional)->sum('angka_kredit');
+                            // // validasi maksimal angka kredit 
+                            // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                            //                                                 ->where('kode',$internasional)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                            // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                                if($result > 10){
-                                    $errorMessage = 'Maksimal Angka Kredit Yaitu 10';
-                                    Alert::error($errorMessage);
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                                }
+                            // // cek maksimal angka kredit
+                            //     if($result > 10){
+                            //         $errorMessage = 'Maksimal Angka Kredit Yaitu 10';
+                            //         Alert::error($errorMessage);
+                            //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                            //     }
 
                             $validatedData['kode'] = $internasional;
                             $validatedData['nilai_kegiatan'] = 'Internasional';
@@ -2487,18 +2561,18 @@ class DosenController extends Controller
                     # Nasional
                     elseif($request->input('dipresentasikan_secara_oral') == $nasional){
 
-                            // validasi maksimal angka kredit 
-                                $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                                ->where('kode',$nasional)->sum('angka_kredit');
+                            // // validasi maksimal angka kredit 
+                            // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                            //                                                     ->where('kode',$nasional)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                            // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                            if($result > 5){
-                                $errorMessage = 'Maksimal Angka Kredit Yaitu 5';
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                            // // cek maksimal angka kredit
+                            // if($result > 5){
+                            //     $errorMessage = 'Maksimal Angka Kredit Yaitu 5';
+                            //     Alert::error($errorMessage);
+                            //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                            // }
 
                             $validatedData['kode'] = $nasional;
                             $validatedData['nilai_kegiatan'] = 'Nasional';
@@ -2537,18 +2611,18 @@ class DosenController extends Controller
                 // validasi nilai yang masuk
                     #internasional
                     if($request->input('disajikan_dalam_bentuk_poster') == $internasional){
-                        // validasi maksimal angka kredit 
-                            $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                            ->where('kode',$internasional)->sum('angka_kredit');
+                            // // validasi maksimal angka kredit 
+                            // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                            //                                                 ->where('kode',$internasional)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                            // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                                if($result > 10){
-                                    $errorMessage = 'Maksimal Angka Kredit Yaitu 10';
-                                    Alert::error($errorMessage);
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                                }
+                            // // cek maksimal angka kredit
+                            //     if($result > 10){
+                            //         $errorMessage = 'Maksimal Angka Kredit Yaitu 10';
+                            //         Alert::error($errorMessage);
+                            //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                            //     }
 
                             $validatedData['kode'] = $internasional;
                             $validatedData['nilai_kegiatan'] = 'Internasional';
@@ -2559,18 +2633,18 @@ class DosenController extends Controller
                     # Nasional
                     elseif($request->input('disajikan_dalam_bentuk_poster') == $nasional){
 
-                            // validasi maksimal angka kredit 
-                                $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                                ->where('kode',$nasional)->sum('angka_kredit');
+                            // // validasi maksimal angka kredit 
+                            // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                            //                                                     ->where('kode',$nasional)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                            // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                            if($result > 5){
-                                $errorMessage = 'Maksimal Angka Kredit Yaitu 5';
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                            // // cek maksimal angka kredit
+                            // if($result > 5){
+                            //     $errorMessage = 'Maksimal Angka Kredit Yaitu 5';
+                            //     Alert::error($errorMessage);
+                            //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                            // }
 
                             $validatedData['kode'] = $nasional;
                             $validatedData['nilai_kegiatan'] = 'Nasional';
@@ -2609,40 +2683,40 @@ class DosenController extends Controller
                 // validasi nilai yang masuk
                     #internasional
                     if($request->input('disajikan_dalam_seminar') == $internasional){
-                        // validasi maksimal angka kredit 
-                            $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                            ->where('kode',$internasional)->sum('angka_kredit');
+                            // // validasi maksimal angka kredit 
+                            // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                            //                                                 ->where('kode',$internasional)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                            // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                                if($result > 5){
-                                    $errorMessage = 'Maksimal Angka Kredit Yaitu 5';
-                                    Alert::error($errorMessage);
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                                }
+                            // // cek maksimal angka kredit
+                            //     if($result > 5){
+                            //         $errorMessage = 'Maksimal Angka Kredit Yaitu 5';
+                            //         Alert::error($errorMessage);
+                            //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                            //     }
 
-                            $validatedData['kode'] = $internasional;
-                            $validatedData['nilai_kegiatan'] = 'Internasional';
-                            $validatedData['angka_kredit'] = $request->input('angka_kredit');
-                            $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+                        $validatedData['kode'] = $internasional;
+                        $validatedData['nilai_kegiatan'] = 'Internasional';
+                        $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                        $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
                     
                     }
                     # Nasional
                     elseif($request->input('disajikan_dalam_seminar') == $nasional){
 
-                            // validasi maksimal angka kredit 
-                                $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                                ->where('kode',$nasional)->sum('angka_kredit');
+                            // // validasi maksimal angka kredit 
+                            //     $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                            //                                                     ->where('kode',$nasional)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                            // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                            if($result > 3){
-                                $errorMessage = 'Maksimal Angka Kredit Yaitu 3';
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                            // // cek maksimal angka kredit
+                            // if($result > 3){
+                            //     $errorMessage = 'Maksimal Angka Kredit Yaitu 3';
+                            //     Alert::error($errorMessage);
+                            //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                            // }
 
                             $validatedData['kode'] = $nasional;
                             $validatedData['nilai_kegiatan'] = 'Nasional';
@@ -2681,18 +2755,18 @@ class DosenController extends Controller
                 // validasi nilai yang masuk
                     #internasional
                     if($request->input('tidak_disajikan_dalam_seminar') == $internasional){
-                        // validasi maksimal angka kredit 
-                            $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                            ->where('kode',$internasional)->sum('angka_kredit');
+                            // // validasi maksimal angka kredit 
+                            // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                            //                                                 ->where('kode',$internasional)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                            // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                                if($result > 10){
-                                    $errorMessage = 'Maksimal Angka Kredit Yaitu 10';
-                                    Alert::error($errorMessage);
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                                }
+                            // // cek maksimal angka kredit
+                            //     if($result > 10){
+                            //         $errorMessage = 'Maksimal Angka Kredit Yaitu 10';
+                            //         Alert::error($errorMessage);
+                            //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                            //     }
 
                             $validatedData['kode'] = $internasional;
                             $validatedData['nilai_kegiatan'] = 'Internasional';
@@ -2703,18 +2777,18 @@ class DosenController extends Controller
                     # Nasional
                     elseif($request->input('tidak_disajikan_dalam_seminar') == $nasional){
 
-                            // validasi maksimal angka kredit 
-                                $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                                ->where('kode',$nasional)->sum('angka_kredit');
+                            // // validasi maksimal angka kredit 
+                            //     $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                            //                                                     ->where('kode',$nasional)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                            // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                            if($result > 5){
-                                $errorMessage = 'Maksimal Angka Kredit Yaitu 5';
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                            // // cek maksimal angka kredit
+                            // if($result > 5){
+                            //     $errorMessage = 'Maksimal Angka Kredit Yaitu 5';
+                            //     Alert::error($errorMessage);
+                            //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                            // }
 
                             $validatedData['kode'] = $nasional;
                             $validatedData['nilai_kegiatan'] = 'Nasional';
@@ -2751,22 +2825,22 @@ class DosenController extends Controller
 
                 // validasi nilai yang masuk
                         // validasi maksimal angka kredit 
-                            $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                            ->where('kode',$kode)->sum('angka_kredit');
+                            // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                            //                                                 ->where('kode',$kode)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                            // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                                if($result > 1){
-                                    $errorMessage = 'Maksimal Angka Kredit Yaitu 1';
-                                    Alert::error($errorMessage);
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                                }
+                            // // cek maksimal angka kredit
+                            //     if($result > 1){
+                            //         $errorMessage = 'Maksimal Angka Kredit Yaitu 1';
+                            //         Alert::error($errorMessage);
+                            //         return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                            //     }
 
-                            $validatedData['kode'] = $kode;
-                            // $validatedData['nilai_kegiatan'] = '';
-                            $validatedData['angka_kredit'] = $request->input('angka_kredit');
-                            $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
+                $validatedData['kode'] = $kode;
+                // $validatedData['nilai_kegiatan'] = '';
+                $validatedData['angka_kredit'] = $request->input('angka_kredit');
+                $validatedData['komponen_kegiatan'] = $request->input('komponen_kegiatan');
                     
 
             }
@@ -2774,21 +2848,21 @@ class DosenController extends Controller
         // 3 Hasil Penelitian Atau Pemikiran Atau Kerjasama Industri Yang Tidak Dipublikasikan (Tersimpan Dalam Perpustakaan)
             // if($request->input('komponen_kegiatan') == NULL && $request->input('tipe_kegiatan') == 'Hasil Penelitian Atau Pemikiran Atau Kerjasama Industri Yang Tidak Dipublikasikan (Tersimpan Dalam Perpustakaan)'){
             if($request->input('tipe_kegiatan') == 'Hasil Penelitian Atau Pemikiran Atau Kerjasama Industri Yang Tidak Dipublikasikan (Tersimpan Dalam Perpustakaan)'){
-                // deklarasi variable
-                $kode = 'II.A.2';
+                    // deklarasi variable
+                    $kode = 'II.A.2';
 
-                // validasi maksimal angka kredit 
-                $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                            ->where('kode',$kode)->sum('angka_kredit');
+                    // // validasi maksimal angka kredit 
+                    // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                    //                                             ->where('kode',$kode)->sum('angka_kredit');
 
-                $result = $count_angka_kredit + $request->input('angka_kredit');
+                    // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                // cek maksimal angka kredit
-                if($result > 2){
-                    $errorMessage = 'Maksimal Angka Kredit Yaitu 2';
-                    Alert::error($errorMessage);
-                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                }
+                    // // cek maksimal angka kredit
+                    // if($result > 2){
+                    //     $errorMessage = 'Maksimal Angka Kredit Yaitu 2';
+                    //     Alert::error($errorMessage);
+                    //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                    // }
 
                 $validatedData['kode'] = $kode;
                 // $validatedData['nilai_kegiatan'] = '';
@@ -2799,21 +2873,21 @@ class DosenController extends Controller
 
         // 4 Menerjemahkan/ Menyadur Buku Ilmiah Yang Diterbitkan (Ber ISBN)
             if($request->input('tipe_kegiatan') == 'Menerjemahkan/ Menyadur Buku Ilmiah Yang Diterbitkan (Ber ISBN)'){
-                // deklarasi variable
-                $kode = 'II.B';
+                    // deklarasi variable
+                    $kode = 'II.B';
 
-                // validasi maksimal angka kredit 
-                $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                            ->where('kode',$kode)->sum('angka_kredit');
+                    // // validasi maksimal angka kredit 
+                    // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                    //                                             ->where('kode',$kode)->sum('angka_kredit');
 
-                $result = $count_angka_kredit + $request->input('angka_kredit');
+                    // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                // cek maksimal angka kredit
-                if($result > 15){
-                    $errorMessage = 'Maksimal Angka Kredit Yaitu 15';
-                    Alert::error($errorMessage);
-                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                }
+                    // // cek maksimal angka kredit
+                    // if($result > 15){
+                    //     $errorMessage = 'Maksimal Angka Kredit Yaitu 15';
+                    //     Alert::error($errorMessage);
+                    //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                    // }
 
                 $validatedData['kode'] = $kode;
                 // $validatedData['nilai_kegiatan'] = '';
@@ -2824,21 +2898,21 @@ class DosenController extends Controller
 
         // 5 Mengedit/ Menyunting Karya Ilmiah Dalam Bentuk Buku Yang Diterbitkan (Ber ISBN)
             if($request->input('tipe_kegiatan') == 'Mengedit/ Menyunting Karya Ilmiah Dalam Bentuk Buku Yang Diterbitkan (Ber ISBN)'){
-                // deklarasi variable
-                $kode = 'II.C';
+                    // deklarasi variable
+                    $kode = 'II.C';
 
-                // validasi maksimal angka kredit 
-                $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                            ->where('kode',$kode)->sum('angka_kredit');
+                    // // validasi maksimal angka kredit 
+                    // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                    //                                             ->where('kode',$kode)->sum('angka_kredit');
 
-                $result = $count_angka_kredit + $request->input('angka_kredit');
+                    // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                // cek maksimal angka kredit
-                if($result > 10){
-                    $errorMessage = 'Maksimal Angka Kredit Yaitu 10';
-                    Alert::error($errorMessage);
-                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                }
+                    // // cek maksimal angka kredit
+                    // if($result > 10){
+                    //     $errorMessage = 'Maksimal Angka Kredit Yaitu 10';
+                    //     Alert::error($errorMessage);
+                    //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                    // }
 
                 $validatedData['kode'] = $kode;
                 // $validatedData['nilai_kegiatan'] = '';
@@ -2861,18 +2935,18 @@ class DosenController extends Controller
                 // validasi nilai yang masuk
                     #internasional
                     if($request->input('komponen_kegiatan') == $internasional){
-                        // validasi maksimal angka kredit 
-                            $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                            ->where('kode',$kode_internasional)->sum('angka_kredit');
+                                // // validasi maksimal angka kredit 
+                                // $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                                //                                             ->where('kode',$kode_internasional)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                                // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                                if($result > 60){
-                                    $errorMessage = 'Maksimal Angka Kredit Yaitu 60';
-                                    Alert::error($errorMessage);
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                                }
+                                // // cek maksimal angka kredit
+                                // if($result > 60){
+                                //     $errorMessage = 'Maksimal Angka Kredit Yaitu 60';
+                                //     Alert::error($errorMessage);
+                                //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                                // }
 
                             $validatedData['kode'] = $kode_internasional;
                             // $validatedData['nilai_kegiatan'] = $internasional;
@@ -2883,18 +2957,18 @@ class DosenController extends Controller
                     # Nasional
                     elseif($request->input('komponen_kegiatan') == $nasional){
 
-                            // validasi maksimal angka kredit 
-                                $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                                ->where('kode',$kode_nasional)->sum('angka_kredit');
+                            // // validasi maksimal angka kredit 
+                            //     $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                            //                                                     ->where('kode',$kode_nasional)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                            // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                            if($result > 40){
-                                $errorMessage = 'Maksimal Angka Kredit Yaitu 40';
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                            // // cek maksimal angka kredit
+                            // if($result > 40){
+                            //     $errorMessage = 'Maksimal Angka Kredit Yaitu 40';
+                            //     Alert::error($errorMessage);
+                            //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                            // }
 
                             $validatedData['kode'] = $kode_nasional;
                             // $validatedData['nilai_kegiatan'] = 'Nasional';
@@ -2919,18 +2993,18 @@ class DosenController extends Controller
                 // validasi nilai yang masuk
                     #internasional
                     if($request->input('komponen_kegiatan') == $internasional){
-                        // validasi maksimal angka kredit 
-                            $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                            ->where('kode',$kode_internasional)->sum('angka_kredit');
+                        // // validasi maksimal angka kredit 
+                        //     $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                        //                                                     ->where('kode',$kode_internasional)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                        //     $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                                if($result > 20){
-                                    $errorMessage = 'Maksimal Angka Kredit Yaitu 20';
-                                    Alert::error($errorMessage);
-                                    return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                                }
+                        //     // cek maksimal angka kredit
+                        //         if($result > 20){
+                        //             $errorMessage = 'Maksimal Angka Kredit Yaitu 20';
+                        //             Alert::error($errorMessage);
+                        //             return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                        //         }
 
                             $validatedData['kode'] = $kode_internasional;
                             // $validatedData['nilai_kegiatan'] = $internasional;
@@ -2941,18 +3015,18 @@ class DosenController extends Controller
                     # Nasional
                     elseif($request->input('komponen_kegiatan') == $nasional){
 
-                            // validasi maksimal angka kredit 
-                                $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                                ->where('kode',$kode_nasional)->sum('angka_kredit');
+                            // // validasi maksimal angka kredit 
+                            //     $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                            //                                                     ->where('kode',$kode_nasional)->sum('angka_kredit');
 
-                            $result = $count_angka_kredit + $request->input('angka_kredit');
+                            // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                            // cek maksimal angka kredit
-                            if($result > 15){
-                                $errorMessage = 'Maksimal Angka Kredit Yaitu 15';
-                                Alert::error($errorMessage);
-                                return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                            }
+                            // // cek maksimal angka kredit
+                            // if($result > 15){
+                            //     $errorMessage = 'Maksimal Angka Kredit Yaitu 15';
+                            //     Alert::error($errorMessage);
+                            //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                            // }
 
                             $validatedData['kode'] = $kode_nasional;
                             // $validatedData['nilai_kegiatan'] = 'Nasional';
@@ -2964,18 +3038,18 @@ class DosenController extends Controller
                     # Lokal
                     elseif($request->input('komponen_kegiatan') == $lokal){
 
-                        // validasi maksimal angka kredit 
-                            $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
-                                                                            ->where('kode',$kode_lokal)->sum('angka_kredit');
+                        // // validasi maksimal angka kredit 
+                        //     $count_angka_kredit = pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->where('kategori_pak_id',2)
+                        //                                                     ->where('kode',$kode_lokal)->sum('angka_kredit');
 
-                        $result = $count_angka_kredit + $request->input('angka_kredit');
+                        // $result = $count_angka_kredit + $request->input('angka_kredit');
 
-                        // cek maksimal angka kredit
-                        if($result > 10){
-                            $errorMessage = 'Maksimal Angka Kredit Yaitu 10';
-                            Alert::error($errorMessage);
-                            return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
-                        }
+                        // // cek maksimal angka kredit
+                        // if($result > 10){
+                        //     $errorMessage = 'Maksimal Angka Kredit Yaitu 10';
+                        //     Alert::error($errorMessage);
+                        //     return redirect()->back()->withInput()->withErrors(['buat_error' => $errorMessage]);
+                        // }
 
                         $validatedData['kode'] = $kode_lokal;
                         $validatedData['angka_kredit'] = $request->input('angka_kredit');

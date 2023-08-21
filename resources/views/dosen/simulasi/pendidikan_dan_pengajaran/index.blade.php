@@ -129,36 +129,36 @@
               <div class="row justify-content-between">
 
                   <div class="col-md-4">
-                    <p class="mt-3 mb-1" style="font-size: 15px;" >Perkuliahan: {{ $total_sks }} </p>
-                    <p class="mt-2 mb-2" style="font-size: 15px;" >Pendidikan Dokter Klinis: {{ $pendidikan_dokter_klinis }} </p>
+                    <p class="mt-3 mb-1" style="font-size: 15px;" >Perkuliahan: {{ $total_sks }} SKS</p>
+                    <p class="mt-2 mb-2" style="font-size: 15px;" >Pendidikan Dokter Klinis: {{ $pendidikan_dokter_klinis }} AK</p>
                     <p class="mt-2 mb-2" style="font-size: 15px;" >Membimbing Seminar Mahasiswa: {{ $membimbing_seminar_mahasiswa }} </p>
                     <p class="mt-2 mb-2" style="font-size: 15px;" >Membimbing KKN, PKN, PKL: {{ $membimbing_kkn_dst }} </p>
-                    <p class="mt-2 mb-2" style="font-size: 15px;" >P1 Disertasi: {{ $p1_disertasi }} </p>
-                    <p class="mt-2 mb-2" style="font-size: 15px;" >P1 Tesis: {{ $p1_tesis }} </p>
-                    <p class="mt-2 mb-2" style="font-size: 15px;" >P1 Skripsi: {{ $p1_skripsi }} </p>
-                    <p class="mt-2 mb-2" style="font-size: 15px;" >P1 Laporan Akhir Studi: {{ $p1_laporan_akhir_studi }} </p>
+                    <p class="mt-2 mb-2" style="font-size: 15px;" >P1 Disertasi: {{ $p1_disertasi }} Lulusan</p>
+                    <p class="mt-2 mb-2" style="font-size: 15px;" >P1 Tesis: {{ $p1_tesis }} Lulusan</p>
+                    <p class="mt-2 mb-2" style="font-size: 15px;" >P1 Skripsi: {{ $p1_skripsi }} Lulusan</p>
+                    <p class="mt-2 mb-2" style="font-size: 15px;" >P1 Laporan Akhir Studi: {{ $p1_laporan_akhir_studi }} Lulusan</p>
 
                 </div>
                 <div class="col-md-4">
-                  <p class="mt-3 mb-1" style="font-size: 15px;" >P2 Disertasi: {{ $p2_disertasi }} </p>
-                  <p class="mt-0 mb-1" style="font-size: 15px;" >P2 Tesis: {{ $p2_tesis }} </p>
-                  <p class="mt-0 mb-1" style="font-size: 15px;" >P2 Skripsi: {{ $p2_skripsi }} </p>
-                  <p class="mt-0 mb-1" style="font-size: 15px;" >P2 Laporan Akhir Studi: {{ $p2_laporan_akhir_studi }} </p>
-                  <p class="mt-0 mb-1" style="font-size: 15px;" >Ketua Penguji: {{ $ketua_penguji }} </p>
-                  <p class="mt-0 mb-1" style="font-size: 15px;" >Anggota Penguji: {{ $anggota_penguji }} </p>
-                  <p class="mt-0 mb-1" style="font-size: 15px;" >Membina Kegiatan: {{ $membina_kegiatan_mahasiswa }} </p>
-                  <p class="mt-0 mb-1" style="font-size: 15px;" >Mengembangkan Program Kuliah: {{ $mengembangkan_program_kuliah }} </p>
-                  <p class="mt-0 mb-1" style="font-size: 15px;">Orasi Ilmiah : {{ $orasi_ilmiah }} </p>
+                  <p class="mt-3 mb-1" style="font-size: 15px;" >P2 Disertasi: {{ $p2_disertasi }} Lulusan</p>
+                  <p class="mt-0 mb-1" style="font-size: 15px;" >P2 Tesis: {{ $p2_tesis }} Lulusan</p>
+                  <p class="mt-0 mb-1" style="font-size: 15px;" >P2 Skripsi: {{ $p2_skripsi }} Lulusan</p>
+                  <p class="mt-0 mb-1" style="font-size: 15px;" >P2 Laporan Akhir Studi: {{ $p2_laporan_akhir_studi }} Lulusan</p>
+                  <p class="mt-0 mb-1" style="font-size: 15px;" >Ketua Penguji: {{ $ketua_penguji }} Lulusan</p>
+                  <p class="mt-0 mb-1" style="font-size: 15px;" >Anggota Penguji: {{ $anggota_penguji }} Lulusan</p>
+                  <p class="mt-0 mb-1" style="font-size: 15px;" >Membina Kegiatan: {{ $membina_kegiatan_mahasiswa }} Kegiatan</p>
+                  <p class="mt-0 mb-1" style="font-size: 15px;" >Mengembangkan Program Kuliah: {{ $mengembangkan_program_kuliah }} MK</p>
+                  <p class="mt-0 mb-1" style="font-size: 15px;">Orasi Ilmiah : {{ $orasi_ilmiah }} Orasi</p>
 
                 </div>
 
                 <div class="col-md-4">
-                  <p class="mt-3 mb-1" style="font-size: 15px;">Buku Ajar : {{ $buku_ajar }} </p>
-                  <p class="mt-2 mb-2" style="font-size: 15px;">Diklat, Modul, dsb : {{ $diklat_modul }} </p>
-                  <p class="mt-2 mb-2" style="font-size: 15px;">Pembimbing Pencangkokan : {{ $pembimbing_pencangkokan }} </p>
-                  <p class="mt-2 mb-2" style="font-size: 15px;">Pembimbing Reguler : {{ $pembimbing_reguler }} </p>
-                  <p class="mt-2 mb-2" style="font-size: 15px;">Detasering Luar Instansi : {{ $detasering_luar_instansi }} </p>
-                  <p class="mt-2 mb-2" style="font-size: 15px;">Pencangkokan Luar Instansi : {{ $pencangkokan_luar_instansi }} </p>
+                  <p class="mt-3 mb-1" style="font-size: 15px;">Buku Ajar : {{ $buku_ajar }} Buku</p>
+                  <p class="mt-2 mb-2" style="font-size: 15px;">Diklat, Modul, dsb : {{ $diklat_modul }} Produk</p>
+                  <p class="mt-2 mb-2" style="font-size: 15px;">Pembimbing Pencangkokan : {{ $pembimbing_pencangkokan }} Orang</p>
+                  <p class="mt-2 mb-2" style="font-size: 15px;">Pembimbing Reguler : {{ $pembimbing_reguler }} Orang</p>
+                  <p class="mt-2 mb-2" style="font-size: 15px;">Detasering Luar Instansi : {{ $detasering_luar_instansi }} Orang</p>
+                  <p class="mt-2 mb-2" style="font-size: 15px;">Pencangkokan Luar Instansi : {{ $pencangkokan_luar_instansi }} Orang</p>
                   <p class="mt-2 mb-2" style="font-size: 15px;">Pengembangan Diri {{ $pengembangan_diri }} </p>
                   <p class="mt-2 mb-2" style="font-size: 15px;">Menduduki Jabatan : {{ $menduduki_jabatan }} </p>
                 </div>

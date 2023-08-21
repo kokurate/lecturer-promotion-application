@@ -736,41 +736,75 @@ class DosenController extends Controller
                          }
 
                             // Mendapatkan nilai SKS sekarang
-                            $sksNow = $request->sks_now;
+                            // $sksNow = $request->sks_now;
+                            $sksNow = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id',auth()->user()->id)->sum('sks_reset');
 
                             // Mendapatkan jumlah SKS yang dimasukkan melalui request
-                            $perkuliahan = $request->perkuliahan;
+                            $sksRequest = $request->perkuliahan;
 
                             // Validasi jumlah SKS
-                            $totalSks = $sksNow + $perkuliahan;
+                            $totalSks = $sksNow + $sksRequest;
 
                              if ($totalSks <= 10) {
                                 // Hitung jumlah SKS
-                                $nilaiSks = $perkuliahan * 0.5;
+                                $nilaiSks = $sksRequest * 0.5;
                                 $validatedData['kode'] = 'II.A.1.a';
+                                $validatedData['sks_reset'] = $sksRequest;
                             }elseif($totalSks > 10 && $totalSks <= 12){
+
                                 // Hitung jumlah SKS
                                 $sks10 = 10 - $sksNow; // SKS yang dibutuhkan untuk mencapai 10
-                                $sksLain = $perkuliahan - $sks10; // Sisa SKS di atas 10
+                                $sksLain = $sksRequest - $sks10; // Sisa SKS di atas 10
                                 $nilaiSks = ($sks10 * 0.5) + ($sksLain * 0.25);
                                 $validatedData['kode'] = 'II.A.1.b';
+                                $validatedData['sks_reset'] = $sksRequest;
+
                             }elseif($totalSks > 11 && $totalSks < 13){
 
+                                $nilaiSks = $sksRequest * 0.25;
+                                $validatedData['kode'] = 'II.A.1.b';
+                                $validatedData['sks_reset'] = $sksRequest;
 
-                                $nilaiSks = $perkuliahan * 0.25;
+                            }elseif($totalSks > 12 && $totalSks <= 23){
+                                
+
+                                    if($sksNow < 11){
+                                        $sksUnder10 = 10 - $sksNow; // 1 sks untuk mencapai 10 
+                                        $sksBetween= 12 - $sksNow -  $sksUnder10; // 12 - 9 = 3 - 1 = 2
+                                        $sks13 = 12 - $sksNow; // 12 - 9 = 3 
+                                        $sks_diatas_13 = $sksRequest - $sks13; // sisa sks di atas 13 | 5 - 3 = 2  
+                                        $nilaiSks =  ($sksUnder10 * 0.5) + ($sksBetween * 0.25) + ($sks_diatas_13 * 0.5);  
+                                     
+                                    }else{
+                                        // hitung jumlah sks 
+                                        $sks13= 12 - $sksNow; // Sks yang dibutuhkan untuk mencapai 13
+                                        $sks_diatas_13 = $sksRequest - $sks13; // sisa sks di atas 13
+                                        $nilaiSks = ($sks13 * 0.25) + ($sks_diatas_13 * 0.5);
+                                    }
+
+                                    // // hitung jumlah sks 
+                                    // $sks13= 12 - $sksNow; // Sks yang dibutuhkan untuk mencapai 13
+                                    // $sks_diatas_13 = $sksRequest - $sks13; // sisa sks di atas 13
+                                    // $nilaiSks = ($sks13 * 0.25) + ($sks_diatas_13 * 0.5);  
+                                    // $validatedData['kode'] = 'II.A.1.b';
+                               
+
+                                // Mengambil nilai 'sks_reset' untuk user saat ini
+                                pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->pluck('sks_reset')->first();
+
+                                // Memperbarui semua nilai 'sks_reset' untuk user saat ini menjadi 0
+                                pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->update(['sks_reset' => 0]);
+
+                                $validatedData['sks_reset'] = $sks_diatas_13;
                                 $validatedData['kode'] = 'II.A.1.a';
-
-                            }
-                            else {   
-                                Alert::error('Jumlah SKS sudah melebihi batas maksimal.');
-                                return redirect()->back()->withInput()->withErrors(['total_sks' => 'Total SKS melebihi batas maksimum (12 SKS).']);
                             }
                            
 
 
                             // Set nilai angka kredit sesuai dengan nilai SKS
+                            
                             $validatedData['angka_kredit'] = $nilaiSks;
-                            $validatedData['sks'] = $perkuliahan;
+                            $validatedData['sks'] = $sksRequest;
                             $validatedData['komponen_kegiatan'] = 'Mengajar';
                            
 
@@ -797,57 +831,71 @@ class DosenController extends Controller
                             }
 
                             // Mendapatkan nilai SKS sekarang
-                            $sksNow = $request->sks_now;
+                             $sksNow = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id',auth()->user()->id)->sum('sks_reset');
 
                             // Mendapatkan jumlah SKS yang dimasukkan melalui request
-                            $perkuliahan = $request->perkuliahan;
+                            $sksRequest = $request->perkuliahan;
 
                             // Validasi jumlah SKS
-                            $totalSks = $sksNow + $perkuliahan;
+                            $totalSks = $sksNow + $sksRequest;
 
-
-                            if ($totalSks <= 10) {
+                             if ($totalSks <= 10) {
                                 // Hitung jumlah SKS
-                                $nilaiSks = $perkuliahan * 1;
+                                $nilaiSks = $sksRequest * 1;
                                 $validatedData['kode'] = 'II.A.2.a';
+                                $validatedData['sks_reset'] = $sksRequest;
                             }elseif($totalSks > 10 && $totalSks <= 12){
+                                
                                 // Hitung jumlah SKS
                                 $sks10 = 10 - $sksNow; // SKS yang dibutuhkan untuk mencapai 10
-                                $sksLain = $perkuliahan - $sks10; // Sisa SKS di atas 10
+                                $sksLain = $sksRequest - $sks10; // Sisa SKS di atas 10
                                 $nilaiSks = ($sks10 * 1) + ($sksLain * 0.5);
-                                $validatedData['kode'] = 'II.A.2.b';
+                                $validatedData['kode'] = 'II.A.2.a';
+                                $validatedData['sks_reset'] = $sksRequest;
+
                             }elseif($totalSks > 11 && $totalSks < 13){
 
+                                $nilaiSks = $sksRequest * 0.5;
+                                $validatedData['kode'] = 'II.A.2.a';
+                                $validatedData['sks_reset'] = $sksRequest;
 
-                                $nilaiSks = $perkuliahan * 0.5;
-                                $validatedData['kode'] = 'II.A.2.b';
+                            }elseif($totalSks > 12 && $totalSks <= 23){
+                                
 
+                                    if($sksNow < 11){
+                                        $sksUnder10 = 10 - $sksNow; // 1 sks untuk mencapai 10 
+                                        $sksBetween= 12 - $sksNow -  $sksUnder10; // 12 - 9 = 3 - 1 = 2
+                                        $sks13 = 12 - $sksNow; // 12 - 9 = 3 
+                                        $sks_diatas_13 = $sksRequest - $sks13; // sisa sks di atas 13 | 5 - 3 = 2  
+                                        $nilaiSks =  ($sksUnder10 * 1) + ($sksBetween * 0.5) + ($sks_diatas_13 * 1);  
+                                     
+                                    }else{
+                                        // hitung jumlah sks 
+                                        $sks13= 12 - $sksNow; // Sks yang dibutuhkan untuk mencapai 13
+                                        $sks_diatas_13 = $sksRequest - $sks13; // sisa sks di atas 13
+                                        $nilaiSks = ($sks13 * 0.5) + ($sks_diatas_13 * 1);
+                                    }
+
+                                    // // hitung jumlah sks 
+                                    // $sks13= 12 - $sksNow; // Sks yang dibutuhkan untuk mencapai 13
+                                    // $sks_diatas_13 = $sksRequest - $sks13; // sisa sks di atas 13
+                                    // $nilaiSks = ($sks13 * 0.5) + ($sks_diatas_13 * 1);  
+                                    // $validatedData['kode'] = 'II.A.1.b';
+                               
+
+                                // Mengambil nilai 'sks_reset' untuk user saat ini
+                                pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->pluck('sks_reset')->first();
+
+                                // Memperbarui semua nilai 'sks_reset' untuk user saat ini menjadi 0
+                                pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->update(['sks_reset' => 0]);
+
+                                $validatedData['sks_reset'] = $sks_diatas_13;
+                                $validatedData['kode'] = 'II.A.2.a';
                             }
-                            else {   
-                                Alert::error('Jumlah SKS sudah melebihi batas maksimal.');
-                                return redirect()->back()->withInput()->withErrors(['total_sks' => 'Total SKS melebihi batas maksimum (12 SKS).']);
-                            }
-
-
-                            // // Mengatur nilai SKS berdasarkan kondisi
-                            // if ($totalSks <= 10) {
-                            //     $nilaiSks = ($perkuliahan * 1);
-                            //     $validatedData['kode'] = 'II.A.2.a';
-                            // } elseif ($totalSks > 10 && $totalSks <= 11) {
-                            //     $nilaiSks = ($perkuliahan * 0.5);
-                            //     $validatedData['kode'] = 'II.A.2.b';
-                            // } elseif ($totalSks > 11 && $totalSks <= 12) {
-                            //     $nilaiSks =  ($perkuliahan * 0.5);
-                            //     $validatedData['kode'] = 'II.A.2.b';
-                            // } else {
-                            //     // Pesan error jika jumlah SKS melebihi batas maksimal
-                            //     Alert::error('Jumlah SKS sudah melebihi batas maksimal.');
-                            //     return redirect()->back()->withErrors(['perkuliahan' => 'Jumlah SKS sudah melebihi batas maksimal.'])->withInput();
-                            // }
 
                             // Set nilai angka kredit sesuai dengan nilai SKS
                             $validatedData['angka_kredit'] = $nilaiSks;
-                            $validatedData['sks'] = $perkuliahan;
+                            $validatedData['sks'] = $sksRequest;
                             $validatedData['komponen_kegiatan'] = 'Mengajar';
 
 

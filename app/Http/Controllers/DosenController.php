@@ -583,7 +583,61 @@ class DosenController extends Controller
         if($record->bukti){
             Storage::delete($record->bukti);
         }
-        
+
+             if($record->sks != '-'){
+
+                $count_now_sks = $record->sks;
+                $count_sks_reset = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id',auth()->user()->id)->sum('sks_reset');
+
+                $total =  $count_sks_reset - $count_now_sks;
+                    
+                    if($total == 0 ){$result = 0 ;}
+                    elseif($total == -1 ){$result = 12 ;}
+                    elseif($total == -2 ){$result = 11 ;}
+                    elseif($total == -3 ){$result = 10 ;}
+                    elseif($total == -4 ){$result = 9 ;}
+                    elseif($total == -5 ){$result = 8 ;}
+                    elseif($total == -6 ){$result = 7 ;}
+                    elseif($total == -7 ){$result = 6 ;}
+                    elseif($total == -8 ){$result = 5 ;}
+                    elseif($total == -9 ){$result = 4 ;}
+                    elseif($total == -10 ){$result = 3 ;}
+                    elseif($total == -11 ){$result = 2 ;}
+                    elseif($total == -12 ){$result = 1 ;}
+                    elseif($total == -13 ){$result = 0 ;}
+                    else{
+                        $result =  $total;
+                    }
+                 
+
+                 // Mengambil nilai 'sks_reset' untuk user saat ini
+                 pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->pluck('sks_reset')->first();
+
+                 // Memperbarui semua nilai 'sks_reset' untuk user saat ini menjadi 0
+                 pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->update(['sks_reset' => 0]);
+
+
+                 $validatedData = [
+                    'sks_reset' => $result,
+                    'kegiatan' => null,
+                    'tipe_kegiatan' => null,
+                    'jenis_pendidikan' => null,
+                    'komponen_kegiatan' => null,
+                    'kode' => null,
+                    'sks' => null,
+                    'angka_kredit' => null,
+                    'tahun_ajaran_id' => 0,
+                    'bukti' => null,
+                    'slug' => null,
+                 ];
+
+                 pak_kegiatan_pendidikan_dan_pengajaran::where('slug', $slug)->update($validatedData);
+
+                Alert::success('Sukses','File Berhasil dihapus');
+                return redirect()->route('pendidikan-dan-pengajaran');
+             }
+             
+
 
         pak_kegiatan_pendidikan_dan_pengajaran::destroy($record->id);
 

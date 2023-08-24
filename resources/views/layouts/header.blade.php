@@ -10,7 +10,7 @@
           <a href="{{ route('pegawai.index') }}" class="logo d-flex align-items-center">
         @endif
         {{-- <img src="/templates/assets/img/logo.png" alt=""> --}}
-        <span class="d-none d-lg-block my-1">Pengelolaan Data Dosen</span>
+        <span class="d-none d-lg-block my-1 fs-4">Pengelolaan Data Dosen</span>
     
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>

@@ -252,7 +252,7 @@
                   <div class="row" >
                     <div class="col-lg my-3">
                         <h2></h2>
-                        <table id="semua_dosen" class="table table-hover">
+                        <table id="semua_dosen" class="table table-hover" style="width:100%">
                             <thead>
                               <tr>
                                 <th scope="col" class="text-center">#</th>
@@ -319,7 +319,8 @@
         $('#semua_dosen').DataTable({
             "paging":   true,
             "ordering": true,
-            "info":     true
+            "info":     true,
+            "scrollX": true
         });
         });
     </script>

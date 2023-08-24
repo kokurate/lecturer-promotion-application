@@ -17,14 +17,14 @@
                         <div class="row" >
                             <div class="col-lg my-3">
                                 <h2></h2>
-                                <table id="pengajuan_dalam_proses" class="table table-hover">
+                                <table id="pengajuan_dalam_proses" class="table table-hover" style="width:100%">
                                     <thead>
                                     <tr>
                                         <th scope="col" class="text-center">#</th>
                                         <th scope="col" class="text-center">Nama</th>
                                         <th scope="col" class="text-center">Program Studi</th>
                                         <th scope="col" class="text-center">File</th>
-                                        <th scope="col" class="text-center">Selesaikan Pengajuan</th>
+                                        <th scope="col" class="text-center">Selesaikan</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -42,7 +42,9 @@
                                             </td>
                                             <td class="text-center ">
                                                 <div class="d-flex justify-content-center">
-                                                    <a href="#" class="d-block btn btn-primary" style="background-color:#00ff62;  border:none;" data-bs-toggle="modal" data-bs-target="#verticalycentered{{ $data->id }}"><strong>Selesaikan</strong></a>
+                                                    <a href="#" class="d-block" data-bs-toggle="modal" data-bs-target="#verticalycentered{{ $data->id }}">
+                                                        <i class="bi bi-check-square-fill"></i>
+                                                </a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -134,7 +136,10 @@
         $('#pengajuan_dalam_proses').DataTable({
             "paging":   true,
             "ordering": true,
-            "info":     true
+            "info":     true,   
+            // "scrollCollapse": true,
+            // "scrollY": '50vh'
+            "scrollX": true
         });
         });
     </script>

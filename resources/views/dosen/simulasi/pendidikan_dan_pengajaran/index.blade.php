@@ -44,7 +44,7 @@
                   <div class="row" >
                     <div class="col-lg my-3">
                         <h2></h2>
-                        <table id="simulasi" class="table table-hover">
+                        <table id="simulasi" class="table table-hover" style="width:100%">
                             <thead>
                               <tr>
                                 <th scope="col" class="text-center">#</th>
@@ -201,7 +201,8 @@
           $('#simulasi').DataTable({
               "paging":   true,
               "ordering": true,
-              "info":     true
+              "info":     true,
+              "scrollX": true
           });
           });
       </script>

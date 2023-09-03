@@ -200,6 +200,9 @@ class PegawaiController extends Controller
         $validatedData['status'] = 'Tersedia'; 
         $validatedData['user_id'] = $user->id; 
 
+        // Ubah user status to null, so this will not showed in permintaan kenaikan
+        User::where('id', $user->id)->update(['status' => NULL ]);
+
         // status_kenaikan_pangkat::create($validatedData);
         
         // dd($validatedData);

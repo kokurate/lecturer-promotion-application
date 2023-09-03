@@ -88,6 +88,7 @@ class PegawaiController extends Controller
         return view('pegawai.permintaan_kenaikan_pangkat',[
             'title' => 'Pegawai | Permintaan Kenaikan Pangkat',
             'permintaan_kenaikan' => User::where('status', 'Permintaan Kenaikan Pangkat Reguler')
+                                        ->where('fakultas', auth()->user()->fakultas)
                                         ->orderBy('updated_at', 'ASC')
                                         ->get(),
         ]);

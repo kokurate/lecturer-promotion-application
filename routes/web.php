@@ -171,10 +171,10 @@ Route::middleware('auth', 'level:admin')->group(function () {
     Route::post('/admin/simulasi/tambah-tahun-ajaran_update/{id}',[AdminController::class,('tambah_tahun_ajaran_update')])->name('admin.simulasi_tambah.tahun_ajaran_update');
     Route::delete('/admin/simulasi/truncate-tahun-ajaran',[AdminController::class,('truncate_tahun_ajaran')])->name('truncate_tahun_ajaran');
     
-    Route::delete('/admin/simulasi/kategori-simulasi/{id}/destroy',[AdminController::class,('kategori_simulasi_destroy')])->name('admin.simulasi.kategori_simulasi_destroy');
-    Route::post('/admin/simulasi/kategori-simulasi/tambah',[AdminController::class,('kategori_simulasi_store')])->name('admin.simulasi.kategori_simulasi_store');
-    Route::delete('/admin/simulasi/kategori-simulasi/pendidikan-dan-pengajaran/tipe-kegiatan/{id}/destroy',[AdminController::class,('tipe_kegiatan_pendidikan_dan_pengajaran_destroy')])->name('admin.simulasi.tipe_kegiatan_pendidikan_dan_pengajaran_destroy');
-    Route::post('/admin/simulasi/kategori-simulasi/pendidikan-dan-pengajaran/tipe-kegiatan/store',[AdminController::class,('tipe_kegiatan_pendidikan_dan_pengajaran_store')])->name('admin.simulasi.tipe_kegiatan_pendidikan_dan_pengajaran_store');
+    // Route::delete('/admin/simulasi/kategori-simulasi/{id}/destroy',[AdminController::class,('kategori_simulasi_destroy')])->name('admin.simulasi.kategori_simulasi_destroy');
+    // Route::post('/admin/simulasi/kategori-simulasi/tambah',[AdminController::class,('kategori_simulasi_store')])->name('admin.simulasi.kategori_simulasi_store');
+    // Route::delete('/admin/simulasi/kategori-simulasi/pendidikan-dan-pengajaran/tipe-kegiatan/{id}/destroy',[AdminController::class,('tipe_kegiatan_pendidikan_dan_pengajaran_destroy')])->name('admin.simulasi.tipe_kegiatan_pendidikan_dan_pengajaran_destroy');
+    // Route::post('/admin/simulasi/kategori-simulasi/pendidikan-dan-pengajaran/tipe-kegiatan/store',[AdminController::class,('tipe_kegiatan_pendidikan_dan_pengajaran_store')])->name('admin.simulasi.tipe_kegiatan_pendidikan_dan_pengajaran_store');
 
 
 

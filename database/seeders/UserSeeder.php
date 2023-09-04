@@ -90,7 +90,7 @@ class UserSeeder extends Seeder
             'name' => 'dosen Fakultas Ilmu Pendidikan',
             'level' => 'dosen',
             'email' => 'dosenfip@gmail.com', 
-            'fakultas' => 'dosen Fakultas Ilmu Pendidikan',
+            'fakultas' => 'Fakultas Ilmu Pendidikan',
             'password' => bcrypt('password'), //password
             'pangkat_id' => 1,
             'jurusan_prodi' => 'Program Studi Pendidikan Luar Sekolah',

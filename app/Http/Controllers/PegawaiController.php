@@ -186,7 +186,7 @@ class PegawaiController extends Controller
 
     public function ubah_status_kenaikan_pangkat_store(Request $request , User $user){
         $validator = Validator::make($request->all(),[ 
-            'golongan' => 'nullable',
+            'golongan' => 'required',
         ],[
             // 'golongan.exists' => 'Golongan Belum dipilih'
         ]);

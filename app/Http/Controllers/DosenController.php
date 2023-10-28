@@ -387,7 +387,7 @@ class DosenController extends Controller
         $user = Auth::user();
 
         // Banyaknya
-        $banyaknya = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->count('id') + 
+        $banyaknya = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kegiatan','!=', NULL)->count('id') + 
                     pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->count('id') +
                     pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->count('id') +
                     pak_kegiatan_penunjang_tri_dharma_pt::where('user_id', auth()->user()->id)->count('id') ;
@@ -409,7 +409,7 @@ class DosenController extends Controller
             //     ->get(),
             'kategori_pak' => kategori_pak::withCount([
                 'pak_kegiatan_pendidikan_dan_pengajaran' => function ($query) use ($user) {
-                    $query->where('user_id', $user->id);
+                    $query->where('user_id', $user->id)->where('kegiatan', '!=', NULL);
                 },
                 'pak_kegiatan_penelitian' => function ($query) use ($user) {
                     $query->where('user_id', $user->id);
@@ -632,6 +632,13 @@ class DosenController extends Controller
                  ];
 
                  pak_kegiatan_pendidikan_dan_pengajaran::where('slug', $slug)->update($validatedData);
+
+                 // Delete All the sks reset where value = 0
+                    $sksreset0 = pak_kegiatan_pendidikan_dan_pengajaran::where('sks_reset', 0)->where('kegiatan', NULL)->get();
+
+                    foreach($sksreset0 as $data){
+                        $data->delete();
+                    }                 
 
                 Alert::success('Sukses','File Berhasil dihapus');
                 return redirect()->route('pendidikan-dan-pengajaran');
@@ -2106,7 +2113,7 @@ class DosenController extends Controller
 
         $tipe_kegiatan = tipe_kegiatan_penelitian::all();
         
-        return view('dosen\simulasi\penelitian\tambah',[
+        return view('dosen.simulasi.penelitian.tambah',[
             'title' => 'Simulasi Penelitian',
             'tipe_kegiatan' => $tipe_kegiatan,
             't_a' => tahun_ajaran::where('now', 1)->value('tahun'),
@@ -3346,7 +3353,7 @@ class DosenController extends Controller
 
         $tipe_kegiatan = tipe_kegiatan_pengabdian_pada_masyarakat::all();
         
-        return view('dosen\simulasi\pengabdian_pada_masyarakat\tambah',[
+        return view('dosen.simulasi.pengabdian_pada_masyarakat.tambah',[
             'title' => 'Pengabdian Pada Masyarakat',
             'tipe_kegiatan' => $tipe_kegiatan,
             't_a' => tahun_ajaran::where('now', 1)->value('tahun'),
@@ -3940,7 +3947,7 @@ class DosenController extends Controller
 
         $tipe_kegiatan = tipe_kegiatan_penunjang_tri_dharma_pt::all();
         
-        return view('dosen\simulasi\penunjang_tri_dharma_pt\tambah',[
+        return view('dosen.simulasi.penunjang_tri_dharma_pt.tambah',[
             'title' => 'Simulasi Penunjang Tri Dharma PT',
             'tipe_kegiatan' => $tipe_kegiatan,
             't_a' => tahun_ajaran::where('now', 1)->value('tahun'),

@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Mail\DosenNotifications;
 use App\Models\berkas_kenaikan_pangkat_reguler;
 use App\Models\history;
+use App\Models\kategori_pak;
+use App\Models\pak_kegiatan_pendidikan_dan_pengajaran;
+use App\Models\pak_kegiatan_penelitian;
+use App\Models\pak_kegiatan_pengabdian_pada_masyarakat;
+use App\Models\pak_kegiatan_penunjang_tri_dharma_pt;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -14,6 +19,9 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
+
 
 class PdfController extends Controller
 {
@@ -95,6 +103,66 @@ class PdfController extends Controller
 
         // return response()->download(public_path($fileName));
         return redirect()->back()->with('success', 'Pengajuan Berhasil Diterima');
+
+    }
+
+    public function simulation_download()
+    {
+
+        $user = Auth::user();
+
+        // Banyaknya
+            $banyaknya = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->where('kegiatan','!=', NULL)->count('id') + 
+                        pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->count('id') +
+                        pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->count('id') +
+                        pak_kegiatan_penunjang_tri_dharma_pt::where('user_id', auth()->user()->id)->count('id') ;
+        
+            $total_kredit = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', auth()->user()->id)->sum('angka_kredit') +
+                            pak_kegiatan_penelitian::where('user_id', auth()->user()->id)->sum('angka_kredit') +
+                            pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', auth()->user()->id)->sum('angka_kredit') +
+                            pak_kegiatan_penunjang_tri_dharma_pt::where('user_id', auth()->user()->id)->sum('angka_kredit') ;
+
+                            $title = 'Dosen | Simulasi';
+                       
+                            $kategori_pak = kategori_pak::withCount([
+                                'pak_kegiatan_pendidikan_dan_pengajaran' => function ($query) use ($user) {
+                                    $query->where('user_id', $user->id)->where('kegiatan', '!=', NULL);
+                                },
+                                'pak_kegiatan_penelitian' => function ($query) use ($user) {
+                                    $query->where('user_id', $user->id);
+                                },
+                                'pak_kegiatan_pengabdian_pada_masyarakat' => function ($query) use ($user) {
+                                    $query->where('user_id', $user->id);
+                                },
+                                'pak_kegiatan_penunjang_tri_dharma_pt' => function ($query) use ($user) {
+                                    $query->where('user_id', $user->id);
+                                }
+                            ])
+                            ->with([
+                                'pak_kegiatan_pendidikan_dan_pengajaran' => function ($query) use ($user) {
+                                    $query->where('user_id', $user->id);
+                                },
+                                'pak_kegiatan_penelitian' => function ($query) use ($user) {
+                                    $query->where('user_id', $user->id);
+                                },
+                                'pak_kegiatan_pengabdian_pada_masyarakat' => function ($query) use ($user) {
+                                    $query->where('user_id', $user->id);
+                                },
+                                'pak_kegiatan_penunjang_tri_dharma_pt' => function ($query) use ($user) {
+                                    $query->where('user_id', $user->id);
+                                }
+                            ])
+
+                            ->get();
+
+
+        $pdf = Pdf::loadView('dosen.simulasi.index', [
+            'kategori_pak' => $kategori_pak,
+            'title' => $title,
+            'total_kegiatan' => $banyaknya,
+            'jumlah_kredit' => $total_kredit, 
+        ]);
+        return $pdf->download('invoice.pdf');
 
     }
 }

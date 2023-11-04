@@ -23,7 +23,7 @@
                 </div>
 
                 <a href="{{ route('dosen.simulasi.export') }}" target="__blank"
-                  class="btn btn-primary ">Export</a>
+                  class="btn btn-primary">Export</a>
 
                   <!-- ========== Data Table ========-->
                   <div class="row" >

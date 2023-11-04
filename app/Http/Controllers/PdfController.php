@@ -10,6 +10,7 @@ use App\Models\pak_kegiatan_pendidikan_dan_pengajaran;
 use App\Models\pak_kegiatan_penelitian;
 use App\Models\pak_kegiatan_pengabdian_pada_masyarakat;
 use App\Models\pak_kegiatan_penunjang_tri_dharma_pt;
+use App\Models\tahun_ajaran;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -156,13 +157,146 @@ class PdfController extends Controller
                             ->get();
 
 
-        $pdf = Pdf::loadView('dosen.simulasi.index', [
+        $pdf = Pdf::loadView('pdf.export-simulasi', [
             'kategori_pak' => $kategori_pak,
             'title' => $title,
             'total_kegiatan' => $banyaknya,
             'jumlah_kredit' => $total_kredit, 
+            // PENDIDIKAN DAN PENGAJARAN ===================================
+                'all' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->with('tahun_ajaran')->where('user_id', auth()->user()->id)->where('kategori_pak_id', 1)
+                                                                                    ->whereHas('tahun_ajaran', function ($query) {
+                                                                                                        $query->where('now', true);
+                                                                                                    })
+                                                                                    ->orderBy('id', 'DESC')
+                                                                                    ->get(),
+                'tahun_ajaran' => tahun_ajaran::where('now', true)->get(),
+                'total_kredit' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id', 1)->sum('angka_kredit'),
+                'pendidikan_formal'=> pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id', 1)
+                                        ->where('tipe_kegiatan','Mengikuti Pendidikan Formal')->count(),
+                'diklat_pra_jabatan' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id', 1)
+                                        ->where('tipe_kegiatan','Mengikuti Diklat Pra-Jabatan')->count(),
+                'total_sks' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id', 1)
+                                        ->where('tipe_kegiatan', 'Melaksanakan Perkuliahan')->where('komponen_kegiatan', 'Mengajar')->sum('sks'),
+                'pendidikan_dokter_klinis' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where(function ($query) {
+                                            $query->where('kode', 'II.A.3.a')
+                                                ->orWhere('kode', 'II.A.3.b')
+                                                ->orWhere('kode', 'II.A.3.c')
+                                                ->orWhere('kode', 'II.A.3.d')
+                                                ->orWhere('kode', 'II.A.3.e');
+                                        })->sum('angka_kredit'),      
+                'membimbing_seminar_mahasiswa' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id', 1)
+                                            ->where('tipe_kegiatan','Membimbing Seminar Mahasiswa (Setiap Mahasiswa)')->count(),
+                'membimbing_kkn_dst' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id', 1)
+                                            ->where('tipe_kegiatan','Membimbing KKN, Praktik Kerja Nyata, Praktik Kerja Lapangan')->count(),
+                // Pembimbing 1 Count
+                    'p1_disertasi' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                ->where('kode','II.D.1.a')->count(),
+                    'p1_tesis' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.D.1.b')->count(),
+                    'p1_skripsi' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.D.1.c')->count(),
+                    'p1_laporan_akhir_studi' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                    ->where('kode','II.D.1.d')->count(),
+                // Pembimbing 2 Count
+                    'p2_disertasi' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                ->where('kode','II.D.2.a')->count(),
+                    'p2_tesis' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.D.2.b')->count(),
+                    'p2_skripsi' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.D.2.c')->count(),
+                    'p2_laporan_akhir_studi' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.D.2.d')->count(),
+                                                        
+
+                    'ketua_penguji' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.E.1')->count(),
+                    'anggota_penguji' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.E.2')->count(),
+                    'membina_kegiatan_mahasiswa' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.F')->count(),
+                    'mengembangkan_program_kuliah' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.G')->count(),
+                    'buku_ajar' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.H.1')->count(),
+                    'diklat_modul' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.H.2')->count(),
+                    'orasi_ilmiah' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.I')->count(),
+                    'menduduki_jabatan' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where(function ($query) { $query ->where('kode', 'II.J.1')
+                                                                                        ->orWhere('kode','II.J.2') 
+                                                                                        ->orWhere('kode','II.J.3') 
+                                                                                        ->orWhere('kode','II.J.4') 
+                                                                                        ->orWhere('kode','II.J.5') 
+                                                                                        ->orWhere('kode','II.J.6') 
+                                                                                        ->orWhere('kode','II.J.7') 
+                                                                                        ->orWhere('kode','II.J.8'); 
+                                                                                    })->count(),
+                    'pembimbing_pencangkokan' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.K.1')->count(),
+                    'pembimbing_reguler' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.K.2')->count(),
+                    'detasering_luar_instansi' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.L.1')->count(),
+                    'pencangkokan_luar_instansi' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where('kode','II.L.2')->count(),
+                    'pengembangan_diri' => pak_kegiatan_pendidikan_dan_pengajaran::with('tahun_ajaran')->whereHas('tahun_ajaran', function ($query) {$query->where('now', true);})->where('user_id', auth()->user()->id)->where('kategori_pak_id',1)
+                                                        ->where(function ($query) { $query ->where('kode', 'II.M.1')
+                                                                                        ->orWhere('kode','II.M.2') 
+                                                                                        ->orWhere('kode','II.M.3') 
+                                                                                        ->orWhere('kode','II.M.4') 
+                                                                                        ->orWhere('kode','II.M.5') 
+                                                                                        ->orWhere('kode','II.M.6') 
+                                                                                        ->orWhere('kode','II.M.7'); 
+                                                                                    })->count(),
+            // PENELITIAN =========================================                                                                   
+                # 1 a)    
+                'k_i__buku_refrensi' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.a.1')->sum('angka_kredit'),
+                'k_i__monograf' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.a.2')->sum('angka_kredit'),
+                # 1 b)
+                'buku_internasional' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.a.2.1')->sum('angka_kredit'),
+                'buku_nasional' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.a.2.2')->sum('angka_kredit'),
+                # 1 c)
+                'jurnal_int_bereputasi' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.b.1.1')->sum('angka_kredit'),
+                'jurnal_int_terindek_db_bereputpasi' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.b.1.2')->sum('angka_kredit'),
+                'jurnal_int_terindek_db_int_luar_kategori_2' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.b.1.3')->sum('angka_kredit'),
+                'jurnal_nas_terakreditasi' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.b.2')->sum('angka_kredit'),
+                'jurnal_nas_bhs_indonesia_doaj' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.b.2.1')->sum('angka_kredit'),
+                'jurnal_nas_bhs_inggris_doaj' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.b.2.2')->sum('angka_kredit'),
+                'jurnal_nasional' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.b.3')->sum('angka_kredit'),
+                'jurnal_bhs_resmi_pbb' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.b.3.1')->sum('angka_kredit'),
+                # 2 a
+                'dimuat_dalam_prosiding_int' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.c.1.a.1')->sum('angka_kredit'),
+                'dimuat_dalam_prosiding_nas' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.c.2.b')->sum('angka_kredit'),
+                # 2 b
+                'poster_dalam_prosiding_int' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.c.2.a')->sum('angka_kredit'),
+                'poster_dalam_prosiding_nas' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.c.1.b.1')->sum('angka_kredit'),
+                # 2 c
+                'int_tanpa_prosiding_disajikan_dalam_seminar_dsb' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.c.1.a')->sum('angka_kredit'),
+                'nas_tanpa_prosiding_disajikan_dalam_seminar_dsb' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.c.1.b')->sum('angka_kredit'),
+                # 2 d
+                'int_prosiding_disajikan_dalam_seminar_dsb' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.c.3.a')->sum('angka_kredit'),
+                'nas_prosiding_disajikan_dalam_seminar_dsb' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.c.3.b')->sum('angka_kredit'),
+                # 2 e
+                'disajikan_dalam_koran_majalah_dsb' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.1.d')->sum('angka_kredit'),
+                # 3 
+                'hasil_penelitian_tidak_dipublikasikan_tersimpan_perpustakaan' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.A.2')->sum('angka_kredit'),
+                # 4
+                'menerjemahkan_buku_ilmiah_isbn' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.B')->sum('angka_kredit'),
+                # 5 
+                'menyunting_karya_ilmiah_bentuk_buku_isbn' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.C')->sum('angka_kredit'),
+                # 6 
+                'paten_rancangan_teknologi_int' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.D.1')->sum('angka_kredit'),
+                'paten_rancangan_teknologi_nas' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.D.2')->sum('angka_kredit'),
+                # 7
+                'tanpa_paten_rancangan_teknologi_int' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.E.1')->sum('angka_kredit'),
+                'tanpa_paten_rancangan_teknologi_nas' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.E.2')->sum('angka_kredit'),
+                'tanpa_paten_rancangan_teknologi_lokal' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.E.3')->sum('angka_kredit'),
+                # 8
+                'tanpa_hki_rancangan_teknologi' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.E.4')->sum('angka_kredit'),
+
         ]);
-        return $pdf->download('invoice.pdf');
+        return $pdf->download('simulasi-'.auth()->user()->name);
 
     }
 }

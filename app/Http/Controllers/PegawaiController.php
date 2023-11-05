@@ -374,7 +374,7 @@ class PegawaiController extends Controller
 
         $validatedData['pangkat_id'] = $user->pangkat_id + 1;
         $validatedData['tanggapan'] = null;
-        $validatedData['status'] = null;
+        $validatedData['status'] = 'Selesai';
 
         User::where('id', $user->id)->update($validatedData);
         // dd($validatedData);

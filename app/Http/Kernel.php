@@ -41,6 +41,7 @@ class Kernel extends HttpKernel
             // ======= ======   NEW   = ==========
             // \App\Http\Middleware\VerifyNipAndNidn::class, nda jadi pake 
             \App\Http\Middleware\ExpiredUsersMyToken::class,
+            \App\Http\Middleware\EmailReminderToUpdatePangkat::class,
 
         ],
 

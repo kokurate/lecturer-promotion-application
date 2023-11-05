@@ -294,7 +294,108 @@ class PdfController extends Controller
                 'tanpa_paten_rancangan_teknologi_lokal' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.E.3')->sum('angka_kredit'),
                 # 8
                 'tanpa_hki_rancangan_teknologi' => pak_kegiatan_penelitian::QueryCount()->QueryKode('II.E.4')->sum('angka_kredit'),
+            ### PENGABDIAN PADA MASYARAKAT
+                # 1
+                'menduduki_jabatan_pimpinan_bebas_setiap_semester' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('7.1')->sum('angka_kredit'),
+                # 2
+                'kembangkan_pendidikan_dan_penelitian_untuk_masyarakat' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('7.2')->sum('angka_kredit'),
+                # 3 1 a
+                'memberikan_latihan_dalam_satu_semester_tingkat_internasional' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('7.3.1.a')->sum('angka_kredit'),
+                # 3 1 b
+                'memberikan_latihan_dalam_satu_semester_tingkat_nasional' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('7.3.1.b')->sum('angka_kredit'),
+                # 3 1 c
+                'memberikan_latihan_dalam_satu_semester_tingkat_lokal' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('7.3.1.c')->sum('angka_kredit'),
+                # 3 2 a
+                'memberikan_latihan_kurang_dari_satu_semester_tingkat_internasional' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('7.3.2.a')->sum('angka_kredit'),
+                # 3 2 b
+                'memberikan_latihan_kurang_dari_satu_semester_tingkat_nasional' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('7.3.2.b')->sum('angka_kredit'),
+                # 3 2 c
+                'memberikan_latihan_kurang_dari_satu_semester_tingkat_lokal' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('7.3.2.c')->sum('angka_kredit'),
+                # 4 a
+                'memberikan_pelayanan_bidang_keahlian' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('7.4.a')->sum('angka_kredit'),
+                # 4 b
+                'memberikan_pelayanan_penugasan_lembaga' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('7.4.b')->sum('angka_kredit'),
+                # 4 c
+                'memberikan_pelayanan_fungsi' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('7.4.c')->sum('angka_kredit'),
+                # 5
+                'menulis_karya_pengabdian_tidak_dipublikasikan' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('7.5')->sum('angka_kredit'),
 
+            ### PENUNJANG TRI DHARMA PT
+                # 1 a
+                'menjadi_ketua_panitia_perguruan_tinggi' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.1.a')->sum('angka_kredit'),
+                # 1 b
+                'menjadi_anggota_panitia_perguruan_tinggi' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.1.b')->sum('angka_kredit'),
+                # 2 a 1
+                'menjadi_ketua_panitia_pusat_pemerintahan' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.2.a.1')->sum('angka_kredit'),
+                # 2 a 2
+                'menjadi_anggota_panitia_pusat_pemerintahan' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.2.a.2')->sum('angka_kredit'),
+                # 2 b 1 	
+                'menjadi_ketua_panitia_daerah_pemerintahan' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.2.b.1')->sum('angka_kredit'),
+                # 2 b 2 	
+                'menjadi_anggota_panitia_daerah_pemerintahan' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.2.b.2')->sum('angka_kredit'),
+                # 3 a 1 	
+                'menjadi_anggota_profesi_internasional_sebagai_pengurus' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.3.a.1')->sum('angka_kredit'),
+                # 3 a 2 	
+                'menjadi_anggota_profesi_internasional_sebagai_anggota_permintaan' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.3.a.2')->sum('angka_kredit'),
+                # 3 a 3 	
+                'menjadi_anggota_profesi_internasional_sebagai_anggota' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.3.a.3')->sum('angka_kredit'),
+                # 3 b 1 		
+                'menjadi_anggota_profesi_nasional_sebagai_pengurus' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.3.b.1')->sum('angka_kredit'),
+                # 3 b 2		
+                'menjadi_anggota_profesi_nasional_sebagai_anggota_permintaan' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.3.b.2')->sum('angka_kredit'),
+                # 3 b 3		
+                'menjadi_anggota_profesi_nasional_sebagai_anggota' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.3.b.3')->sum('angka_kredit'),
+                # 4		
+                'mewakili_pt_pemerintah_dalam_panitia_antar_lembaga' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.4')->sum('angka_kredit'),
+                # 5 a		
+                'ketua_delegasi_nasional_pertemuan_internasional' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.5.a')->sum('angka_kredit'),
+                # 5 b		
+                'anggota_delegasi_nasional_pertemuan_internasional' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.5.b')->sum('angka_kredit'),
+                # 6 a
+                'editor_jurnal_ilmiah_internasional' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.6.a')->sum('angka_kredit'),
+                # 6 b
+                'editor_jurnal_ilmiah_nasional' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.6.b')->sum('angka_kredit'),
+                # 7 a 1 	
+                'ketua_internasional_pertemuan_ilmiah' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.7.a.1')->sum('angka_kredit'),
+                # 7 a 2 	
+                'anggota_internasional_pertemuan_ilmiah' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.7.a.2')->sum('angka_kredit'),
+                # 7 b 1 	
+                'ketua_perguruan_tinggi_pertemuan_ilmiah' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.7.b.1')->sum('angka_kredit'),
+                # 7 b 2 	
+                'anggota_perguruan_tinggi_pertemuan_ilmiah' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.7.b.2')->sum('angka_kredit'),
+                # 8 a 	
+                'satya_lencana_30' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.8.a')->sum('angka_kredit'),
+                # 8 b 	
+                'satya_lencana_20' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.8.b')->sum('angka_kredit'),
+                # 8 c 	
+                'satya_lencana_10' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.8.c')->sum('angka_kredit'),
+                # 8 d	
+                'penghargaan_internasional' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.8.d')->sum('angka_kredit'),
+                # 8 e	
+                'penghargaan_nasional' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.8.e')->sum('angka_kredit'),
+                # 8 f	
+                'penghargaan_daerah' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.8.f')->sum('angka_kredit'),
+                # 9 a	
+                'buku_smta' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.9.a')->sum('angka_kredit'),
+                # 9 b	
+                'buku_smtp' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.9.b')->sum('angka_kredit'),
+                # 9 c	
+                'buku_sd' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.9.c')->sum('angka_kredit'),
+                # 10 a
+                'prestasi_olahraga_internasional' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.10.a')->sum('angka_kredit'),
+                # 10 b
+                'prestasi_olahraga_nasional' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.10.b')->sum('angka_kredit'),
+                # 10 c
+                'prestasi_olahraga_daerah' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.10.c')->sum('angka_kredit'),
+                # 11
+                'keanggotaan_tim_penilai' => pak_kegiatan_pengabdian_pada_masyarakat::QueryCount()->QueryKode('8.11')->sum('angka_kredit'),
+
+
+                // a
+                // asdasd
+            // asd
+            // asd
+            // a
         ]);
         return $pdf->download('simulasi-'.auth()->user()->name);
 

@@ -33,4 +33,21 @@ class pak_kegiatan_penunjang_tri_dharma_pt extends Model
                     ->where('kategori_pak_id', 4);
         }
 
+        // query for take the count 
+
+    public function scopeQueryCount($query){
+        
+        return $query->with('tahun_ajaran')
+            ->whereHas('tahun_ajaran', function ($query) {
+                $query->where('now', true);
+            })
+            ->where('user_id', auth()->user()->id)
+            ->where('kategori_pak_id', 4);
+    }
+
+    public function scopeQueryKode($query, $kode)
+    {
+        return $query->where('kode', $kode);
+    }
+
 }

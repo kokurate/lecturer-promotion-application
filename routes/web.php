@@ -80,6 +80,7 @@ Route::middleware('auth', 'level:admin,dosen',)->group(function () {
 
     //  ======= ======   Simulasi
     Route::get('dosen/simulasi-pak',[DosenController::class,('simulasi')])->name('dosen.simulasi');
+    Route::get('dosen/simulasi-pak/export/pdf',[PdfController::class,'simulation_download'])->name('dosen.simulasi.export');
     
     // Pendidikan dan Pengajaran 1
     Route::get('dosen/simulasi-pak/pendidikan-dan-pengajaran/',[DosenController::class,('pendidikan_dan_pengajaran')])->name('pendidikan-dan-pengajaran');

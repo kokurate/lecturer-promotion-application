@@ -33,4 +33,24 @@ class pak_kegiatan_pengabdian_pada_masyarakat extends Model
                 ->where('user_id', auth()->user()->id)
                 ->where('kategori_pak_id', 3);
     }
+
+    // query for take the count 
+
+    public function scopeQueryCount($query){
+        
+        return $query->with('tahun_ajaran')
+            ->whereHas('tahun_ajaran', function ($query) {
+                $query->where('now', true);
+            })
+            ->where('user_id', auth()->user()->id)
+            ->where('kategori_pak_id', 3);
+    }
+
+    public function scopeQueryKode($query, $kode)
+    {
+        return $query->where('kode', $kode);
+    }
+
+
+
 }

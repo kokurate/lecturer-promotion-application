@@ -220,6 +220,16 @@
                                     <p class="text-danger my-2"><strong>{{ $message }}</strong></p>    
                             @enderror
                         </div>
+                        <div class="col">
+                            <div class="form-group my-2">
+                                <label for="tmt" class="mt-3 form-label"><strong>TMT</strong></label>
+                                <input id="tmt" class="form-control{{ $errors->has('tmt') ? ' is-invalid' : '' }}" type="date" name="tmt" value="{{ old('tmt') }}" required autocomplete="off">
+                                @error('tmt')
+                                    <p class="text-danger my-2"><strong>{{ $message }}</strong></p>    
+                                @enderror
+                            </div>
+                        </div>
+                        
                     </div>
                 </div> <!-- End Row-->
             </form>
@@ -353,7 +363,7 @@
     <script>
         function confirmDelete(event) {
         event.preventDefault();
-        if (window.confirm('Are you sure you want to delete?')) {
+        if (window.confirm('Kamu yakin akan menghapus akun ini?')) {
             document.getElementById('delete-form').submit();
         }
         }

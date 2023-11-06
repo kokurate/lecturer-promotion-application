@@ -183,6 +183,7 @@ class PegawaiController extends Controller
             'jurusan_prodi' => 'required|exists:jurusan_prodis,nama',
             'nip' => 'required|numeric|digits_between:18,18|unique:users,nip',
             'nidn' => 'required|numeric|digits_between:10,10|unique:users,nidn',
+            'tmt' => 'required|date',
 
          ],[
             'pangkat_id.exists' => 'Golongan Belum dipilih',
@@ -196,6 +197,8 @@ class PegawaiController extends Controller
             'nidn.numeric' => 'NIDN Hanya berupa angka',
             'nidn.required' => 'NIDN harus diisi',
             'nidn.digits_between' => 'NIDN harus 10 angka',
+            'tmt.required' => 'TMT harus diisi',
+            'tmt.date' => 'Format TMT tidak valid',
          ]);
 
          if ($validator->fails()) {
@@ -207,6 +210,7 @@ class PegawaiController extends Controller
         $validatedData = $validator->validated();
         // $validatedData['password'] = bcrypt(Str::random('5')); 
         $validatedData['level'] = 'dosen'; 
+        $validatedData['pengajuan_terakhir'] = $request->tmt; 
         $validatedData['fakultas'] = auth()->user()->fakultas; 
 
         $newUser = User::create($validatedData);

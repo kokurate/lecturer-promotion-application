@@ -27,6 +27,9 @@
                             <label for="email" class="mt-3 form-label"><strong>email</strong></label>
                             <input id="email"  class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email" value="{{ old('email') }}" required>
                         </div>
+                        @error('email')
+                            <p class="text-danger my-2"><strong>{{ $message }}</strong></p>    
+                        @enderror
                         <div class="form-group my-2">
                             <label for="nip" class="mt-3 form-label"><strong>NIP</strong></label>
                             <input id="nip" class="form-control{{ $errors->has('nip') ? ' is-invalid' : '' }}" type="text" name="nip" value="{{ old('nip') }}" required autocomplete="off">
@@ -284,10 +287,10 @@
                                                     Ubah Status Kenaikan Pangkat
                                                 </span>
                                             </a> --}}
-                                            <form action="{{ route('pegawai.semua_dosen_delete', $data->id) }}" id="delete-form" method="post">@csrf @method('delete')</form>  
-                                            <a href="{{ route('pegawai.semua_dosen_delete', $data->id) }}" 
+                                            <form action="{{ route('pegawai.semua_dosen_delete', $data->id) }}" id="delete-form-{{ $data->id }}" method="post">@csrf @method('delete')</form>  
+                                            <a href="#" 
                                                 class="text-center my-1 mx-1" style="color:red;font-size:15px;" 
-                                                onclick="confirmDelete(event)">
+                                                onclick="confirmDelete(event, '{{ $data->id }}')">
                                                 <i class="bi bi-trash-fill"></i>
                                             </a>
                                             <a href="{{ route('pegawai.ubah_status_kenaikan_pangkat', $data->email) }}" 
@@ -361,11 +364,11 @@
 
     
     <script>
-        function confirmDelete(event) {
-        event.preventDefault();
-        if (window.confirm('Kamu yakin akan menghapus akun ini?')) {
-            document.getElementById('delete-form').submit();
-        }
+        function confirmDelete(event, id) {
+            event.preventDefault();
+            if (window.confirm('Kamu yakin akan menghapus akun ini?')) {
+                document.getElementById('delete-form-' + id).submit();
+            }
         }
     </script>
 

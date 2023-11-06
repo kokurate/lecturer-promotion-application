@@ -25,9 +25,14 @@ class EmailReminderToUpdatePangkat
         // $twelveMonthsAgo = Carbon::now()->subSecond(60);
         
         // Retrieve the data that meets the criteria from your model
-        $users = User::where('level','dosen')
-                    ->where('notified', false)
-                    ->where('pengajuan_terakhir', '<', $twelveMonthsAgo)->get();
+        $users = User::where('level', 'dosen')
+                        ->where(function ($query) {
+                            $query->where('notified', false)
+                                ->orWhere('notified', null);
+                        })
+                        ->where('pengajuan_terakhir', '<', $twelveMonthsAgo)
+                        ->get();
+    
 
         // dd($data);
 

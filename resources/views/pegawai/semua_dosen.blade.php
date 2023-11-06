@@ -274,7 +274,14 @@
                                                     Ubah Status Kenaikan Pangkat
                                                 </span>
                                             </a> --}}
-                                            <a href="{{ route('pegawai.ubah_status_kenaikan_pangkat', $data->email) }}" class="text-center" style="color:#012970;font-size:15px;a:hover{color:blue;}" >
+                                            <form action="{{ route('pegawai.semua_dosen_delete', $data->id) }}" id="delete-form" method="post">@csrf @method('delete')</form>  
+                                            <a href="{{ route('pegawai.semua_dosen_delete', $data->id) }}" 
+                                                class="text-center my-1 mx-1" style="color:red;font-size:15px;" 
+                                                onclick="confirmDelete(event)">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </a>
+                                            <a href="{{ route('pegawai.ubah_status_kenaikan_pangkat', $data->email) }}" 
+                                                class="text-center my-1 mx-1" style="color:#012970;font-size:15px;a:hover{color:blue;}" >
                                                 <i class="bi bi-info-square-fill"></i>
                                             </a>
                                         </div>
@@ -341,4 +348,16 @@
         }
         });
     </script>
+
+    
+    <script>
+        function confirmDelete(event) {
+        event.preventDefault();
+        if (window.confirm('Are you sure you want to delete?')) {
+            document.getElementById('delete-form').submit();
+        }
+        }
+    </script>
+
+    
 @endpush

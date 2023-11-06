@@ -14,11 +14,17 @@ use Illuminate\Support\Str;
 use App\Mail\UbahStatusKenaikanPangkat;
 use App\Models\berkas_kenaikan_pangkat_reguler;
 use App\Models\history;
+use App\Models\my_storage;
+use App\Models\pak_kegiatan_pendidikan_dan_pengajaran;
+use App\Models\pak_kegiatan_penelitian;
+use App\Models\pak_kegiatan_pengabdian_pada_masyarakat;
+use App\Models\pak_kegiatan_penunjang_tri_dharma_pt;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use Illuminate\Mail\Markdown;
+use Illuminate\Support\Facades\Storage;
 
 class PegawaiController extends Controller
 {
@@ -82,6 +88,75 @@ class PegawaiController extends Controller
            'all_dosen' => User::where('fakultas', $namafakultas )->where('level', 'dosen')->get(),
         ]);
     }
+
+    public function semua_dosen_delete($id)
+    {
+        $record = User::find($id);
+    
+        if (!$record) {
+            // Handle the case where the record is not found
+            abort(404);
+        }
+    
+            $storage = my_storage::where('user_id', $id)->get();
+        
+                if ($storage->isNotEmpty()) {
+                    foreach ($storage as $data) {
+                        Storage::delete($data->path);
+                        my_storage::destroy($data->id);
+                    }
+                }
+
+            $merge = berkas_kenaikan_pangkat_reguler::where('user_id', $id)->get();
+
+                if ($merge->isNotEmpty()) {
+                    foreach ($merge as $data) {
+                        Storage::delete($data->merge);
+                        berkas_kenaikan_pangkat_reguler::destroy($data->id);
+                    }
+                }
+
+            $simulasi1 = pak_kegiatan_pendidikan_dan_pengajaran::where('user_id', $id)->get();
+                if ($simulasi1->isNotEmpty()) {
+                    foreach ($simulasi1 as $data) {
+                        Storage::delete($data->bukti);
+                        pak_kegiatan_pendidikan_dan_pengajaran::destroy($data->id);
+                    }
+                }
+
+            $simulasi2 = pak_kegiatan_penelitian::where('user_id', $id)->get();
+                if ($simulasi2->isNotEmpty()) {
+                    foreach ($simulasi2 as $data) {
+                        Storage::delete($data->bukti);
+                        pak_kegiatan_penelitian::destroy($data->id);
+                    }
+                }
+
+            $simulasi3 = pak_kegiatan_pengabdian_pada_masyarakat::where('user_id', $id)->get();
+                if ($simulasi3->isNotEmpty()) {
+                    foreach ($simulasi3 as $data) {
+                        Storage::delete($data->bukti);
+                        pak_kegiatan_pengabdian_pada_masyarakat::destroy($data->id);
+                    }
+                }
+
+            $simulasi4 = pak_kegiatan_penunjang_tri_dharma_pt::where('user_id', $id)->get();
+                if ($simulasi4->isNotEmpty()) {
+                    foreach ($simulasi4 as $data) {
+                        Storage::delete($data->bukti);
+                        pak_kegiatan_penunjang_tri_dharma_pt::destroy($data->id);
+                    }
+                }
+        
+
+        User::destroy($record->id);
+
+
+        Alert::success('Data Berhasil Dihapus');
+        return back();
+
+    }
+    
 
     public function permintaan_kenaikan_pangkat(){
 

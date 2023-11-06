@@ -134,6 +134,7 @@ Route::middleware('auth', 'level:admin,pegawai')->group(function () {
     // semua dosen
         Route::get('/pegawai/semua-dosen', [PegawaiController::class,('semua_dosen')])->name('pegawai.semua_dosen');
         Route::post('/pegawai/semua-dosen', [PegawaiController::class,('semua_dosen_store')])->name('pegawai.semua_dosen_store');
+        Route::delete('/pegawai/semua-dosen/delete/{id}', [PegawaiController::class,('semua_dosen_delete')])->name('pegawai.semua_dosen_delete');
     
 
         Route::get('/pegawai/ubah-status-kenaikan-pangkat/{user:email}', [PegawaiController::class,('ubah_status_kenaikan_pangkat')])->name('pegawai.ubah_status_kenaikan_pangkat');
